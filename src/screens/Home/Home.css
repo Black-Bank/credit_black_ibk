@@ -13,6 +13,7 @@
 @media screen and (max-width: 600px) {
 	.home-container {
 		flex-direction: column;
+		justify-content: center;
 	}
 }
 
