@@ -41,6 +41,11 @@
 	font-size: 30px;
 	font-weight: bolder;
 }
+@media screen and (max-width: 600px) {
+	.info-title {
+		font-size: 20px;
+	}
+}
 .info-create-account {
 	display: flex;
 	justify-content: left;
@@ -56,6 +61,11 @@
 	margin-top: 15px;
 }
 
+@media screen and (max-width: 600px) {
+	.info-description {
+		font-size: 18px;
+	}
+}
 .info-document {
 	margin-top: 60px;
 	font-size: 15px;
