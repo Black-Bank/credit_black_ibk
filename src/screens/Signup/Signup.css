@@ -13,6 +13,14 @@
 @media screen and (max-width: 600px) {
 	.signup-container {
 		flex-direction: column;
+		align-items: center;
+	}
+}
+@media screen and (max-width: 600px) {
+	.signup-block {
+		flex-direction: column;
+		width: 80vh;
+		height: 40vh;
 	}
 }
 .signup-secound-block {
