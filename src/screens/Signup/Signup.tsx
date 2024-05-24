@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './Signup.css';
 import { IErrorSignup } from './enum';
 import { formatCellphone, isValidEmail } from '../../Utils/utils';
+import { CreateUserService } from '../../Services/CreateUserService';
 
 const errorInitialValues = {
 	error_name: false,
@@ -12,6 +13,7 @@ const errorInitialValues = {
 	error_cellphone: false,
 };
 export const Signup: React.FC = () => {
+	const createUserService = new CreateUserService();
 	const [name, setName] = useState<string>('');
 	const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
 	const [password, setPassword] = useState<string>('');
@@ -20,17 +22,17 @@ export const Signup: React.FC = () => {
 	const [cellphone, setCellphone] = useState<string>('');
 	const [disabled, setDisabled] = useState<boolean>(true);
 	const [errorType, setErrorType] = useState<IErrorSignup>(errorInitialValues);
-	const cpf = sessionStorage.getItem('identifier');
+	const cpf = sessionStorage.getItem('identifier') as string;
 
 	useEffect(() => {
-		const validateName = () => name.length > 3 && /\s/.test(name);
+		const validateName = () => name?.length > 3 && /\s/.test(name);
 		const validatePassword = () =>
 			/(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(
 				password
 			);
 		const validateSamePassword = () => password === confirmPassword;
 		const validateEmail = () => isValidEmail(email);
-		const validateCellphone = () => cellphone.length === 16;
+		const validateCellphone = () => cellphone?.length === 16;
 
 		const hasError =
 			!validateName() ||
@@ -68,15 +70,29 @@ export const Signup: React.FC = () => {
 	const handleConfirmPassword = (password: string) => {
 		setConfirmPassword(password);
 	};
+	const handleClean = () => {
+		setPassword('');
+		setEmail('');
+		setCellphone('');
+		setConfirmPassword('');
+		setName('');
+	};
 	const handleContinue = () => {
-		console.log({
+		const now = new Date();
+		const isoDateString = now.toISOString();
+		const userData = {
 			name: name,
 			identifier: cpf,
 			email: email,
 			password: password,
 			confirmPassword: confirmPassword,
 			amount: 0,
-		});
+			cellphone: cellphone,
+			createdAt: isoDateString,
+		};
+		createUserService.createUser(userData);
+
+		handleClean();
 	};
 	return (
 		<div className="signup-container">
@@ -171,7 +187,7 @@ export const Signup: React.FC = () => {
 					</div>
 					<div className={`button ${disabled ? 'disabled' : 'active'}`}>
 						<span
-							className="buton-title"
+							className="button-title"
 							onClick={handleContinue}
 						>
 							Continuar

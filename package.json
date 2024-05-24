@@ -6,6 +6,7 @@
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
+		"@types/crypto-js": "^4.2.2",
 		"@types/jest": "^27.5.2",
 		"@types/node": "^16.18.97",
 		"@types/react": "^18.3.2",
@@ -13,6 +14,7 @@
 		"@types/react-input-mask": "^3.0.5",
 		"@types/react-router-dom": "^5.3.3",
 		"axios": "^1.7.2",
+		"crypto-js": "^4.2.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-input-mask": "^2.0.4",
@@ -25,7 +27,8 @@
 		"start": "yarn cache clean && react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"reset": "rm -rf node_modules && yarn && yarn cache clean"
 	},
 	"eslintConfig": {
 		"extends": [

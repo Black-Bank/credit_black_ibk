@@ -35,7 +35,7 @@ export const Home: React.FC = () => {
 		}
 	};
 
-	const isValidCpf = unmaskCpf(cpf).length === 11;
+	const isValidCpf = unmaskCpf(cpf)?.length === 11;
 
 	return (
 		<>
