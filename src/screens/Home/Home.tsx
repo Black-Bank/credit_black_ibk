@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Header } from '../../components/Header/Header';
 import './Home.css';
 import { unmaskCpf } from '../../Utils/utils';
+import { useNavigate } from 'react-router-dom';
 
 export const Home: React.FC = () => {
+	const navigate = useNavigate();
+
 	const [cpf, setCpf] = useState('');
 
 	const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +27,12 @@ export const Home: React.FC = () => {
 		);
 
 		setCpf(cpfWithMask);
+	};
+	const handleContinue = () => {
+		if (isValidCpf) {
+			sessionStorage.setItem('identifier', unmaskCpf(cpf));
+			navigate('/signup');
+		}
 	};
 
 	const isValidCpf = unmaskCpf(cpf).length === 11;
@@ -56,7 +65,12 @@ export const Home: React.FC = () => {
 						/>
 					</div>
 					<div className={`button ${!isValidCpf ? 'disabled' : 'active'}`}>
-						<span className="buton-title">Continuar</span>
+						<span
+							className="buton-title"
+							onClick={handleContinue}
+						>
+							Continuar
+						</span>
 					</div>
 				</div>
 			</div>
