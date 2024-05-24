@@ -19,7 +19,7 @@
 @media screen and (max-width: 600px) {
 	.signup-block {
 		flex-direction: column;
-		width: 80vh;
+		width: 100vh;
 		height: 40vh;
 	}
 }
