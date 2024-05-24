@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './Signup.css';
 import { IErrorSignup } from './enum';
-import { isValidEmail } from '../../Utils/utils';
+import { formatCellphone, isValidEmail } from '../../Utils/utils';
 
 const errorInitialValues = {
 	error_name: false,
@@ -30,7 +30,7 @@ export const Signup: React.FC = () => {
 			);
 		const validateSamePassword = () => password === confirmPassword;
 		const validateEmail = () => isValidEmail(email);
-		const validateCellphone = () => cellphone.length === 11;
+		const validateCellphone = () => cellphone.length === 16;
 
 		const hasError =
 			!validateName() ||
@@ -47,15 +47,18 @@ export const Signup: React.FC = () => {
 			error_cellphone: !validateCellphone(),
 		});
 		setDisabled(hasError);
-		console.log(hasError);
 	}, [name, email, password, confirmPassword, cellphone]);
+
+	const handleCellphone = (input: string) => {
+		const formattedInput = input.replace(/\D/g, '');
+		const formattedCellphone = formatCellphone(formattedInput);
+		setCellphone(formattedCellphone);
+	};
 
 	const handleName = (name: string) => {
 		setName(name);
 	};
-	const handleCellphone = (cellphone: string) => {
-		setCellphone(cellphone);
-	};
+
 	const handleEmail = (email: string) => {
 		setEmail(email);
 	};
@@ -99,10 +102,11 @@ export const Signup: React.FC = () => {
 
 					<div className="signup-wrapper">
 						<input
-							type="text"
+							type="tel"
 							value={cellphone}
 							onChange={(e) => handleCellphone(e.target.value)}
 							placeholder="Celular"
+							maxLength={11}
 							className={
 								!errorType.error_cellphone
 									? 'field-input-valid'
