@@ -116,6 +116,7 @@
 	color: aliceblue;
 	background-color: #624aa7;
 	font-weight: bold;
+	z-index: 1000;
 }
 
 .button:hover {
