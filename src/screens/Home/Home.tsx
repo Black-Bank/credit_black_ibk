@@ -64,14 +64,14 @@ export const Home: React.FC = () => {
 							className={isValidCpf ? 'cpf-input-valid' : 'cpf-input-invalid'}
 						/>
 					</div>
-					<div className={`button ${!isValidCpf ? 'disabled' : 'active'}`}>
+					<button className={`button ${!isValidCpf ? 'disabled' : 'active'}`}>
 						<span
 							className="buton-title"
 							onClick={handleContinue}
 						>
 							Continuar
 						</span>
-					</div>
+					</button>
 				</div>
 			</div>
 		</>

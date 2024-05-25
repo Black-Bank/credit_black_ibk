@@ -27,5 +27,7 @@
 }
 
 .loading-icon-loading {
+	width: 150px;
+	height: 150px;
 	animation: pulse 2s infinite;
 }
