@@ -3,6 +3,6 @@ import * as SignupAPI from '../api/signup';
 
 export class CreateUserService {
 	public createUser = async (user: ICreateUser) => {
-		SignupAPI.createUser(user);
+		await SignupAPI.createUser(user);
 	};
 }

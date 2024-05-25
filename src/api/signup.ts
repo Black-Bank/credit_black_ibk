@@ -10,7 +10,6 @@ export const createUser = async (userData: ICreateUser) => {
 	const headers = {
 		'Content-Type': 'application/json',
 		Authorization: AUTHORIZATION_HEADER,
-		Origin: '*',
 	};
 	const userDataString = JSON.stringify(userData);
 	const token = cryptoService.encrypt(userDataString);

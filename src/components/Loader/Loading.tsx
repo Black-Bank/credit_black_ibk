@@ -1,6 +1,6 @@
 import React from 'react';
 import './Loading.css';
-import logo from '../assets/logo.svg';
+import logo from '../../assets/logo.svg';
 
 export const Loading: React.FC = () => {
 	return (

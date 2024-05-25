@@ -20,13 +20,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: rgba(255, 255, 255, 0.1);
+	background: rgb(62, 60, 60, 0.8);
+
 	backdrop-filter: blur(10px);
 	z-index: 1000;
 }
 
 .loading-icon {
-	width: 100px;
-	height: 100px;
 	animation: pulse 2s infinite;
 }
