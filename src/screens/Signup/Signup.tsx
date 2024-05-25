@@ -201,7 +201,7 @@ export const Signup: React.FC = () => {
 								{errorType.error_password && 'As senhas precisam ser as iguais'}
 							</span>
 						</div>
-						<div className={`button ${!disabled ? 'disabled' : 'active'}`}>
+						<div className={`button ${disabled ? 'disabled' : 'active'}`}>
 							<span
 								className="button-title"
 								onClick={handleContinue}
