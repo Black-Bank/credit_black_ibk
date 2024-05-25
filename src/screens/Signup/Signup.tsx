@@ -107,6 +107,7 @@ export const Signup: React.FC = () => {
 				navigate('/');
 			}
 		} catch (e) {
+			navigate('/');
 		} finally {
 			setIsLoading(false);
 		}
