@@ -8,7 +8,7 @@ export const Loading: React.FC = () => {
 			<img
 				src={logo}
 				alt="Loading"
-				className="loading-icon"
+				className="loading-icon-loading"
 			/>
 		</div>
 	);

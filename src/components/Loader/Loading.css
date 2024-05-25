@@ -26,6 +26,6 @@
 	z-index: 1000;
 }
 
-.loading-icon {
+.loading-icon-loading {
 	animation: pulse 2s infinite;
 }

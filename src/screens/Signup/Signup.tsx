@@ -100,8 +100,12 @@ export const Signup: React.FC = () => {
 			createdAt: isoDateString,
 		};
 		try {
-			await createUserService.createUser(userData);
-			handleClean();
+			const response = await createUserService.createUser(userData);
+
+			if (response.status === 200) {
+				handleClean();
+				navigate('/');
+			}
 		} catch (e) {
 		} finally {
 			setIsLoading(false);
