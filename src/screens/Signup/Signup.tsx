@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Signup.css';
 import { IErrorSignup } from './enum';
 import { formatCellphone, isValidEmail } from '../../Utils/utils';
@@ -14,6 +16,9 @@ const errorInitialValues = {
 	error_email: false,
 	error_cellphone: false,
 };
+interface IError {
+	message: string;
+}
 export const Signup: React.FC = () => {
 	const createUserService = new CreateUserService();
 	const navigate = useNavigate();
@@ -105,9 +110,11 @@ export const Signup: React.FC = () => {
 			if (response.status === 200) {
 				handleClean();
 				navigate('/');
+			} else {
+				toast.error(response.message as string);
 			}
-		} catch (e) {
-			navigate('/');
+		} catch (e: any) {
+			toast.error(e?.message as string);
 		} finally {
 			setIsLoading(false);
 		}
@@ -206,14 +213,16 @@ export const Signup: React.FC = () => {
 								{errorType.error_password && 'As senhas precisam ser as iguais'}
 							</span>
 						</div>
-						<button className={`button ${disabled ? 'disabled' : 'active'}`}>
-							<span
-								className="button-title"
-								onClick={handleContinue}
-							>
-								Continuar
-							</span>
-						</button>
+						{!isLoading && (
+							<button className={`button ${disabled ? 'disabled' : 'active'}`}>
+								<span
+									className="button-title"
+									onClick={handleContinue}
+								>
+									Continuar
+								</span>
+							</button>
+						)}
 					</div>
 				</div>
 			</div>
