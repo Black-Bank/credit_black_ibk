@@ -6,9 +6,7 @@
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
-		"paths": {
-			"~/*": ["*"]
-		},
+
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,

@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Login } from '../screens/Login/Login';
 import { Signup } from '../screens/Signup/Signup';
-import { Header } from '../components/Header/Header';
 import { Home } from '../screens/Home/Home';
 
 export const AppRoutes: React.FC = () => {

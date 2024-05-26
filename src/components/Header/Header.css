@@ -2,8 +2,15 @@
 	display: flex;
 	width: 100%;
 	height: 80px;
+	background-color: transparent;
+}
+.Header-home {
+	display: flex;
+	width: 100%;
+	height: 80px;
 	background-color: #271d42;
 }
+
 .container {
 	display: flex;
 	justify-content: space-between;

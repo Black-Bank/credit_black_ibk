@@ -3,6 +3,7 @@ import { Header } from '../../components/Header/Header';
 import './Home.css';
 import { unmaskCpf } from '../../Utils/utils';
 import { useNavigate } from 'react-router-dom';
+import { ScreenTypes } from 'components/Header/enum';
 
 export const Home: React.FC = () => {
 	const navigate = useNavigate();
@@ -39,7 +40,7 @@ export const Home: React.FC = () => {
 
 	return (
 		<>
-			<Header />
+			<Header screen={ScreenTypes.SCREEN_HOME} />
 
 			<div className="home-container">
 				<div className="info-container">
