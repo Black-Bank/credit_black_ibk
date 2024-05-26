@@ -116,6 +116,7 @@ export const Login: React.FC = () => {
 						{!isLoading && (
 							<button
 								className={`button-login ${disabled ? 'disabled' : 'active'}`}
+								disabled={disabled}
 							>
 								<span
 									className="button-title"
