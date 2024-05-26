@@ -8,3 +8,9 @@ export interface ICreateUser {
 	cellphone: string;
 	createdAt: string;
 }
+
+export interface IAuthUser {
+	identifier: string;
+	password: string;
+	timestamp: number;
+}

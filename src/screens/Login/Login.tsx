@@ -8,9 +8,11 @@ import { Loading } from '../../components/Loader/Loading';
 import { Header } from 'components/Header/Header';
 import { ScreenTypes } from 'components/Header/enum';
 import { unmaskCpf } from 'Utils/utils';
+import { AuthService } from 'Services/AuthService';
 
 export const Login: React.FC = () => {
 	const navigate = useNavigate();
+	const authService = new AuthService();
 	const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
 	const [password, setPassword] = useState<string>('');
 	const [disabled, setDisabled] = useState<boolean>(true);
@@ -55,14 +57,14 @@ export const Login: React.FC = () => {
 	const handleContinue = async () => {
 		setIsLoading(true);
 		const now = new Date();
-		const isoDateString = now.toISOString();
+		const timeStamp = now.getTime();
 		const userData = {
-			identifier: cpf,
+			identifier: unmaskCpf(cpf),
 			password: password,
-			createdAt: isoDateString,
+			timestamp: Number(timeStamp),
 		};
 		try {
-			const response = { status: 200, data: userData, message: 'sucess' };
+			const response = await authService.AuthUser(userData);
 
 			if (response.status === 200) {
 				handleClean();

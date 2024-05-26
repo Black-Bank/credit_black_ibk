@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Signup.css';
 import { IErrorSignup } from './enum';
-import { formatCellphone, isValidEmail } from '../../Utils/utils';
+import { formatCellphone, isValidEmail, unmaskCpf } from '../../Utils/utils';
 import { CreateUserService } from '../../Services/CreateUserService';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../components/Loader/Loading';
@@ -16,9 +16,7 @@ const errorInitialValues = {
 	error_email: false,
 	error_cellphone: false,
 };
-interface IError {
-	message: string;
-}
+
 export const Signup: React.FC = () => {
 	const createUserService = new CreateUserService();
 	const navigate = useNavigate();
@@ -96,7 +94,7 @@ export const Signup: React.FC = () => {
 		const isoDateString = now.toISOString();
 		const userData = {
 			name: name,
-			identifier: cpf,
+			identifier: unmaskCpf(cpf),
 			email: email,
 			password: password,
 			confirmPassword: confirmPassword,
@@ -109,7 +107,7 @@ export const Signup: React.FC = () => {
 
 			if (response.status === 200) {
 				handleClean();
-				navigate('/');
+				navigate('/login');
 			} else {
 				toast.error(response.message as string);
 			}
