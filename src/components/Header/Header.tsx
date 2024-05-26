@@ -3,11 +3,16 @@ import './Header.css';
 import logo from '../../assets/logo.svg';
 import LoginLogo from '../../assets/login.svg';
 import { ScreenTypes } from './enum';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = ({ screen }: { screen: string }) => {
+	const navigate = useNavigate();
 	if (!screen) {
 		return <></>;
 	}
+	const handleLogin = () => {
+		navigate('/login');
+	};
 	switch (screen) {
 		case ScreenTypes.SCREEN_LOGIN:
 			return (
@@ -34,7 +39,10 @@ export const Header = ({ screen }: { screen: string }) => {
 								className="loading-icon"
 							/>
 						</div>
-						<div className="login-logo">
+						<div
+							className="login-logo"
+							onClick={handleLogin}
+						>
 							<span className="login-text">Login</span>
 							<img
 								src={LoginLogo}
