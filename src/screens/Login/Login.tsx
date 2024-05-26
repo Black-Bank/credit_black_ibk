@@ -68,9 +68,9 @@ export const Login: React.FC = () => {
 
 			if (response.status === 200) {
 				handleClean();
-				navigate('/');
+				navigate('/dashboard');
 			} else {
-				toast.error(response.message as string);
+				toast.error(response?.message as string);
 			}
 		} catch (e: any) {
 			toast.error(e?.message as string);
