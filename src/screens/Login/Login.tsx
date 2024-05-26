@@ -3,62 +3,26 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.css';
-import { IErrorLogin } from './enum';
-import { isValidEmail, unmaskCpf } from '../../Utils/utils';
-import { CreateUserService } from '../../Services/CreateUserService';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../components/Loader/Loading';
 import { Header } from 'components/Header/Header';
 import { ScreenTypes } from 'components/Header/enum';
-
-const errorInitialValues = {
-	error_name: false,
-	error_password: false,
-	error_isSamePassword: false,
-	error_email: false,
-	error_cellphone: false,
-};
+import { unmaskCpf } from 'Utils/utils';
 
 export const Login: React.FC = () => {
-	const createUserService = new CreateUserService();
 	const navigate = useNavigate();
-	const [name, setName] = useState<string>('');
 	const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
 	const [password, setPassword] = useState<string>('');
-	const [confirmPassword, setConfirmPassword] = useState<string>('');
-	const [email, setEmail] = useState<string>('');
-	const [cellphone, setCellphone] = useState<string>('');
 	const [disabled, setDisabled] = useState<boolean>(true);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [errorType, setErrorType] = useState<IErrorLogin>(errorInitialValues);
 	const [cpf, setCpf] = useState('');
+	const isValidCpf = unmaskCpf(cpf)?.length === 11;
 
 	useEffect(() => {
-		const validateName = () => name?.length > 3 && /\s/.test(name);
-		const validatePassword = () =>
-			/(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(
-				password
-			);
-		const validateSamePassword = () => password === confirmPassword;
-		const validateEmail = () => isValidEmail(email);
-		const validateCellphone = () => cellphone?.length === 16;
+		const hasError = !isValidCpf || !Boolean(password.length);
 
-		const hasError =
-			!validateName() ||
-			!validatePassword() ||
-			!validateSamePassword() ||
-			!validateEmail() ||
-			!validateCellphone();
-
-		setErrorType({
-			error_name: !validateName(),
-			error_password: !validatePassword(),
-			error_isSamePassword: !validateSamePassword(),
-			error_email: !validateEmail(),
-			error_cellphone: !validateCellphone(),
-		});
 		setDisabled(hasError);
-	}, [name, email, password, confirmPassword, cellphone]);
+	}, [cpf, password]);
 
 	const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		let inputValue = e.target.value.replace(/\D/g, '');
@@ -93,17 +57,12 @@ export const Login: React.FC = () => {
 		const now = new Date();
 		const isoDateString = now.toISOString();
 		const userData = {
-			name: name,
 			identifier: cpf,
-			email: email,
 			password: password,
-			confirmPassword: confirmPassword,
-			amount: 0,
-			cellphone: cellphone,
 			createdAt: isoDateString,
 		};
 		try {
-			const response = await createUserService.createUser(userData);
+			const response = { status: 200, data: userData, message: 'sucess' };
 
 			if (response.status === 200) {
 				handleClean();
@@ -117,7 +76,6 @@ export const Login: React.FC = () => {
 			setIsLoading(false);
 		}
 	};
-	const isValidCpf = unmaskCpf(cpf)?.length === 11;
 
 	return (
 		<>
@@ -154,7 +112,9 @@ export const Login: React.FC = () => {
 						</div>
 
 						{!isLoading && (
-							<button className={`button ${disabled ? 'disabled' : 'active'}`}>
+							<button
+								className={`button-login ${disabled ? 'disabled' : 'active'}`}
+							>
 								<span
 									className="button-title"
 									onClick={handleContinue}
