@@ -1,21 +1,21 @@
 .login-container {
 	display: flex;
+	height: 1000px;
 }
 .login-block {
 	width: 100vh;
-	height: 100vh;
+
 	background-image: url('../../assets/safra.jpg');
 
 	background-size: cover;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 }
 
 @media screen and (max-width: 600px) {
 	.login-block {
 		flex-direction: column;
 		width: 100vh;
-		height: 100vh;
 	}
 }
 .login-secound-block-login {
