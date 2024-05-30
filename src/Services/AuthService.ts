@@ -10,6 +10,8 @@ export class AuthService {
 	}
 	public AuthUser = async (user: IAuthUser) => {
 		const res = await AuthAPI.Authenticate(user);
+
+		sessionStorage.setItem('accessToken', res?.token || '');
 		const token = res.token ? this.cryptoService.decrypt(res.token) : undefined;
 		const result = {
 			status: res.status,

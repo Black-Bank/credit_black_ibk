@@ -53,6 +53,21 @@ export const Header = ({ screen }: { screen: string }) => {
 					</div>
 				</div>
 			);
+		case ScreenTypes.SCREEN_DASHBOARD:
+			return (
+				<div className="Header-home">
+					<div className="container">
+						<div className="logo">
+							<img
+								src={logo}
+								alt="Loading"
+								className="loading-icon"
+							/>
+						</div>
+					</div>
+				</div>
+			);
+
 		default:
 			return <></>;
 	}

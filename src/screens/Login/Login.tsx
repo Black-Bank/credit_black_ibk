@@ -28,34 +28,16 @@ import eyeOff from '../../assets/eye-off.svg';
 export const Login: React.FC = () => {
 	const navigate = useNavigate();
 	const authService = new AuthService();
-	const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
 	const [password, setPassword] = useState<string>('');
 	const [disabled, setDisabled] = useState<boolean>(true);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [cpf, setCpf] = useState('');
 	const [isEye, setIsEye] = useState<boolean>(false);
-	const [windowWidth, setWindowWidth] = useState<number>(
-		Number(window.innerWidth)
-	);
-	const [windowHeight, setWindowHeight] = useState<number>(
-		Number(window.innerHeight)
-	);
 
 	const handleEye = () => {
 		setIsEye(!isEye);
 	};
 	const isValidCpf = unmaskCpf(cpf)?.length === 11;
-
-	useEffect(() => {
-		const handleResize = () => {
-			setWindowWidth(Number(window.innerWidth));
-			setWindowHeight(Number(window.innerHeight));
-		};
-
-		window.addEventListener('resize', handleResize);
-
-		return () => window.removeEventListener('resize', handleResize);
-	}, []);
 
 	useEffect(() => {
 		const hasError = !isValidCpf || !Boolean(password.length);
@@ -117,8 +99,6 @@ export const Login: React.FC = () => {
 		}
 	};
 
-	const isMobile = windowWidth <= 768;
-
 	return (
 		<SafeAreaView>
 			{isLoading && <Loading />}
@@ -146,12 +126,12 @@ export const Login: React.FC = () => {
 
 						<PassContainer>
 							<FieldInputValidPass
-								type={isEye ? 'password' : 'text'}
+								type={!isEye ? 'password' : 'text'}
 								value={password}
 								onChange={(e) => handlePassword(e.target.value)}
 								placeholder="Senha"
 							/>
-							{isEye ? (
+							{!isEye ? (
 								<Eye
 									src={eyeOff}
 									alt="Esconder senha"
