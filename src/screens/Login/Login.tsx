@@ -2,13 +2,29 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './Login.css';
+import {
+	LoginContainer,
+	LoginMobileContainer,
+	LoginBlock,
+	LoginSecoundBlockLogin,
+	LoginField,
+	LoginTitle,
+	LoginWrapper,
+	LoginWrapperFirst,
+	FieldInputValid,
+	FieldInputValidPass,
+	ButtonLogin,
+	SafeAreaView,
+	Logo,
+	LogoContainer,
+} from './Login.styles';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../components/Loader/Loading';
 import { Header } from 'components/Header/Header';
 import { ScreenTypes } from 'components/Header/enum';
 import { unmaskCpf } from 'Utils/utils';
 import { AuthService } from 'Services/AuthService';
+import logo from '../../assets/logo.svg';
 
 export const Login: React.FC = () => {
 	const navigate = useNavigate();
@@ -18,7 +34,25 @@ export const Login: React.FC = () => {
 	const [disabled, setDisabled] = useState<boolean>(true);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [cpf, setCpf] = useState('');
+	const [windowWidth, setWindowWidth] = useState<number>(
+		Number(window.innerWidth)
+	);
+	const [windowHeight, setWindowHeight] = useState<number>(
+		Number(window.innerHeight)
+	);
+
 	const isValidCpf = unmaskCpf(cpf)?.length === 11;
+
+	useEffect(() => {
+		const handleResize = () => {
+			setWindowWidth(Number(window.innerWidth));
+			setWindowHeight(Number(window.innerHeight));
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
 
 	useEffect(() => {
 		const hasError = !isValidCpf || !Boolean(password.length);
@@ -54,6 +88,7 @@ export const Login: React.FC = () => {
 		setPassword('');
 		setCpf('');
 	};
+
 	const handleContinue = async () => {
 		setIsLoading(true);
 		const now = new Date();
@@ -79,42 +114,44 @@ export const Login: React.FC = () => {
 		}
 	};
 
-	return (
-		<>
-			{isLoading && <Loading />}
+	const isMobile = windowWidth <= 768;
 
-			<div className="login-container">
-				<div className="login-block">
-					<Header screen={ScreenTypes.SCREEN_LOGIN as string} />
-				</div>
+	return (
+		<SafeAreaView>
+			{isLoading && <Loading />}
+			<LoginMobileContainer>
 				<div className="login-secound-block-login">
-					<div className="login-field">
-						<span className="login-title">Acesse sua conta</span>
-						<div className="login-wrapper">
-							<input
+					<LoginField>
+						<LogoContainer>
+							<Logo
+								src={logo}
+								alt="Logo Credit Black"
+							/>
+						</LogoContainer>
+
+						<LoginTitle>Acesse sua conta</LoginTitle>
+						<LoginWrapper>
+							<FieldInputValid
 								type="text"
 								value={cpf}
 								onChange={(e) => handleCpfChange(e)}
 								placeholder="Digite seu CPF"
 								maxLength={16}
-								className={
-									isValidCpf ? 'field-input-valid' : 'field-input-invalid'
-								}
+								className={isValidCpf ? '' : 'field-input-invalid'}
 							/>
-						</div>
+						</LoginWrapper>
 
-						<div className="login-wrapper">
-							<input
+						<LoginWrapper>
+							<FieldInputValidPass
 								type={hiddenPassword ? 'password' : 'text'}
 								value={password}
 								onChange={(e) => handlePassword(e.target.value)}
 								placeholder="Senha"
-								className={'field-input-valid-pass'}
 							/>
-						</div>
+						</LoginWrapper>
 
 						{!isLoading && (
-							<button
+							<ButtonLogin
 								className={`button-login ${disabled ? 'disabled' : 'active'}`}
 								disabled={disabled}
 							>
@@ -124,11 +161,11 @@ export const Login: React.FC = () => {
 								>
 									Entrar
 								</span>
-							</button>
+							</ButtonLogin>
 						)}
-					</div>
+					</LoginField>
 				</div>
-			</div>
-		</>
+			</LoginMobileContainer>
+		</SafeAreaView>
 	);
 };

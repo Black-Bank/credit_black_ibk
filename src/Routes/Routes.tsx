@@ -7,22 +7,20 @@ import { Home } from '../screens/Home/Home';
 export const AppRoutes: React.FC = () => {
 	return (
 		<Router>
-			<main>
-				<Routes>
-					<Route
-						path="/"
-						element={<Home />}
-					/>
-					<Route
-						path="/login"
-						element={<Login />}
-					/>
-					<Route
-						path="/signup"
-						element={<Signup />}
-					/>
-				</Routes>
-			</main>
+			<Routes>
+				<Route
+					path="/"
+					element={<Home />}
+				/>
+				<Route
+					path="/login"
+					element={<Login />}
+				/>
+				<Route
+					path="/signup"
+					element={<Signup />}
+				/>
+			</Routes>
 		</Router>
 	);
 };
