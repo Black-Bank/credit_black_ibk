@@ -138,7 +138,7 @@ export const ErrorMessage = styled.div`
 	margin-top: 5px;
 `;
 export const Link = styled.a`
-	margin-top: 10px;
+	margin-top: 30px;
 	color: #007bff;
 	text-decoration: none;
 	cursor: pointer;
