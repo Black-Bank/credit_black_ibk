@@ -15,6 +15,7 @@ import {
 	LogoContainer,
 	Eye,
 	PassContainer,
+	Link,
 } from './Login.styles';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../components/Loader/Loading';
@@ -166,17 +167,22 @@ export const Login: React.FC = () => {
 						</PassContainer>
 
 						{!isLoading && (
-							<ButtonLogin
-								className={`button-login ${disabled ? 'disabled' : 'active'}`}
-								disabled={disabled}
-							>
-								<span
-									className="button-title"
-									onClick={handleContinue}
+							<>
+								<ButtonLogin
+									className={`button-login ${disabled ? 'disabled' : 'active'}`}
+									disabled={disabled}
 								>
-									Entrar
-								</span>
-							</ButtonLogin>
+									<span
+										className="button-title"
+										onClick={handleContinue}
+									>
+										Entrar
+									</span>
+								</ButtonLogin>
+								<Link href="https://credit-black-ibk.vercel.app/">
+									Cadastre-se
+								</Link>
+							</>
 						)}
 					</LoginField>
 				</div>
