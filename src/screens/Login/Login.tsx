@@ -88,6 +88,8 @@ export const Login: React.FC = () => {
 
 			if (response.status === 200) {
 				handleClean();
+
+				sessionStorage.setItem('identifier', unmaskCpf(cpf) || '');
 				navigate('/dashboard');
 			} else {
 				toast.error(response?.message as string);

@@ -10,7 +10,11 @@ import {
 } from './Balance.styles';
 import { IBalance } from './interface';
 
-export const Balance = ({ availableBalance, InvestedCapital }: IBalance) => {
+export const Balance = ({
+	availableBalance,
+	InvestedCapital,
+	loanValue,
+}: IBalance) => {
 	return (
 		<BalanceContainer>
 			<BalanceWrapper>
@@ -26,7 +30,7 @@ export const Balance = ({ availableBalance, InvestedCapital }: IBalance) => {
 				<Divider />
 				<BalanceItem>
 					<ItemTitle>Empréstimo</ItemTitle>
-					<ItemRedValue>{formatMoney(InvestedCapital)}</ItemRedValue>
+					<ItemRedValue>{formatMoney(loanValue)}</ItemRedValue>
 				</BalanceItem>
 			</BalanceWrapper>
 		</BalanceContainer>
