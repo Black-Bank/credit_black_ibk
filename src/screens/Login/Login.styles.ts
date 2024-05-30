@@ -16,6 +16,20 @@ export const Logo = styled.img`
 	width: 50px;
 	height: auto;
 `;
+export const PassContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-top: 30px;
+`;
+export const Eye = styled.img`
+	position: absolute;
+	right: 1;
+	margin-left: 330px;
+	height: auto;
+	width: 20px;
+`;
 export const LoginContainer = styled.div`
 	display: flex;
 	height: 1000px;

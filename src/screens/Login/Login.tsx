@@ -3,28 +3,26 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
-	LoginContainer,
 	LoginMobileContainer,
-	LoginBlock,
-	LoginSecoundBlockLogin,
 	LoginField,
 	LoginTitle,
 	LoginWrapper,
-	LoginWrapperFirst,
 	FieldInputValid,
 	FieldInputValidPass,
 	ButtonLogin,
 	SafeAreaView,
 	Logo,
 	LogoContainer,
+	Eye,
+	PassContainer,
 } from './Login.styles';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../components/Loader/Loading';
-import { Header } from 'components/Header/Header';
-import { ScreenTypes } from 'components/Header/enum';
 import { unmaskCpf } from 'Utils/utils';
 import { AuthService } from 'Services/AuthService';
 import logo from '../../assets/logo.svg';
+import eye from '../../assets/eye.svg';
+import eyeOff from '../../assets/eye-off.svg';
 
 export const Login: React.FC = () => {
 	const navigate = useNavigate();
@@ -34,6 +32,7 @@ export const Login: React.FC = () => {
 	const [disabled, setDisabled] = useState<boolean>(true);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [cpf, setCpf] = useState('');
+	const [isEye, setIsEye] = useState<boolean>(false);
 	const [windowWidth, setWindowWidth] = useState<number>(
 		Number(window.innerWidth)
 	);
@@ -41,6 +40,9 @@ export const Login: React.FC = () => {
 		Number(window.innerHeight)
 	);
 
+	const handleEye = () => {
+		setIsEye(!isEye);
+	};
 	const isValidCpf = unmaskCpf(cpf)?.length === 11;
 
 	useEffect(() => {
@@ -141,14 +143,27 @@ export const Login: React.FC = () => {
 							/>
 						</LoginWrapper>
 
-						<LoginWrapper>
+						<PassContainer>
 							<FieldInputValidPass
-								type={hiddenPassword ? 'password' : 'text'}
+								type={isEye ? 'password' : 'text'}
 								value={password}
 								onChange={(e) => handlePassword(e.target.value)}
 								placeholder="Senha"
 							/>
-						</LoginWrapper>
+							{isEye ? (
+								<Eye
+									src={eyeOff}
+									alt="Esconder senha"
+									onClick={handleEye}
+								/>
+							) : (
+								<Eye
+									src={eye}
+									alt="Esconder senha"
+									onClick={handleEye}
+								/>
+							)}
+						</PassContainer>
 
 						{!isLoading && (
 							<ButtonLogin
