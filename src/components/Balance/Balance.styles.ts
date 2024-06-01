@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const BalanceContainer = styled.div`
+	width: 100%;
 	min-width: 451;
 	min-height: 132;
 `;
@@ -8,6 +9,7 @@ export const BalanceContainer = styled.div`
 export const BalanceWrapper = styled.div`
 	background-color: #303030;
 	justify-content: center;
+	width: 100%;
 	padding: 10px;
 	border-radius: 8px;
 	border: 1px solid transparent;

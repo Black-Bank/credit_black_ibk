@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const StatementContainer = styled.div`
 	display: flex;
+	width: 100%;
 	flex-direction: column;
 	background-color: #303030;
 	min-width: 350px;
