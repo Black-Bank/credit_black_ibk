@@ -14,6 +14,7 @@ import { ITrend } from 'components/TrendItems/types';
 import BTC from '../../assets/bitcoin-logo.svg';
 import ETH from '../../assets/eth-logo.svg';
 import DOLLAR from '../../assets/usdt-logo.svg';
+import { Statement } from 'components/Statement/Statement';
 const trendingItems: ITrend[] = [
 	{
 		id: '1',
@@ -88,6 +89,9 @@ export const Dashboard = () => {
 				</DashboardItem>
 				<DashboardItem>
 					<TrendItems items={trendingItems} />
+				</DashboardItem>
+				<DashboardItem>
+					<Statement />
 				</DashboardItem>
 			</DashboardContainer>
 		</>

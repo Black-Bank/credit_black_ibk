@@ -11,8 +11,8 @@ export const DashboardContainer = styled.div`
 
 export const DashboardItem = styled.div`
 	flex: 0 0 calc(33.33% - 20px);
-	margin: 10px;
-	padding: 20px;
+	margin: 5px;
+	padding: 10px;
 	box-sizing: border-box;
 
 	@media screen and (max-width: 768px) {
