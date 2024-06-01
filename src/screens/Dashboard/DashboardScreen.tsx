@@ -9,7 +9,34 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IUser } from './interfaces';
 import { Loading } from 'components/Loader/Loading';
-
+import { TrendItems } from 'components/TrendItems/TrendItems';
+import { ITrend } from 'components/TrendItems/types';
+import BTC from '../../assets/bitcoin-logo.svg';
+import ETH from '../../assets/eth-logo.svg';
+import DOLLAR from '../../assets/usdt-logo.svg';
+const trendingItems: ITrend[] = [
+	{
+		id: '1',
+		name: 'Bitcoin',
+		image: BTC,
+		value: 100000.0,
+		profit: 10.5,
+	},
+	{
+		id: '2',
+		name: 'Ethereum',
+		image: ETH,
+		value: 20000.0,
+		profit: -15.0,
+	},
+	{
+		id: '3',
+		name: 'Dollar',
+		image: DOLLAR,
+		value: 5.23,
+		profit: 20.0,
+	},
+];
 export const Dashboard = () => {
 	const userService = UserService.getInstance();
 	const accessToken = userService.getAccessToken();
@@ -58,6 +85,9 @@ export const Dashboard = () => {
 						InvestedCapital={Number(me?.investedValue || 0)}
 						loanValue={Number(me?.loanValue || 0)}
 					/>
+				</DashboardItem>
+				<DashboardItem>
+					<TrendItems items={trendingItems} />
 				</DashboardItem>
 			</DashboardContainer>
 		</>
