@@ -33,7 +33,7 @@ export const ItemTitle = styled.text`
 `;
 export const ItemValue = styled.text`
 	font-weight: bold;
-	color: green;
+	color: #27d100;
 	margin-top: 5px;
 `;
 
