@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { Login } from '../screens/Login/login.screen';
 import { Signup } from '../screens/Signup/signup';
-import { Home } from '../screens/Home/home.screen';
+import Home from '../screens/Home/home.screen';
 import { Dashboard } from 'screens/Dashboard/dashboard.screen';
 
 export const AppRoutes = () => {
