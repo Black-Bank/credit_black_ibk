@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import themes from './themes.styles';
 
 export const GlobalStyles = createGlobalStyle`
     * {
@@ -9,5 +10,15 @@ export const GlobalStyles = createGlobalStyle`
             sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        background-color: ${themes.colors.dark};
+        color: ${themes.colors.white};
+    }
+
+    a {
+        text-decoration: none;
+        color: ${themes.colors.white};
     }
 `;
