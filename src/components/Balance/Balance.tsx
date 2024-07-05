@@ -1,38 +1,38 @@
 import { formatMoney } from 'utils/utils';
 import {
-	BalanceContainer,
-	BalanceItem,
-	BalanceWrapper,
-	Divider,
-	ItemRedValue,
-	ItemTitle,
-	ItemValue,
+  BalanceContainer,
+  BalanceItem,
+  BalanceWrapper,
+  Divider,
+  ItemRedValue,
+  ItemTitle,
+  ItemValue,
 } from './balance.styles';
 import { IBalance } from './interface';
 
 export const Balance = ({
-	availableBalance,
-	InvestedCapital,
-	loanValue,
+  availableBalance,
+  InvestedCapital,
+  loanValue,
 }: IBalance) => {
-	return (
-		<BalanceContainer>
-			<BalanceWrapper>
-				<BalanceItem>
-					<ItemTitle>Disponível</ItemTitle>
-					<ItemValue>{formatMoney(availableBalance)}</ItemValue>
-				</BalanceItem>
-				<Divider />
-				<BalanceItem>
-					<ItemTitle>Investido</ItemTitle>
-					<ItemValue>{formatMoney(InvestedCapital)}</ItemValue>
-				</BalanceItem>
-				<Divider />
-				<BalanceItem>
-					<ItemTitle>Empréstimo</ItemTitle>
-					<ItemRedValue>{formatMoney(loanValue)}</ItemRedValue>
-				</BalanceItem>
-			</BalanceWrapper>
-		</BalanceContainer>
-	);
+  return (
+    <BalanceContainer>
+      <BalanceWrapper>
+        <BalanceItem>
+          <ItemTitle>Disponível</ItemTitle>
+          <ItemValue>{formatMoney(availableBalance)}</ItemValue>
+        </BalanceItem>
+        <Divider />
+        <BalanceItem>
+          <ItemTitle>Investido</ItemTitle>
+          <ItemValue>{formatMoney(InvestedCapital)}</ItemValue>
+        </BalanceItem>
+        <Divider />
+        <BalanceItem>
+          <ItemTitle>Empréstimo</ItemTitle>
+          <ItemRedValue>{formatMoney(loanValue)}</ItemRedValue>
+        </BalanceItem>
+      </BalanceWrapper>
+    </BalanceContainer>
+  );
 };

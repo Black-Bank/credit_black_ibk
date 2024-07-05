@@ -1,5 +1,5 @@
 export interface IBalance {
-	availableBalance: number;
-	InvestedCapital: number;
-	loanValue: number;
+  availableBalance: number;
+  InvestedCapital: number;
+  loanValue: number;
 }
