@@ -1,4 +1,3 @@
-import React from 'react';
 import { ITrend } from './types';
 import {
 	TrendContainer,
@@ -8,8 +7,8 @@ import {
 	ItemDescription,
 	ItemProfitGreen,
 	ItemProfitRed,
-} from './TrendItem.styles';
-import { formatMoney } from 'Utils/utils';
+} from './trend-items.styles';
+import { formatMoney } from 'utils/utils';
 
 interface TrendItemsProps {
 	items: ITrend[];

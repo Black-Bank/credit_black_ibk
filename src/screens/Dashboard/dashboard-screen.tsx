@@ -1,20 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Header } from 'components/Header/Header';
+import { Header } from 'components/Header/header';
 import { ScreenTypes } from 'components/Header/enum';
-import { DashboardContainer, DashboardItem } from './Dashboard.styles';
-import { Balance } from 'components/Balance/Balance';
-import { UserService } from 'Services/UserService';
+import { DashboardContainer, DashboardItem } from './dashboard';
+import { Balance } from 'components/Balance/balance';
+import { UserService } from 'services/user-service';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IUser } from './interfaces';
-import { Loading } from 'components/Loader/Loading';
-import { TrendItems } from 'components/TrendItems/TrendItems';
+import { Loading } from 'components/Loader/loading';
+import { TrendItems } from 'components/TrendItems/trend-items';
 import { ITrend } from 'components/TrendItems/types';
 import BTC from '../../assets/bitcoin-logo.svg';
 import ETH from '../../assets/eth-logo.svg';
 import DOLLAR from '../../assets/usdt-logo.svg';
-import { Statement } from 'components/Statement/Statement';
+import { Statement } from 'components/Statement/statement';
 const trendingItems: ITrend[] = [
 	{
 		id: '1',

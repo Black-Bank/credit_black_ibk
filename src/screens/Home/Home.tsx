@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Header } from '../../components/Header/Header';
+import { Header } from '../../components/Header/header';
 import './Home.css';
-import { unmaskCpf } from '../../Utils/utils';
+import { unmaskCpf } from '../../utils/utils';
 import { useNavigate } from 'react-router-dom';
 import { ScreenTypes } from 'components/Header/enum';
 

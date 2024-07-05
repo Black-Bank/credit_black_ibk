@@ -16,11 +16,11 @@ import {
 	Eye,
 	PassContainer,
 	Link,
-} from './Login.styles';
+} from './login.styles';
 import { useNavigate } from 'react-router-dom';
-import { Loading } from '../../components/Loader/Loading';
-import { unmaskCpf } from 'Utils/utils';
-import { AuthService } from 'Services/AuthService';
+import { Loading } from '../../components/Loader/loading';
+import { unmaskCpf } from 'utils/utils';
+import { AuthService } from 'services/auth-service';
 import logo from '../../assets/logo.svg';
 import eye from '../../assets/eye.svg';
 import eyeOff from '../../assets/eye-off.svg';

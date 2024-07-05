@@ -1,4 +1,4 @@
-import { formatMoney } from 'Utils/utils';
+import { formatMoney } from 'utils/utils';
 import {
 	BalanceContainer,
 	BalanceItem,
@@ -7,7 +7,7 @@ import {
 	ItemRedValue,
 	ItemTitle,
 	ItemValue,
-} from './Balance.styles';
+} from './balance.styles';
 import { IBalance } from './interface';
 
 export const Balance = ({

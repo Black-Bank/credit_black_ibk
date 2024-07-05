@@ -4,10 +4,10 @@ import {
 	Route,
 	Navigate,
 } from 'react-router-dom';
-import { Login } from '../screens/Login/Login';
-import { Signup } from '../screens/Signup/Signup';
-import { Home } from '../screens/Home/Home';
-import { Dashboard } from 'screens/Dashboard/DashboardScreen';
+import { Login } from '../screens/Login/login';
+import { Signup } from '../screens/Signup/signup';
+import { Home } from '../screens/Home/home';
+import { Dashboard } from 'screens/Dashboard/dashboard-screen';
 
 export const AppRoutes = () => {
 	return (
