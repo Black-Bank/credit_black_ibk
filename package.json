@@ -26,7 +26,7 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start": "yarn cache clean && react-scripts start",
+		"start": "yarn cache clean && BROWSER=none react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
@@ -49,5 +49,13 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "latest",
+		"@typescript-eslint/parser": "latest",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-prettier": "^5.1.3",
+		"eslint-plugin-react": "latest",
+		"prettier": "^3.3.2"
 	}
 }
