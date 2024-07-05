@@ -15,6 +15,8 @@ export const Container = styled.nav`
   border-radius: 50px;
   margin: 3.125rem 0;
   padding: 1.25rem 2.125rem;
+  width: 85%;
+  margin: 3.25rem auto;
 
   img {
     width: 3rem;
@@ -29,6 +31,7 @@ export const Container = styled.nav`
     display: flex;
     flex-direction: column;
     text-align: center;
+    width: 75%;
   }
 `;
 
