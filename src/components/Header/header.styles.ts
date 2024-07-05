@@ -1,48 +1,79 @@
 import styled from 'styled-components';
 
-type HeaderContainerType = {
-  $isHome?: boolean;
-};
+import themes from '../../styles/themes.styles';
 
-export const HeaderContainer = styled.header<HeaderContainerType>`
+interface ItemProps {
+  $active?: boolean;
+}
+
+export const Container = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${themes.colors.navBackgroundColor};
+  border: 1px solid ${themes.colors.navBorderColor};
+  border-radius: 50px;
+  margin: 3.125rem 0;
+  padding: 1.25rem 2.125rem;
+
+  img {
+    width: 3rem;
+    margin-right: 1rem;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+`;
+
+export const Logo = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 80px;
-  background-color: ${(props) => (props.$isHome ? '#271d42' : 'transparent')};
+  margin-bottom: 1rem;
+`;
 
-  .container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    flex-direction: row;
-    margin-left: 40px;
-    margin-right: 40px;
+export const Items = styled.ul`
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: 1.625rem;
+`;
+
+export const Item = styled.li<ItemProps>`
+  cursor: pointer;
+  background-color: ${(props) =>
+    props.$active && `${themes.colors.navBorderColor}`};
+  padding: ${(props) => props.$active && `0.75rem 1.5rem`};
+  border-radius: ${(props) => props.$active && `3.125rem`};
+  transition: 0.5s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const ResponsiveHidden = styled.div`
+  @media (max-width: 800px) {
+    display: none;
+  }
+`;
+
+export const Responsive = styled.div`
+  display: none;
+  width: 100%;
+
+  button {
+    margin: 0 auto;
   }
 
-  .login-logo {
-    display: flex;
-    align-items: center;
-  }
-
-  .loading-icon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .login-logo:hover {
-    opacity: 0.5;
-    cursor: pointer;
-  }
-
-  .loading-icon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .login-text {
-    font-weight: 18px;
-    color: #fff;
-    margin-right: 5px;
+  @media (max-width: 800px) {
+    display: block;
   }
 `;

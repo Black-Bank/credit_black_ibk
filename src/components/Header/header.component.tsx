@@ -1,41 +1,95 @@
+import { Title } from 'components/global.component';
 import logo from '../../assets/logo.svg';
-import LoginLogo from '../../assets/login.svg';
 import { ScreenTypes } from './header.enum';
-import { useNavigate } from 'react-router-dom';
-import { HeaderContainer } from './header.styles';
+import {
+  Container,
+  Item,
+  Items,
+  Logo,
+  Responsive,
+  ResponsiveHidden,
+} from './header.styles';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import {
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from '@mui/material';
+import ResponsiveBar from 'components/ResponsiveBar/responsive-bar.component';
 
-export const Header = ({ screen }: { screen: string }) => {
+type HeaderProps = {
+  screen: string;
+  active: string;
+};
+
+export const Header = ({ screen, active }: HeaderProps) => {
+  const [open, setOpen] = useState(false);
+
   const navigate = useNavigate();
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+
+  const DrawerList = (
+    <Box sx={{ width: 400 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        {['Home', 'Carreiras', 'Sobre', 'Segurança'].map((text) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton onClick={() => navigate('/')}>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   if (!screen) {
     return <></>;
   }
-  const handleLogin = () => {
-    navigate('/login');
-  };
+
   switch (screen) {
     case ScreenTypes.SCREEN_LOGIN:
       return (
-        <HeaderContainer>
+        <Container>
           <div className="container">
             <div className="login-logo">
               <img src={logo} alt="Login" className="loading-icon" />
             </div>
           </div>
-        </HeaderContainer>
+        </Container>
       );
     case ScreenTypes.SCREEN_HOME:
       return (
-        <HeaderContainer $isHome>
-          <div className="container">
-            <div className="logo">
-              <img src={logo} alt="Loading" className="loading-icon" />
+        <Container>
+          <Logo>
+            <div>
+              <img src={logo} alt="logo-creditblack" />
             </div>
-            <div className="login-logo" onClick={handleLogin}>
-              <span className="login-text">Login</span>
-              <img src={LoginLogo} alt="Login" className="loading-icon" />
-            </div>
-          </div>
-        </HeaderContainer>
+            <Title>Credit Black</Title>
+          </Logo>
+          <ResponsiveHidden>
+            <Items>
+              <Item $active={active === '/'}>
+                <Link to={'/'}>Home</Link>
+              </Item>
+              <Item $active={active === '/carreiras'}>Carreiras</Item>
+              <Item $active={active === '/sobre'}>Sobre</Item>
+              <Item $active={active === '/segurança'}>Segurança</Item>
+            </Items>
+          </ResponsiveHidden>
+          <Responsive>
+            <ResponsiveBar onClick={toggleDrawer(true)} />
+          </Responsive>
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+          </Drawer>
+        </Container>
       );
     case ScreenTypes.SCREEN_DASHBOARD:
       return (
