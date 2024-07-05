@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Header } from '../../components/Header/Header';
 import './Home.css';
 import { unmaskCpf } from '../../Utils/utils';
 import { useNavigate } from 'react-router-dom';
 import { ScreenTypes } from 'components/Header/enum';
 
-export const Home: React.FC = () => {
+export const Home = () => {
 	const navigate = useNavigate();
 
 	const [cpf, setCpf] = useState('');

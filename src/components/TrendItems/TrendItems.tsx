@@ -15,7 +15,7 @@ interface TrendItemsProps {
 	items: ITrend[];
 }
 
-export const TrendItems: React.FC<TrendItemsProps> = ({ items }) => {
+export const TrendItems = ({ items }: TrendItemsProps) => {
 	return (
 		<TrendContainer>
 			{items.map((item) => (

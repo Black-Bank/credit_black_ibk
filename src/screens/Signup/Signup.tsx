@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Signup.css';
@@ -35,7 +35,7 @@ const errorInitialValues = {
 	error_cellphone: false,
 };
 
-export const Signup: React.FC = () => {
+export const Signup = () => {
 	const createUserService = new CreateUserService();
 	const navigate = useNavigate();
 	const [name, setName] = useState<string>('');

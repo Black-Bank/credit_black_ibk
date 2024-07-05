@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -25,7 +25,7 @@ import logo from '../../assets/logo.svg';
 import eye from '../../assets/eye.svg';
 import eyeOff from '../../assets/eye-off.svg';
 
-export const Login: React.FC = () => {
+export const Login = () => {
 	const navigate = useNavigate();
 	const authService = new AuthService();
 	const [password, setPassword] = useState<string>('');
