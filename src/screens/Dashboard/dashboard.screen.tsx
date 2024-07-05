@@ -77,7 +77,7 @@ export const Dashboard = () => {
   return (
     <>
       {isLoading && <Loading />}
-      <Header screen={ScreenTypes.SCREEN_DASHBOARD} />
+      {/* <Header screen={ScreenTypes.SCREEN_DASHBOARD} /> */}
       <DashboardContainer>
         <DashboardItem>
           <Balance
