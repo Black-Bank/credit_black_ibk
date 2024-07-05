@@ -36,7 +36,10 @@ export const Logo = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 1rem;
+
+  @media (max-width: 800px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const Items = styled.ul`
