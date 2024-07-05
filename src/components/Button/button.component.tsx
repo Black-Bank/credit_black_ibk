@@ -5,13 +5,13 @@ import { Container } from './button.styles';
 interface ButtonProps {
   children: ReactNode;
   variant: 'purple' | 'none';
+  width?: number;
   onClick?: () => void;
-  id?: string;
 }
 
-const Button = ({ children, variant, onClick, id }: ButtonProps) => {
+const Button = ({ children, variant, width, onClick }: ButtonProps) => {
   return (
-    <Container $variant={variant} onClick={onClick} id={id}>
+    <Container $variant={variant} $width={width} onClick={onClick}>
       {children}
     </Container>
   );
