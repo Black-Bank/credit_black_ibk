@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Header } from '../../components/Header/header';
-import './home.css';
+import { Header } from '../../components/Header/header.component';
 import { unmaskCpf } from '../../utils/utils';
 import { useNavigate } from 'react-router-dom';
-import { ScreenTypes } from 'components/Header/enum';
+import { ScreenTypes } from 'components/Header/header.enum';
+import { HomeContainer } from './home.styles';
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ export const Home = () => {
     <>
       <Header screen={ScreenTypes.SCREEN_HOME} />
 
-      <div className="home-container">
+      <HomeContainer>
         <div className="info-container">
           <span className="info-title">Coloque sua riqueza sobre a rocha</span>
           <span className="info-description">
@@ -71,7 +71,7 @@ export const Home = () => {
             </span>
           </button>
         </div>
-      </div>
+      </HomeContainer>
     </>
   );
 };

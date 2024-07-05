@@ -17,9 +17,9 @@ import {
   Link,
 } from './login.styles';
 import { useNavigate } from 'react-router-dom';
-import { Loading } from '../../components/Loader/loading';
+import { Loading } from '../../components/Loader/loading.component';
 import { unmaskCpf } from 'utils/utils';
-import { AuthService } from 'services/auth-service';
+import { AuthService } from 'services/auth.service';
 import logo from '../../assets/logo.svg';
 import eye from '../../assets/eye.svg';
 import eyeOff from '../../assets/eye-off.svg';

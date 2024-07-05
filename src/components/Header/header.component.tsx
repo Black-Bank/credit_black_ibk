@@ -1,8 +1,8 @@
-import './header.css';
 import logo from '../../assets/logo.svg';
 import LoginLogo from '../../assets/login.svg';
-import { ScreenTypes } from './enum';
+import { ScreenTypes } from './header.enum';
 import { useNavigate } from 'react-router-dom';
+import { HeaderContainer } from './header.styles';
 
 export const Header = ({ screen }: { screen: string }) => {
   const navigate = useNavigate();
@@ -15,17 +15,17 @@ export const Header = ({ screen }: { screen: string }) => {
   switch (screen) {
     case ScreenTypes.SCREEN_LOGIN:
       return (
-        <div className="Header">
+        <HeaderContainer>
           <div className="container">
             <div className="login-logo">
               <img src={logo} alt="Login" className="loading-icon" />
             </div>
           </div>
-        </div>
+        </HeaderContainer>
       );
     case ScreenTypes.SCREEN_HOME:
       return (
-        <div className="Header-home">
+        <HeaderContainer $isHome>
           <div className="container">
             <div className="logo">
               <img src={logo} alt="Loading" className="loading-icon" />
@@ -35,7 +35,7 @@ export const Header = ({ screen }: { screen: string }) => {
               <img src={LoginLogo} alt="Login" className="loading-icon" />
             </div>
           </div>
-        </div>
+        </HeaderContainer>
       );
     case ScreenTypes.SCREEN_DASHBOARD:
       return (

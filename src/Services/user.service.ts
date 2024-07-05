@@ -1,6 +1,6 @@
 import { getMe } from 'api/user';
-import { CryptoService } from './crypto-service';
-import { IUser } from 'screens/Dashboard/interfaces';
+import { CryptoService } from './crypto.service';
+import { IUser } from 'screens/Dashboard/dashboard.interface';
 
 export class UserService {
   private static instance: UserService;

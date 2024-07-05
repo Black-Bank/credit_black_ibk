@@ -8,7 +8,7 @@ import {
   ItemTitle,
   ItemValue,
 } from './balance.styles';
-import { IBalance } from './interface';
+import { IBalance } from './balance.interface';
 
 export const Balance = ({
   availableBalance,

@@ -11,7 +11,7 @@ export const Statement = () => {
   return (
     <StatementContainer>
       <HeaderInfo>
-        <Title>Portifólio</Title>
+        <Title>Portfólio</Title>
         <MainDescription>
           <MainDescriptionValue>R$ 10,00</MainDescriptionValue>
           <DescriptionPercentage>3,0%</DescriptionPercentage>

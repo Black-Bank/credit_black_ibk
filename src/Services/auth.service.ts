@@ -1,6 +1,6 @@
-import { IAuthUser } from './interfaces';
+import { IAuthUser } from './user.interface';
 import * as AuthAPI from '../api/authenticate';
-import { CryptoService } from './crypto-service';
+import { CryptoService } from './crypto.service';
 
 export class AuthService {
   private cryptoService: CryptoService;

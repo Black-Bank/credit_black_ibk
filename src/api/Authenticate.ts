@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { CryptoService } from '../services/crypto-service';
+import { CryptoService } from '../services/crypto.service';
 import { AUTHORIZATION_HEADER, BASE_URL } from '../config/env';
-import { IAuthUser } from '../services/interfaces';
+import { IAuthUser } from '../services/user.interface';
 
 export const Authenticate = async (userData: IAuthUser) => {
   const cryptoService = new CryptoService();

@@ -1,4 +1,4 @@
-import { ICreateUser } from './interfaces';
+import { ICreateUser } from './user.interface';
 import * as SignupAPI from '../api/signup';
 
 export class CreateUserService {
