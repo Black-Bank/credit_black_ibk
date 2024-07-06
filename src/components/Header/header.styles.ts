@@ -8,15 +8,12 @@ interface ItemProps {
 
 export const Container = styled.nav`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background-color: ${themes.colors.gray1c1c1c};
   border: 1px solid ${themes.colors.gray262626};
   border-radius: 50px;
   margin: 3.125rem 0;
   padding: 1.25rem 2.125rem;
-  width: 85%;
-  margin: 3.25rem auto;
 
   img {
     width: 3rem;

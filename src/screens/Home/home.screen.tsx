@@ -1,7 +1,3 @@
-import { Header } from 'components/Header/header.component';
-import { ScreenTypes } from 'components/Header/header.enum';
-import { Container } from './home.styles';
-import MainDesign from 'components/Designs/MainDesign/main.design';
 import {
   Flex,
   Spacer,
@@ -18,9 +14,7 @@ import OpenAccountCard from 'components/OpenAccountCard/open-account-card.compon
 const Home = () => {
   return (
     <>
-      <MainDesign />
-      <Header active="/" screen={ScreenTypes.SCREEN_HOME} />
-      <Container>
+      <div>
         <Flex>
           <div>
             <Title>
@@ -46,7 +40,7 @@ const Home = () => {
         </Flex>
         <OurProducts />
         <OpenAccountCard />
-      </Container>
+      </div>
     </>
   );
 };
