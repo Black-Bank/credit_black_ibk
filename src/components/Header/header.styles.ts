@@ -10,8 +10,8 @@ export const Container = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${themes.colors.navBackgroundColor};
-  border: 1px solid ${themes.colors.navBorderColor};
+  background-color: ${themes.colors.gray1c1c1c};
+  border: 1px solid ${themes.colors.gray262626};
   border-radius: 50px;
   margin: 3.125rem 0;
   padding: 1.25rem 2.125rem;
@@ -55,7 +55,7 @@ export const Items = styled.ul`
 export const Item = styled.li<ItemProps>`
   cursor: pointer;
   background-color: ${(props) =>
-    props.$active && `${themes.colors.navBorderColor}`};
+    props.$active && `${themes.colors.gray262626}`};
   padding: ${(props) => props.$active && `0.75rem 1.5rem`};
   border-radius: ${(props) => props.$active && `3.125rem`};
   transition: 0.5s;

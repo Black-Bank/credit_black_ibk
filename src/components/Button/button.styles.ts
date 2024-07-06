@@ -11,7 +11,7 @@ export const Container = styled.button<ButtonProps>`
   border: none;
   color: ${(props) =>
     props.$variant === 'purple'
-      ? `${themes.colors.navBackgroundColor}`
+      ? `${themes.colors.gray1c1c1c}`
       : `${themes.colors.white}`};
   background-color: ${(props) =>
     props.$variant === 'purple' && `${themes.colors.primary}`};
@@ -19,7 +19,6 @@ export const Container = styled.button<ButtonProps>`
   border-radius: 3.125rem;
   cursor: pointer;
   margin-right: 1.875rem;
-  margin-top: 2rem;
   transition: 0.3s;
   width: ${(props) => `${props.$width}%`};
 
