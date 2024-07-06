@@ -1,4 +1,3 @@
-import { Title } from 'components/global.styles';
 import logo from '../../assets/logo.svg';
 import { ScreenTypes } from './header.enum';
 import {
@@ -20,13 +19,14 @@ import {
   ListItemText,
 } from '@mui/material';
 import ResponsiveBar from 'components/ResponsiveBar/responsive-bar.component';
+import Button from 'components/Button/button.component';
 
 type HeaderProps = {
   screen: string;
   active: string;
 };
 
-export const Header = ({ screen, active }: HeaderProps) => {
+const Header = ({ screen, active }: HeaderProps) => {
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ export const Header = ({ screen, active }: HeaderProps) => {
             <div>
               <img src={logo} alt="logo-creditblack" />
             </div>
-            <Title>Credit Black</Title>
+            <h1>Credit Black</h1>
           </Logo>
           <ResponsiveHidden>
             <Items>
@@ -82,6 +82,14 @@ export const Header = ({ screen, active }: HeaderProps) => {
               <Item $active={active === '/sobre'}>Sobre</Item>
               <Item $active={active === '/segurança'}>Segurança</Item>
             </Items>
+          </ResponsiveHidden>
+          <ResponsiveHidden>
+            <Button variant="none">
+              <Link to={'/cadastrar'}>Cadastrar</Link>
+            </Button>
+            <Link to={'/logar'}>
+              <Button variant="purple">Logar</Button>
+            </Link>
           </ResponsiveHidden>
           <Responsive>
             <ResponsiveBar onClick={toggleDrawer(true)} />
@@ -106,3 +114,5 @@ export const Header = ({ screen, active }: HeaderProps) => {
       return <></>;
   }
 };
+
+export default Header;

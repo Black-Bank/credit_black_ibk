@@ -9,6 +9,7 @@ interface ItemProps {
 export const Container = styled.nav`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: ${themes.colors.gray1c1c1c};
   border: 1px solid ${themes.colors.gray262626};
   border-radius: 50px;
@@ -35,7 +36,6 @@ export const Container = styled.nav`
 export const Logo = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
 
   @media (max-width: 800px) {
     margin-bottom: 1rem;

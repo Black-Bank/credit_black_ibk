@@ -1,5 +1,5 @@
 import MainDesign from 'components/Designs/MainDesign/main.design';
-import { Header } from 'components/Header/header.component';
+import Header from 'components/Header/header.component';
 import { Container, MainContainer } from './default.styles';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ScreenTypes } from 'components/Header/header.enum';

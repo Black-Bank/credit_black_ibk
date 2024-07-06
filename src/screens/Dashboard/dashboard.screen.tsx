@@ -1,5 +1,3 @@
-import { Header } from 'components/Header/header.component';
-import { ScreenTypes } from 'components/Header/header.enum';
 import { DashboardContainer, DashboardItem } from './dashboard.styles';
 import { Balance } from 'components/Balance/balance.component';
 import { UserService } from 'services/user.service';
