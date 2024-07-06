@@ -27,15 +27,15 @@ const Footer = () => {
         <ContactCard>
           <Item>
             <IoMdMail />
-            <p>gabriel.oliveira2040@hotmail.com</p>
+            <p>Email</p>
           </Item>
           <Item>
             <FaPhoneAlt />
-            <p>(11) 99011-5235</p>
+            <p>Phone</p>
           </Item>
           <Item>
             <IoLocationSharp />
-            <p>Santo André - SP</p>
+            <p>Cidade</p>
           </Item>
         </ContactCard>
         <FooterCard>
@@ -51,7 +51,7 @@ const Footer = () => {
               </CircleContact>
             </a>
           </Flex>
-          <p>DevBank todos os direitos reservados</p>
+          <p>Credit Black todos os direitos reservados</p>
           <p>Política de privacidade | Termos de serviço</p>
         </FooterCard>
       </Container>
