@@ -11,12 +11,12 @@ export const Svg = styled.svg`
   }
 
   @media (min-width: 801px) and (max-width: 1000px) {
-    top: 380%;
-    right: 62%;
+    top: 391%;
+    right: 64%;
   }
 
   @media (min-width: 1001px) and (max-width: 1200px) {
-    top: 375%;
-    right: 67%;
+    top: 391%;
+    right: 69%;
   }
 `;
