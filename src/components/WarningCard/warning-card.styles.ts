@@ -12,6 +12,6 @@ export const Container = styled.div`
   border-radius: 3.75rem;
 
   @media (max-width: 600px) {
-    width: 24rem;
+    width: 22rem;
   }
 `;
