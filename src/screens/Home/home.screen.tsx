@@ -10,11 +10,13 @@ import ExchangeDesign from 'components/Designs/ExchangeDesign/exchange.design';
 import ExchangeArrowDesign from 'components/Designs/ExchangeArrowDesign/exchange-arrow.design';
 import OurProducts from 'container/OurProducts/our-products.container';
 import OpenAccountCard from 'components/OpenAccountCard/open-account-card.component';
+import WarningCard from 'components/WarningCard/warning-card.component';
 
 const Home = () => {
   return (
     <>
       <div>
+        <WarningCard />
         <Flex>
           <div>
             <Title>
