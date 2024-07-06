@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Svg = styled.svg`
   position: absolute;
   right: 73%;
-  top: 201%;
+  top: 209%;
   z-index: -1;
 
   @media (max-width: 800px) {
