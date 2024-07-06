@@ -1,4 +1,4 @@
-import { Title } from 'components/global.component';
+import { Title } from 'components/global.styles';
 import logo from '../../assets/logo.svg';
 import { ScreenTypes } from './header.enum';
 import {
