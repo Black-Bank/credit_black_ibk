@@ -31,7 +31,7 @@ const Home = () => {
               nossos clientes.
             </Text>
             <Spacer size={2} />
-            <Button variant="purple" width={47}>
+            <Button variant="purple" width={90}>
               Abrir conta
             </Button>
           </div>
