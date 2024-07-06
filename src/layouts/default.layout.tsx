@@ -3,6 +3,7 @@ import Header from 'components/Header/header.component';
 import { Container, MainContainer } from './default.styles';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ScreenTypes } from 'components/Header/header.enum';
+import Footer from 'components/Footer/footer.component';
 
 const DefaultLayout = () => {
   const { pathname } = useLocation();
@@ -16,7 +17,7 @@ const DefaultLayout = () => {
       <MainContainer>
         <Outlet />
       </MainContainer>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
