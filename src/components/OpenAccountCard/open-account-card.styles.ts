@@ -28,6 +28,7 @@ export const Container = styled.div`
   @media (max-width: 1000px) {
     text-align: center;
     flex-wrap: wrap;
+    justify-content: center;
 
     p,
     button {
