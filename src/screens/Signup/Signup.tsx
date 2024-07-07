@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './signup.css';
+import './Signup.css';
 import { IErrorSignup } from './enum';
-import { formatCellphone, isValidEmail, unmaskCpf } from '../../utils/utils';
-import { CreateUserService } from '../../services/create-user-service';
+import { formatCellphone, isValidEmail, unmaskCpf } from '../../Utils/utils';
+import { CreateUserService } from '../../Services/create-user-service';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../components/Loader/loading.component';
 import logo from '../../assets/logo.svg';
@@ -23,7 +23,7 @@ import {
   SignupMobileContainer,
   SignupTitle,
   SignupWrapper,
-} from './signup.styles';
+} from './Signup.styles';
 import { AxiosError } from 'axios';
 
 const errorInitialValues = {

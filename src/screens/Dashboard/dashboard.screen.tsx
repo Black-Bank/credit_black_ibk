@@ -1,6 +1,6 @@
 import { DashboardContainer, DashboardItem } from './dashboard.styles';
 import { Balance } from 'components/Balance/balance.component';
-import { UserService } from 'services/user.service';
+import { UserService } from 'Services/user.service';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -11,7 +11,7 @@ import { ITrend } from 'components/TrendItems/types';
 import BTC from '../../assets/bitcoin-logo.svg';
 import ETH from '../../assets/eth-logo.svg';
 import DOLLAR from '../../assets/usdt-logo.svg';
-import { Statement } from 'components/Statement/statement';
+import { Statement } from 'components/Statement/Statement';
 const trendingItems: ITrend[] = [
   {
     id: '1',
