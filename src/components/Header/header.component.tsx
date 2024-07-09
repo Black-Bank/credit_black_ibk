@@ -54,17 +54,7 @@ const Header = ({ screen, active }: HeaderProps) => {
   }
 
   switch (screen) {
-    case ScreenTypes.SCREEN_LOGIN:
-      return (
-        <Container>
-          <div className="container">
-            <div className="login-logo">
-              <img src={logo} alt="Login" className="loading-icon" />
-            </div>
-          </div>
-        </Container>
-      );
-    case ScreenTypes.SCREEN_HOME:
+    case ScreenTypes.SCREEN_NOTLOGGED:
       return (
         <Container>
           <Logo>
@@ -85,7 +75,7 @@ const Header = ({ screen, active }: HeaderProps) => {
           </ResponsiveHidden>
           <ResponsiveHidden>
             <Button variant="none">
-              <Link to={'/cadastrar'}>Cadastrar</Link>
+              <Link to={'/signup'}>Cadastrar</Link>
             </Button>
             <Link to={'/logar'}>
               <Button variant="purple">Logar</Button>
@@ -99,15 +89,37 @@ const Header = ({ screen, active }: HeaderProps) => {
           </Drawer>
         </Container>
       );
-    case ScreenTypes.SCREEN_DASHBOARD:
+    case ScreenTypes.SCREEN_LOGGED:
       return (
-        <div className="Header-home">
-          <div className="container">
-            <div className="logo">
-              <img src={logo} alt="Loading" className="loading-icon" />
+        <Container>
+          <Logo>
+            <div>
+              <img src={logo} alt="logo-creditblack" />
             </div>
-          </div>
-        </div>
+            <h1>Credit Black</h1>
+          </Logo>
+          <ResponsiveHidden>
+            <Items>
+              <Item $active={active === '/'}>
+                <Link to={'/'}>Home</Link>
+              </Item>
+              <Item $active={active === '/carreiras'}>Carreiras</Item>
+              <Item $active={active === '/sobre'}>Sobre</Item>
+              <Item $active={active === '/segurança'}>Segurança</Item>
+            </Items>
+          </ResponsiveHidden>
+          <ResponsiveHidden>
+            <Button variant="none">
+              <Link to={'/'}>Sair</Link>
+            </Button>
+          </ResponsiveHidden>
+          <Responsive>
+            <ResponsiveBar onClick={toggleDrawer(true)} />
+          </Responsive>
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+          </Drawer>
+        </Container>
       );
 
     default:
