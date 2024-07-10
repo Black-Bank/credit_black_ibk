@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import ResponsiveBar from 'components/ResponsiveBar/responsive-bar.component';
 import Button from 'components/Button/button.component';
+import { RoutesEnum } from 'layouts/default.enum';
 
 type HeaderProps = {
   screen: string;
@@ -66,7 +67,7 @@ const Header = ({ screen, active }: HeaderProps) => {
           <ResponsiveHidden>
             <Items>
               <Item $active={active === '/'}>
-                <Link to={'/'}>Home</Link>
+                <Link to={RoutesEnum.MAIN_ROUTE}>Home</Link>
               </Item>
               <Item $active={active === '/carreiras'}>Carreiras</Item>
               <Item $active={active === '/sobre'}>Sobre</Item>
