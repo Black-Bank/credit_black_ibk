@@ -3,6 +3,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import * as z from 'zod';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { SpecialTitle, Text, Title } from '../../components/global.styles';
 import Button from '../../components/Button/button.component';
 import SignupDesign from '../../components/Designs/SignupDesign/signup.design';
@@ -11,31 +14,36 @@ import { Actions, Container, Form } from './signup.styles';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactInputMask from 'react-input-mask';
 import { CreateUserData } from './signup.interface';
+import { CreateUserService } from 'services/create-user-service';
+import { AxiosError } from 'axios';
+import { useEffect } from 'react';
+import { RoutesEnum } from 'layouts/default.enum';
 
 type Inputs = {
   fullName: string;
   phone: string;
   email: string;
+  cpf: string;
   password: string;
   confirmPassword: string;
 };
 
 const SignUp = () => {
+  const createUserService = new CreateUserService();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const schema = z
     .object({
       fullName: z
         .string()
         .trim()
         .min(1, { message: 'O nome é preciso ter, pelo menos, 2 caracteres.' }),
-      phone: z
-        .string()
-        .regex(
-          /\(?\b([0-9]{2,3}|0((x|[0-9]){2,3}[0-9]{2}))\)?\s*[0-9]{4,5}[- ]*[0-9]{4}\b/gm,
-          {
-            message: 'O celular está incorreto.',
-          },
-        ),
+      phone: z.string().regex(/.[0-9]{2}. [0-9].[0-9]{4}[-][0-9]{4}/),
       email: z.string().email({ message: 'Este e-mail está inválido.' }),
+      cpf: z.string().regex(/[0-9]{11}/),
       password: z
         .string()
         .trim()
@@ -60,7 +68,32 @@ const SignUp = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data: CreateUserData) => {
-    console.log(data);
+    const now = new Date();
+    const isoDateString = now.toISOString();
+    const userData = {
+      name: data.fullName,
+      identifier: data.cpf,
+      email: data.email,
+      cpf: data.cpf,
+      password: data.password,
+      confirmPassword: data.confirmPassword,
+      amount: 0,
+      cellphone: data.phone,
+      createdAt: isoDateString,
+    };
+
+    try {
+      const response = await createUserService.createUser(userData);
+
+      if (response.status === 200) {
+        toast.success('Usuário criado com sucesso');
+      } else {
+        toast.error(response.message as string);
+      }
+    } catch (e) {
+      const error = e as AxiosError;
+      toast.error(error?.message as string);
+    }
   };
 
   return (
@@ -84,7 +117,7 @@ const SignUp = () => {
         </div>
         <div>
           <ReactInputMask
-            mask={'(99) 99999-9999'}
+            mask={'(99) 9 9999-9999'}
             placeholder="Celular"
             className={errors.phone?.message && 'error'}
             {...register('phone')}
@@ -96,6 +129,14 @@ const SignUp = () => {
             placeholder="E-mail"
             className={errors.email?.message && 'error'}
             {...register('email')}
+          />
+        </div>
+        <div>
+          <ReactInputMask
+            mask={'99999999999'}
+            placeholder="CPF"
+            className={errors.cpf?.message && 'error'}
+            {...register('cpf')}
           />
         </div>
         <div>
@@ -116,7 +157,7 @@ const SignUp = () => {
         </div>
         <Actions>
           <Button variant="purple">Cadastrar</Button>
-          <Link to={'/login'}>
+          <Link to={RoutesEnum.LOGIN_ROUTE}>
             <Button variant="none" id="login">
               Logar
             </Button>
