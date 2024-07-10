@@ -87,6 +87,8 @@ const SignUp = () => {
 
       if (response.status === 200) {
         toast.success('Usuário criado com sucesso');
+      } else if (response.status === 409) {
+        toast.error('Este usuário já existe');
       } else {
         toast.error(response.message as string);
       }
