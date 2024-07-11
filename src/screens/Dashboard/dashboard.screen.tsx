@@ -1,6 +1,6 @@
 import { DashboardContainer, DashboardItem } from './dashboard.styles';
 import { Balance } from 'components/Balance/balance.component';
-import { UserService } from 'services/user.service';
+import { UserService } from 'Services/user.service';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
