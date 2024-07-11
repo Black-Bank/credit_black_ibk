@@ -43,7 +43,7 @@ const SignUp = () => {
       fullName: z
         .string()
         .trim()
-        .regex(/[A-z]{5}[' '][A-z]{5}/),
+        .regex(/[A-z]{3}[' '][A-z]{3}/),
       phone: z.string().regex(/.[0-9]{2}. [0-9].[0-9]{4}[-][0-9]{4}/),
       email: z.string().email({ message: 'Este e-mail está inválido.' }),
       cpf: z.string().regex(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/),
@@ -84,6 +84,7 @@ const SignUp = () => {
       cellphone: data.phone,
       createdAt: isoDateString,
     };
+    console.log('init');
 
     try {
       const response = await createUserService.createUser(userData);
@@ -96,6 +97,7 @@ const SignUp = () => {
         toast.error(response.message as string);
       }
     } catch (e) {
+      console.log('error');
       const error = e as AxiosError;
       toast.error(error?.message as string);
     }
