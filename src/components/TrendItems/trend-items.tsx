@@ -8,7 +8,7 @@ import {
   ItemProfitGreen,
   ItemProfitRed,
 } from './trend-items.styles';
-import { formatMoney } from 'Utils/Utils';
+import { formatMoney } from 'utils/utils';
 
 interface TrendItemsProps {
   items: ITrend[];
