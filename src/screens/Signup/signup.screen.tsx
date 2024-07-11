@@ -11,7 +11,7 @@ import { GoEye, GoEyeClosed } from 'react-icons/go';
 import { SpecialTitle, Text, Title } from '../../components/global.styles';
 import Button from '../../components/Button/button.component';
 import SignupDesign from '../../components/Designs/SignupDesign/signup.design';
-import { Actions, Container, Form, PasswordField } from './signup.styles';
+import { Actions, Container, Form, PasswordField } from './Signup.styles';
 
 import 'react-toastify/dist/ReactToastify.css';
 import ReactInputMask from 'react-input-mask';
