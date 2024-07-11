@@ -6,17 +6,19 @@ import * as z from 'zod';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { GoEye, GoEyeClosed } from 'react-icons/go';
+
 import { SpecialTitle, Text, Title } from '../../components/global.styles';
 import Button from '../../components/Button/button.component';
 import SignupDesign from '../../components/Designs/SignupDesign/signup.design';
-import { Actions, Container, Form } from './Signup.styles';
+import { Actions, Container, Form, PasswordField } from './Signup.styles';
 
 import 'react-toastify/dist/ReactToastify.css';
 import ReactInputMask from 'react-input-mask';
 import { CreateUserData } from './signup.interface';
 import { CreateUserService } from 'Services/create-user-service';
 import { AxiosError } from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { RoutesEnum } from 'layouts/default.enum';
 
 type Inputs = {
@@ -30,6 +32,7 @@ type Inputs = {
 
 const SignUp = () => {
   const createUserService = new CreateUserService();
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,10 +43,10 @@ const SignUp = () => {
       fullName: z
         .string()
         .trim()
-        .min(1, { message: 'O nome é preciso ter, pelo menos, 2 caracteres.' }),
+        .regex(/[A-z]{5}[' '][A-z]{5}/),
       phone: z.string().regex(/.[0-9]{2}. [0-9].[0-9]{4}[-][0-9]{4}/),
       email: z.string().email({ message: 'Este e-mail está inválido.' }),
-      cpf: z.string().regex(/[0-9]{11}/),
+      cpf: z.string().regex(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/),
       password: z
         .string()
         .trim()
@@ -141,14 +144,21 @@ const SignUp = () => {
             {...register('cpf')}
           />
         </div>
-        <div>
-          <input
-            type="password"
-            placeholder="Senha"
-            className={errors.password?.message && 'error'}
-            {...register('password')}
-          />
-        </div>
+        <PasswordField>
+          <div>
+            <input
+              type={passwordVisible ? 'text' : 'password'}
+              placeholder="Senha"
+              className={errors.password?.message && 'error'}
+              {...register('password')}
+            />
+            {!passwordVisible ? (
+              <GoEyeClosed onClick={() => setPasswordVisible(true)} />
+            ) : (
+              <GoEye onClick={() => setPasswordVisible(false)} />
+            )}
+          </div>
+        </PasswordField>
         <div>
           <input
             type="password"
