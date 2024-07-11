@@ -14,7 +14,7 @@ import { Actions, Container, Form } from './signup.styles';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactInputMask from 'react-input-mask';
 import { CreateUserData } from './signup.interface';
-import { CreateUserService } from 'services/create-user-service';
+import { CreateUserService } from 'Services/create-user-service';
 import { AxiosError } from 'axios';
 import { useEffect } from 'react';
 import { RoutesEnum } from 'layouts/default.enum';

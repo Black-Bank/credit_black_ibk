@@ -6,7 +6,7 @@ import {
   MainDescriptionValue,
   StatementContainer,
   Title,
-} from './statement.styles';
+} from './Statement.styles';
 export const Statement = () => {
   return (
     <StatementContainer>
