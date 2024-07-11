@@ -26,7 +26,6 @@ export const createUser = async (userData: ICreateUser) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
     throw new Error('Erro ao criar usuário');
   }
 };
