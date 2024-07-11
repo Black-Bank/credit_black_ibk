@@ -54,34 +54,22 @@ export const Actions = styled.div`
 `;
 
 export const PasswordField = styled.div`
+  position: relative;
+
   div {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    width: 65%;
-    margin: 0 auto;
+    width: 100%;
+  }
+
+  input {
+    width: 55% !important;
   }
 
   svg {
     color: ${themes.colors.primary};
     font-size: 1.8rem;
     cursor: pointer;
-  }
-
-  input {
-    width: 35rem !important;
-  }
-
-  @media (max-width: 800px) {
-    div {
-      flex-direction: column;
-      justify-content: end;
-      align-items: center;
-    }
-
-    input[type='password'] {
-      width: 19rem;
-    }
+    position: absolute;
+    top: 35%;
   }
 `;
 
@@ -104,12 +92,5 @@ export const Form = styled.form`
   input.error,
   input.error:focus {
     border: 1px solid ${themes.colors.error};
-  }
-
-  @media (max-width: 800px) {
-    input {
-      width: 80%;
-      margin: 1rem;
-    }
   }
 `;
