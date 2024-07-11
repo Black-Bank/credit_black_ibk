@@ -5,7 +5,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { Login } from '../screens/Login/login.screen';
-import Signup from '../screens/Signup/signup.screen';
+import Signup from '../screens/signup/signup.screen';
 import Home from '../screens/Home/home.screen';
 import { Dashboard } from 'screens/Dashboard/dashboard.screen';
 import DefaultLayout from 'layouts/default.layout';

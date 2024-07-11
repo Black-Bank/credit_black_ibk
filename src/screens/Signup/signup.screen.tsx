@@ -11,12 +11,12 @@ import { GoEye, GoEyeClosed } from 'react-icons/go';
 import { SpecialTitle, Text, Title } from '../../components/global.styles';
 import Button from '../../components/Button/button.component';
 import SignupDesign from '../../components/Designs/SignupDesign/signup.design';
-import { Actions, Container, Form, PasswordField } from './Signup.styles';
+import { Actions, Container, Form, PasswordField } from './signup.styles';
 
 import 'react-toastify/dist/ReactToastify.css';
 import ReactInputMask from 'react-input-mask';
 import { CreateUserData } from './signup.interface';
-import { CreateUserService } from 'Services/create-user-service';
+import { CreateUserService } from 'services/create-user-service';
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { RoutesEnum } from 'layouts/default.enum';
