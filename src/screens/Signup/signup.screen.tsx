@@ -135,7 +135,7 @@ const SignUp = () => {
         </div>
         <div>
           <ReactInputMask
-            mask={'99999999999'}
+            mask={'999.999.999-99'}
             placeholder="CPF"
             className={errors.cpf?.message && 'error'}
             {...register('cpf')}
