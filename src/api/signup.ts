@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CryptoService } from '../services/crypto.service';
+import { CryptoService } from '../services/crypto.services';
 import { AUTHORIZATION_HEADER, BASE_URL } from '../config/env';
 import { ICreateUser } from '../services/user.interface';
 

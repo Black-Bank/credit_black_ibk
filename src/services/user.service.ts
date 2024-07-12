@@ -1,5 +1,5 @@
 import { getMe } from 'api/user';
-import { CryptoService } from './crypto.service';
+import { CryptoService } from './crypto.services';
 import { IUser } from 'screens/Dashboard/dashboard.interface';
 
 export class UserService {
