@@ -4,6 +4,7 @@ import Button from 'components/Button/button.component';
 import { Container } from './open-account-card.styles';
 import CardDesign from 'components/Designs/CardDesign/card.design';
 import { SpecialTitle } from 'components/global.styles';
+import { RoutesEnum } from 'layouts/default.enum';
 
 const OpenAccountCard = () => {
   return (
@@ -21,7 +22,7 @@ const OpenAccountCard = () => {
           excepcional
         </p>
       </div>
-      <Link to={'/cadastrar'}>
+      <Link to={RoutesEnum.SIGNUP_ROUTE}>
         <Button variant="purple">Abrir conta</Button>
       </Link>
     </Container>

@@ -1,4 +1,4 @@
-import { formatMoney } from 'Utils/utils';
+import { formatMoney } from 'utils/utils';
 import {
   BalanceContainer,
   BalanceItem,

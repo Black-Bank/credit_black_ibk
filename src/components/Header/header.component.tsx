@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import ResponsiveBar from 'components/ResponsiveBar/responsive-bar.component';
 import Button from 'components/Button/button.component';
+import { RoutesEnum } from 'layouts/default.enum';
 
 type HeaderProps = {
   screen: string;
@@ -54,17 +55,42 @@ const Header = ({ screen, active }: HeaderProps) => {
   }
 
   switch (screen) {
-    case ScreenTypes.SCREEN_LOGIN:
+    case ScreenTypes.SCREEN_NOTLOGGED:
       return (
         <Container>
-          <div className="container">
-            <div className="login-logo">
-              <img src={logo} alt="Login" className="loading-icon" />
+          <Logo>
+            <div>
+              <img src={logo} alt="logo-creditblack" />
             </div>
-          </div>
+            <h1>Credit Black</h1>
+          </Logo>
+          <ResponsiveHidden>
+            <Items>
+              <Item $active={active === '/'}>
+                <Link to={RoutesEnum.MAIN_ROUTE}>Home</Link>
+              </Item>
+              <Item $active={active === '/carreiras'}>Carreiras</Item>
+              <Item $active={active === '/sobre'}>Sobre</Item>
+              <Item $active={active === '/segurança'}>Segurança</Item>
+            </Items>
+          </ResponsiveHidden>
+          <ResponsiveHidden>
+            <Button variant="none">
+              <Link to={'/signup'}>Cadastrar</Link>
+            </Button>
+            <Link to={'/logar'}>
+              <Button variant="purple">Logar</Button>
+            </Link>
+          </ResponsiveHidden>
+          <Responsive>
+            <ResponsiveBar onClick={toggleDrawer(true)} />
+          </Responsive>
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+          </Drawer>
         </Container>
       );
-    case ScreenTypes.SCREEN_HOME:
+    case ScreenTypes.SCREEN_LOGGED:
       return (
         <Container>
           <Logo>
@@ -85,11 +111,8 @@ const Header = ({ screen, active }: HeaderProps) => {
           </ResponsiveHidden>
           <ResponsiveHidden>
             <Button variant="none">
-              <Link to={'/cadastrar'}>Cadastrar</Link>
+              <Link to={'/'}>Sair</Link>
             </Button>
-            <Link to={'/logar'}>
-              <Button variant="purple">Logar</Button>
-            </Link>
           </ResponsiveHidden>
           <Responsive>
             <ResponsiveBar onClick={toggleDrawer(true)} />
@@ -98,16 +121,6 @@ const Header = ({ screen, active }: HeaderProps) => {
             {DrawerList}
           </Drawer>
         </Container>
-      );
-    case ScreenTypes.SCREEN_DASHBOARD:
-      return (
-        <div className="Header-home">
-          <div className="container">
-            <div className="logo">
-              <img src={logo} alt="Loading" className="loading-icon" />
-            </div>
-          </div>
-        </div>
       );
 
     default:

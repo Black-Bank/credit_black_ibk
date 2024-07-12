@@ -11,6 +11,8 @@ import ExchangeArrowDesign from 'components/Designs/ExchangeArrowDesign/exchange
 import OurProducts from 'container/OurProducts/our-products.container';
 import OpenAccountCard from 'components/OpenAccountCard/open-account-card.component';
 import WarningCard from 'components/WarningCard/warning-card.component';
+import { Link } from 'react-router-dom';
+import { RoutesEnum } from 'layouts/default.enum';
 
 const Home = () => {
   return (
@@ -31,9 +33,11 @@ const Home = () => {
               nossos clientes.
             </Text>
             <Spacer size={2} />
-            <Button variant="purple" width={90}>
-              Abrir conta
-            </Button>
+            <Link to={RoutesEnum.SIGNUP_ROUTE}>
+              <Button variant="purple" width={90}>
+                Abrir conta
+              </Button>
+            </Link>
           </div>
           <div>
             <ExchangeDesign />
