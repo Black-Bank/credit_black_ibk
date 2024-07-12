@@ -18,8 +18,8 @@ import {
 } from './Login.styles';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../components/Loader/loading.component';
-import { unmaskCpf } from 'Utils/utils';
-import { AuthService } from 'Services/auth.service';
+import { unmaskCpf } from 'utils/utils';
+import { AuthService } from 'services/auth.service';
 import logo from '../../assets/logo.svg';
 import eye from '../../assets/eye.svg';
 import eyeOff from '../../assets/eye-off.svg';

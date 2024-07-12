@@ -1,5 +1,4 @@
 export enum ScreenTypes {
-  SCREEN_LOGIN = 'login',
-  SCREEN_HOME = 'home',
-  SCREEN_DASHBOARD = 'dashboard',
+  SCREEN_NOTLOGGED = 'not_logged',
+  SCREEN_LOGGED = 'logged',
 }
