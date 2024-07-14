@@ -12,7 +12,7 @@ import OurProducts from 'container/OurProducts/our-products.container';
 import OpenAccountCard from 'components/OpenAccountCard/open-account-card.component';
 import WarningCard from 'components/WarningCard/warning-card.component';
 import { Link } from 'react-router-dom';
-import { RoutesEnum } from 'layouts/default.enum';
+import { RoutesEnum } from 'routes/routes.enum';
 
 const Home = () => {
   return (

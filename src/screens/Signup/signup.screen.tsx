@@ -19,7 +19,7 @@ import { CreateUserData } from './signup.interface';
 import { CreateUserService } from 'services/create-user-service';
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
-import { RoutesEnum } from 'layouts/default.enum';
+import { RoutesEnum } from 'routes/routes.enum';
 
 type Inputs = {
   fullName: string;

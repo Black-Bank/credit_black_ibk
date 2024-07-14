@@ -4,7 +4,7 @@ import { Container, MainContainer } from './default.styles';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ScreenTypes } from 'components/Header/header.enum';
 import Footer from 'components/Footer/footer.component';
-import { RoutesEnum } from './default.enum';
+import { RoutesEnum } from 'routes/routes.enum';
 
 const DefaultLayout = () => {
   const { pathname } = useLocation();

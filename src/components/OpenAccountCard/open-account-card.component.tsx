@@ -4,7 +4,7 @@ import Button from 'components/Button/button.component';
 import { Container } from './open-account-card.styles';
 import CardDesign from 'components/Designs/CardDesign/card.design';
 import { SpecialTitle } from 'components/global.styles';
-import { RoutesEnum } from 'layouts/default.enum';
+import { RoutesEnum } from 'routes/routes.enum';
 
 const OpenAccountCard = () => {
   return (
