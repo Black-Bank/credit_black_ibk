@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
-import { Login } from '../screens/Login/login.screen';
+import Login from '../screens/Login/login.screen';
 import Signup from '../screens/Signup/signup.screen';
 import Home from '../screens/Home/home.screen';
 import { Dashboard } from 'screens/Dashboard/dashboard.screen';
