@@ -5,6 +5,7 @@ import {
   Item,
   Items,
   Logo,
+  LogoutText,
   Responsive,
   ResponsiveHidden,
 } from './header.styles';
@@ -117,14 +118,14 @@ const Header = ({ screen, active }: HeaderProps) => {
               <Item $active={active === '/segurança'}>Segurança</Item>
             </Items>
           </ResponsiveHidden>
-          <ResponsiveHidden>
-            <Button variant="none" onClick={handleLogout}>
-              <Link to={RoutesEnum.MAIN_ROUTE}>Sair</Link>
-            </Button>
-          </ResponsiveHidden>
           <Responsive>
             <ResponsiveBar onClick={toggleDrawer(true)} />
           </Responsive>
+          <Button variant="none" onClick={handleLogout}>
+            <Link to={RoutesEnum.MAIN_ROUTE}>
+              <LogoutText>Sair</LogoutText>
+            </Link>
+          </Button>
           <Drawer open={open} onClose={toggleDrawer(false)}>
             {DrawerList}
           </Drawer>

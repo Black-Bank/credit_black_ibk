@@ -80,3 +80,9 @@ export const Responsive = styled.div`
     display: block;
   }
 `;
+
+export const LogoutText = styled.p`
+  font-size: 1.5rem;
+  margin: 1rem;
+  width: 100%;
+`;
