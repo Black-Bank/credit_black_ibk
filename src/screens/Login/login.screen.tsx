@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as z from 'zod';
 
 import { SpecialTitle, Text, Title } from '../../components/global.styles';
@@ -10,19 +9,22 @@ import SignupDesign from '../../components/Designs/SignupDesign/signup.design';
 import { Actions, Container, InputControl } from './Login.styles';
 import { Form } from 'screens/Signup/Signup.styles';
 import { RoutesEnum } from 'routes/routes.enum';
+import { AuthService } from 'services/auth.service';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+import ReactInputMask from 'react-input-mask';
 
 type Inputs = {
-  email: string;
+  cpf: string;
   password: string;
 };
 
 const Login = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const authService = new AuthService();
+  const navigate = useNavigate();
 
   const schema = z.object({
-    email: z.string().email({ message: 'Este e-mail está inválido.' }),
+    cpf: z.string().regex(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/),
     password: z
       .string()
       .trim()
@@ -39,7 +41,34 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
+    const now = new Date();
+    const timeStamp = now.getTime();
+    const userData = {
+      identifier: data.cpf,
+      password: data.password,
+      timestamp: Number(timeStamp),
+    };
+
+    try {
+      const response = await authService.AuthUser(userData);
+
+      if (response.status === 200) {
+        sessionStorage.setItem('identifier', data.cpf || '');
+        toast.success('Você foi autenticado, redirecionando...');
+        setTimeout(() => {
+          navigate(RoutesEnum.DASHBOARD_ROUTE);
+        }, 3000);
+        const userTimestamp = JSON.parse(response.token as string);
+        console.log(userTimestamp.exp - timeStamp);
+      } else if (response.status === 401) {
+        toast.error('CPF ou senha estão incorretos.');
+      } else {
+        toast.error(response?.message as string);
+      }
+    } catch (e) {
+      const error = e as AxiosError;
+      toast.error(error?.message as string);
+    }
   };
 
   return (
@@ -55,11 +84,11 @@ const Login = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <InputControl>
           <div>
-            <input
-              type="text"
-              placeholder="Digite seu e-mail"
-              className={errors.email?.message && 'error'}
-              {...register('email')}
+            <ReactInputMask
+              mask={'999.999.999-99'}
+              placeholder="Digite seu CPF"
+              className={errors.cpf?.message && 'error'}
+              {...register('cpf')}
             />
           </div>
           <div>
