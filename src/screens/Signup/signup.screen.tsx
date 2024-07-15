@@ -18,8 +18,8 @@ import ReactInputMask from 'react-input-mask';
 import { CreateUserData } from './signup.interface';
 import { CreateUserService } from 'services/create-user-service';
 import { AxiosError } from 'axios';
-import { useEffect, useState } from 'react';
-import { RoutesEnum } from 'layouts/default.enum';
+import { useState } from 'react';
+import { RoutesEnum } from 'routes/routes.enum';
 
 type Inputs = {
   fullName: string;
@@ -33,10 +33,6 @@ type Inputs = {
 const SignUp = () => {
   const createUserService = new CreateUserService();
   const [passwordVisible, setPasswordVisible] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const schema = z
     .object({
@@ -84,7 +80,6 @@ const SignUp = () => {
       cellphone: data.phone,
       createdAt: isoDateString,
     };
-    console.log('init');
 
     try {
       const response = await createUserService.createUser(userData);
@@ -97,7 +92,6 @@ const SignUp = () => {
         toast.error(response.message as string);
       }
     } catch (e) {
-      console.log('error');
       const error = e as AxiosError;
       toast.error(error?.message as string);
     }

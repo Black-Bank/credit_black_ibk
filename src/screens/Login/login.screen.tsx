@@ -1,161 +1,116 @@
-import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {
-  LoginMobileContainer,
-  LoginField,
-  LoginTitle,
-  LoginWrapper,
-  FieldInputValid,
-  FieldInputValidPass,
-  ButtonLogin,
-  SafeAreaView,
-  Logo,
-  LogoContainer,
-  Eye,
-  PassContainer,
-  Link,
-} from './Login.styles';
-import { useNavigate } from 'react-router-dom';
-import { Loading } from '../../components/Loader/loading.component';
-import { unmaskCpf } from 'utils/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import * as z from 'zod';
+
+import { SpecialTitle, Text, Title } from '../../components/global.styles';
+import Button from '../../components/Button/button.component';
+import SignupDesign from '../../components/Designs/SignupDesign/signup.design';
+import { Actions, Container, InputControl } from './Login.styles';
+import { Form } from 'screens/Signup/Signup.styles';
+import { RoutesEnum } from 'routes/routes.enum';
 import { AuthService } from 'services/auth.service';
-import logo from '../../assets/logo.svg';
-import eye from '../../assets/eye.svg';
-import eyeOff from '../../assets/eye-off.svg';
+import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
+import ReactInputMask from 'react-input-mask';
 
-export const Login = () => {
-  const navigate = useNavigate();
+type Inputs = {
+  cpf: string;
+  password: string;
+};
+
+const Login = () => {
   const authService = new AuthService();
-  const [password, setPassword] = useState<string>('');
-  const [disabled, setDisabled] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [cpf, setCpf] = useState('');
-  const [isEye, setIsEye] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  const handleEye = () => {
-    setIsEye(!isEye);
-  };
-  const isValidCpf = unmaskCpf(cpf)?.length === 11;
+  const schema = z.object({
+    cpf: z.string().regex(/[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}/),
+    password: z
+      .string()
+      .trim()
+      .min(8, { message: 'A senha é preciso ter, pelo menos, 8 caracteres' }),
+  });
 
-  useEffect(() => {
-    const hasError = !isValidCpf || !password.length;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    resolver: zodResolver(schema),
+    mode: 'onChange',
+  });
 
-    setDisabled(hasError);
-  }, [cpf, password]);
-
-  const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let inputValue = e.target.value.replace(/\D/g, '');
-
-    inputValue = inputValue.slice(0, 11);
-
-    const cpfWithMask = inputValue.replace(
-      /^(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})/,
-      (match, g1, g2, g3, g4) => {
-        let maskedCpf = '';
-        if (g1) maskedCpf += g1 + '.';
-        if (g2) maskedCpf += g2 + '.';
-        if (g3) maskedCpf += g3;
-        if (g4) maskedCpf += '-' + g4;
-        return maskedCpf;
-      },
-    );
-
-    setCpf(cpfWithMask);
-  };
-
-  const handlePassword = (password: string) => {
-    setPassword(password);
-  };
-
-  const handleClean = () => {
-    setPassword('');
-    setCpf('');
-  };
-
-  const handleContinue = async () => {
-    setIsLoading(true);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const now = new Date();
     const timeStamp = now.getTime();
     const userData = {
-      identifier: unmaskCpf(cpf),
-      password: password,
+      identifier: data.cpf,
+      password: data.password,
       timestamp: Number(timeStamp),
     };
+
     try {
       const response = await authService.AuthUser(userData);
 
       if (response.status === 200) {
-        handleClean();
-
-        sessionStorage.setItem('identifier', unmaskCpf(cpf) || '');
-        navigate('/dashboard');
+        sessionStorage.setItem('identifier', data.cpf || '');
+        toast.success('Você foi autenticado, redirecionando...');
+        setTimeout(() => {
+          navigate(RoutesEnum.DASHBOARD_ROUTE);
+        }, 3000);
+        const userTimestamp = JSON.parse(response.token as string);
+        console.log(userTimestamp.exp - timeStamp);
+      } else if (response.status === 401) {
+        toast.error('CPF ou senha estão incorretos.');
       } else {
         toast.error(response?.message as string);
       }
     } catch (e) {
       const error = e as AxiosError;
       toast.error(error?.message as string);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
-    <SafeAreaView>
-      {isLoading && <Loading />}
-      <LoginMobileContainer>
-        <div className="login-secound-block-login">
-          <LoginField>
-            <LogoContainer>
-              <Logo src={logo} alt="Logo Credit Black" />
-            </LogoContainer>
+    <Container>
+      <SignupDesign />
 
-            <LoginTitle>Acesse sua conta</LoginTitle>
-            <LoginWrapper>
-              <FieldInputValid
-                type="text"
-                value={cpf}
-                onChange={(e) => handleCpfChange(e)}
-                placeholder="Digite seu CPF"
-                maxLength={16}
-                className={isValidCpf ? '' : 'field-input-invalid'}
-              />
-            </LoginWrapper>
-
-            <PassContainer>
-              <FieldInputValidPass
-                type={!isEye ? 'password' : 'text'}
-                value={password}
-                onChange={(e) => handlePassword(e.target.value)}
-                placeholder="Senha"
-              />
-              {!isEye ? (
-                <Eye src={eyeOff} alt="Esconder senha" onClick={handleEye} />
-              ) : (
-                <Eye src={eye} alt="Esconder senha" onClick={handleEye} />
-              )}
-            </PassContainer>
-
-            {!isLoading && (
-              <>
-                <ButtonLogin
-                  className={`button-login ${disabled ? 'disabled' : 'active'}`}
-                  disabled={disabled}
-                >
-                  <span className="button-title" onClick={handleContinue}>
-                    Entrar
-                  </span>
-                </ButtonLogin>
-                <Link href="https://credit-black-ibk.vercel.app/">
-                  Cadastre-se
-                </Link>
-              </>
-            )}
-          </LoginField>
-        </div>
-      </LoginMobileContainer>
-    </SafeAreaView>
+      <Title>
+        <SpecialTitle>Login</SpecialTitle>
+        <Text>
+          Bem-vindo de volta! Por favor, logue para acessar sua conta.
+        </Text>
+      </Title>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <InputControl>
+          <div>
+            <ReactInputMask
+              mask={'999.999.999-99'}
+              placeholder="Digite seu CPF"
+              className={errors.cpf?.message && 'error'}
+              {...register('cpf')}
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Digite sua senha"
+              className={errors.password?.message && 'error'}
+              {...register('password')}
+            />
+          </div>
+        </InputControl>
+        <Actions>
+          <Button variant="purple">Logar</Button>
+          <Link to={RoutesEnum.SIGNUP_ROUTE}>
+            <Button variant="none" id="login">
+              Cadastrar
+            </Button>
+          </Link>
+        </Actions>
+      </Form>
+    </Container>
   );
 };
+
+export default Login;
