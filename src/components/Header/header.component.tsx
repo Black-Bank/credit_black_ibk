@@ -21,6 +21,7 @@ import {
 import ResponsiveBar from 'components/ResponsiveBar/responsive-bar.component';
 import Button from 'components/Button/button.component';
 import { RoutesEnum } from 'routes/routes.enum';
+import { toast } from 'react-toastify';
 
 type HeaderProps = {
   screen: string;
@@ -29,11 +30,18 @@ type HeaderProps = {
 
 const Header = ({ screen, active }: HeaderProps) => {
   const [open, setOpen] = useState(false);
-
   const navigate = useNavigate();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  };
+
+  const handleLogout = () => {
+    toast.success('Até mais! Redirecionando...');
+    setTimeout(() => {
+      navigate(RoutesEnum.MAIN_ROUTE);
+      sessionStorage.clear();
+    }, 3000);
   };
 
   const DrawerList = (
@@ -110,7 +118,7 @@ const Header = ({ screen, active }: HeaderProps) => {
             </Items>
           </ResponsiveHidden>
           <ResponsiveHidden>
-            <Button variant="none">
+            <Button variant="none" onClick={handleLogout}>
               <Link to={RoutesEnum.MAIN_ROUTE}>Sair</Link>
             </Button>
           </ResponsiveHidden>
