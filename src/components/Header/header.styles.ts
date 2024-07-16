@@ -82,7 +82,11 @@ export const Responsive = styled.div`
 `;
 
 export const LogoutText = styled.p`
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 1rem;
   width: 100%;
+
+  @media (max-width: 800px) {
+    font-size: 1.5rem;
+  }
 `;
