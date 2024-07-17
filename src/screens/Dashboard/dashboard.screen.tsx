@@ -4,7 +4,13 @@ import {
   Balance,
   BalanceContainer,
   Container,
+  Divider,
   Investments,
+  InvestmentsCard,
+  InvestmentsContainer,
+  MainContainer,
+  Transfer,
+  TransferContainer,
 } from './dashboard.styles';
 import { UserService } from '../../services/user.service';
 import { useEffect, useState } from 'react';
@@ -12,39 +18,17 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IUser } from './dashboard.interface';
 import { Loading } from 'components/Loader/loading.component';
-import { ITrend } from 'components/TrendItems/types';
-import BTC from '../../assets/bitcoin-logo.svg';
-import ETH from '../../assets/eth-logo.svg';
-import DOLLAR from '../../assets/usdt-logo.svg';
+
+import bitcoin from '../../assets/coins/bitcoin-logo.svg';
+
+import { FaPix } from 'react-icons/fa6';
 
 import { GoEye, GoEyeClosed } from 'react-icons/go';
 
 import { FaMoneyBillTransfer } from 'react-icons/fa6';
 import { formatMoney } from 'utils/utils';
+import Button from 'components/Button/button.component';
 
-const trendingItems: ITrend[] = [
-  {
-    id: '1',
-    name: 'Bitcoin',
-    image: BTC,
-    value: 100000.0,
-    profit: 10.5,
-  },
-  {
-    id: '2',
-    name: 'Ethereum',
-    image: ETH,
-    value: 20000.0,
-    profit: -15.0,
-  },
-  {
-    id: '3',
-    name: 'Dollar',
-    image: DOLLAR,
-    value: 5.23,
-    profit: 20.0,
-  },
-];
 export const Dashboard = () => {
   const userService = UserService.getInstance();
   const accessToken = userService.getAccessToken();
@@ -54,6 +38,37 @@ export const Dashboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
+
+  const investments = [
+    {
+      id: 1,
+      type: 'bitcoin',
+      name: 'Meu investimento 1',
+      coinValue: '0.0000034661',
+      investmentValue: 'BRL 56,00',
+    },
+    {
+      id: 2,
+      type: 'bitcoin',
+      name: 'Meu investimento 2',
+      coinValue: '0.0000039361',
+      investmentValue: 'BRL 100,00',
+    },
+    {
+      id: 3,
+      type: 'bitcoin',
+      name: 'Meu investimento 3',
+      coinValue: '0.00000312221',
+      investmentValue: 'BRL 150,00',
+    },
+    {
+      id: 4,
+      type: 'bitcoin',
+      name: 'Meu investimento 3',
+      coinValue: '0.00000312221',
+      investmentValue: 'BRL 150,00',
+    },
+  ];
 
   useEffect(() => {
     const currentTimestamp = Date.now();
@@ -87,38 +102,63 @@ export const Dashboard = () => {
     <>
       {isLoading && <Loading />}
       <Container>
-        <BalanceContainer>
-          <span>Saldo total</span>
-          <Balance $visible={moneyVisible}>
-            <h2>{formatMoney(Number(me?.amount)).replace('R$', '')}</h2>
-            <span>BRL</span>
-            {!moneyVisible ? (
-              <GoEyeClosed onClick={() => setMoneyVisible(true)} />
-            ) : (
-              <GoEye onClick={() => setMoneyVisible(false)} />
-            )}
-          </Balance>
-          <Investments>
-            <span>≈ 2.000,00</span>
-            <span>Este mês: +7.65%</span>
-          </Investments>
-        </BalanceContainer>
-        <ActivitiesContainer>
-          <h3>Sua atividade</h3>
-          <Activity>
-            <div>
-              <FaMoneyBillTransfer />
+        <MainContainer>
+          <BalanceContainer>
+            <span>Saldo total</span>
+            <Balance $visible={moneyVisible}>
+              <h2>{formatMoney(Number(me?.amount)).replace('R$', '')}</h2>
+              <span>BRL</span>
+              {!moneyVisible ? (
+                <GoEyeClosed onClick={() => setMoneyVisible(true)} />
+              ) : (
+                <GoEye onClick={() => setMoneyVisible(false)} />
+              )}
+            </Balance>
+            <Investments>
+              <span>≈ 2.000,00</span>
+              <span>Este mês: +7.65%</span>
+            </Investments>
+            <Divider />
+            <TransferContainer>
+              <Transfer>
+                <FaPix />
+                <p>Pix</p>
+              </Transfer>
+            </TransferContainer>
+          </BalanceContainer>
+          <ActivitiesContainer>
+            <h3>Sua atividade</h3>
+            <Activity>
               <div>
-                <p className="activity-name">Nome</p>
-                <p className="activity-footer">Transferência via Pix</p>
+                <FaMoneyBillTransfer />
+                <div>
+                  <p className="activity-name">Nome</p>
+                  <p className="activity-footer">Transferência via Pix</p>
+                </div>
               </div>
-            </div>
-            <div>
-              <p>- R$ 00,00</p>
-              <p className="activity-footer">30/jul</p>
-            </div>
-          </Activity>
-        </ActivitiesContainer>
+              <div>
+                <p>- R$ 00,00</p>
+                <p className="activity-footer">30/jul</p>
+              </div>
+            </Activity>
+          </ActivitiesContainer>
+        </MainContainer>
+        <InvestmentsContainer>
+          <h3>Investimentos atuais</h3>
+          <section>
+            {investments.map((investment) => (
+              <InvestmentsCard key={investment.id}>
+                <img src={bitcoin} alt="bitcoin" />
+                <div>
+                  <h4>{investment.name}</h4>
+                  <p>{investment.coinValue}</p>
+                  <p>{investment.investmentValue}</p>
+                </div>
+              </InvestmentsCard>
+            ))}
+          </section>
+          <Button variant="purple">Gerenciar investimentos</Button>
+        </InvestmentsContainer>
       </Container>
     </>
   );

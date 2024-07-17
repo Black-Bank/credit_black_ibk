@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
 import themes from 'styles/themes.styles';
 
-export const Container = styled.div`
+export const Container = styled.main``;
+
+export const MainContainer = styled.div`
   display: flex;
   align-items: flex-start;
 
@@ -105,5 +107,68 @@ export const Activity = styled.div`
 
   .activity-name {
     font-weight: bold;
+  }
+`;
+
+export const TransferContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  svg {
+    font-size: 1.5rem;
+    color: ${themes.colors.primary};
+  }
+`;
+
+export const Transfer = styled.div`
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: pointer;
+`;
+
+export const Divider = styled.div`
+  width: 75%;
+  border: 1px solid ${themes.colors.gray262626};
+  margin: 1rem auto;
+`;
+
+export const InvestmentsContainer = styled.div`
+  margin-top: 2rem;
+
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    @media (max-width: 800px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  button {
+    display: block;
+    margin: 1rem auto;
+    width: 75%;
+    color: ${themes.colors.white};
+  }
+`;
+
+export const InvestmentsCard = styled.div`
+  display: flex;
+  gap: 2rem;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.25);
+  padding: 1.5rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  cursor: pointer;
+  width: 25%;
+
+  img {
+    width: 3rem;
+  }
+
+  @media (max-width: 800px) {
+    width: 90%;
   }
 `;
