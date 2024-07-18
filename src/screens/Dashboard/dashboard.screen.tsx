@@ -39,6 +39,30 @@ export const Dashboard = () => {
 
   const navigate = useNavigate();
 
+  const activities = [
+    {
+      id: 1,
+      name: 'Gabriel Santos de Oliveira',
+      transferType: 'Pix',
+      value: 50,
+      date: '30/jul',
+    },
+    {
+      id: 2,
+      name: 'Gabriel Santos de Oliveira',
+      transferType: 'Pix',
+      value: 23,
+      date: '23/mar',
+    },
+    {
+      id: 3,
+      name: 'Gabriel Santos de Oliveira',
+      transferType: 'Pix',
+      value: 97,
+      date: '30/jul',
+    },
+  ];
+
   const investments = [
     {
       id: 1,
@@ -128,19 +152,23 @@ export const Dashboard = () => {
           </BalanceContainer>
           <ActivitiesContainer>
             <h3>Sua atividade</h3>
-            <Activity>
-              <div>
-                <FaMoneyBillTransfer />
+            {activities.map((activity) => (
+              <Activity key={activity.id}>
                 <div>
-                  <p className="activity-name">Nome</p>
-                  <p className="activity-footer">Transferência via Pix</p>
+                  <FaMoneyBillTransfer />
+                  <div>
+                    <p className="activity-name">{activity.name}</p>
+                    <p className="activity-footer">
+                      Transferência feita com {activity.transferType}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <p>- R$ 00,00</p>
-                <p className="activity-footer">30/jul</p>
-              </div>
-            </Activity>
+                <div>
+                  <p>- {formatMoney(activity.value)}</p>
+                  <p className="activity-footer">{activity.date}</p>
+                </div>
+              </Activity>
+            ))}
           </ActivitiesContainer>
         </MainContainer>
         <InvestmentsContainer>
