@@ -8,6 +8,10 @@ import {
   Investments,
   InvestmentsCard,
   InvestmentsContainer,
+  LimitBar,
+  LimitBarFill,
+  Limits,
+  LoanContainer,
   MainContainer,
   Transfer,
   TransferContainer,
@@ -187,6 +191,23 @@ export const Dashboard = () => {
           </section>
           <Button variant="purple">Gerenciar investimentos</Button>
         </InvestmentsContainer>
+        <LoanContainer>
+          <h3>Empréstimos</h3>
+          <Limits>
+            <p>Limite utilizado</p>
+            <p>Limite disponível</p>
+          </Limits>
+          <LimitBar>
+            <LimitBarFill $limitused={1200} $availablelimit={5000} />
+          </LimitBar>
+          <Limits>
+            <p>R$ 1.200,00</p>
+            <p>R$ 5.000,00</p>
+          </Limits>
+          <p className="balance">
+            Saldo devedor: <span>R$ 1.200,00</span>
+          </p>
+        </LoanContainer>
       </Container>
     </>
   );

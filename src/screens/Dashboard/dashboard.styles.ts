@@ -172,3 +172,46 @@ export const InvestmentsCard = styled.div`
     width: 90%;
   }
 `;
+
+export const LoanContainer = styled.div`
+  margin-top: 5rem;
+
+  .balance {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .balance span {
+    color: ${themes.colors.error};
+  }
+`;
+
+export const Limits = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15rem;
+`;
+
+export const LimitBar = styled.div`
+  width: 42%;
+  height: 0.3rem;
+  border: 1px solid ${themes.colors.gray};
+  margin: 1rem auto;
+  border-radius: 50px;
+`;
+
+type LimitBarFillProps = {
+  $limitused: number;
+  $availablelimit: number;
+};
+
+export const LimitBarFill = styled.div<LimitBarFillProps>`
+  width: ${(props) => {
+    return (props.$limitused / props.$availablelimit) * 100 + '%';
+  }};
+  height: 0.2rem;
+  border: 1px solid ${themes.colors.primary};
+  background: ${themes.colors.primary};
+  border-radius: 50px;
+`;
