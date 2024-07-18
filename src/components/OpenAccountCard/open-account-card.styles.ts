@@ -16,7 +16,7 @@ export const Container = styled.div`
   padding: 5rem;
 
   p {
-    color: ${themes.colors.grayb3b3b3};
+    color: ${themes.colors.gray};
     margin-top: 0.875rem;
     width: 75%;
   }

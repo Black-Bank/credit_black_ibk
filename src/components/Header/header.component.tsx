@@ -5,6 +5,7 @@ import {
   Item,
   Items,
   Logo,
+  LogoutText,
   Responsive,
   ResponsiveHidden,
 } from './header.styles';
@@ -20,7 +21,8 @@ import {
 } from '@mui/material';
 import ResponsiveBar from 'components/ResponsiveBar/responsive-bar.component';
 import Button from 'components/Button/button.component';
-import { RoutesEnum } from 'layouts/default.enum';
+import { RoutesEnum } from 'routes/routes.enum';
+import { toast } from 'react-toastify';
 
 type HeaderProps = {
   screen: string;
@@ -29,11 +31,18 @@ type HeaderProps = {
 
 const Header = ({ screen, active }: HeaderProps) => {
   const [open, setOpen] = useState(false);
-
   const navigate = useNavigate();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  };
+
+  const handleLogout = () => {
+    toast.success('Até mais! Redirecionando...');
+    setTimeout(() => {
+      navigate(RoutesEnum.MAIN_ROUTE);
+      sessionStorage.clear();
+    }, 3000);
   };
 
   const DrawerList = (
@@ -66,7 +75,7 @@ const Header = ({ screen, active }: HeaderProps) => {
           </Logo>
           <ResponsiveHidden>
             <Items>
-              <Item $active={active === '/'}>
+              <Item $active={active === RoutesEnum.MAIN_ROUTE}>
                 <Link to={RoutesEnum.MAIN_ROUTE}>Home</Link>
               </Item>
               <Item $active={active === '/carreiras'}>Carreiras</Item>
@@ -76,9 +85,9 @@ const Header = ({ screen, active }: HeaderProps) => {
           </ResponsiveHidden>
           <ResponsiveHidden>
             <Button variant="none">
-              <Link to={'/signup'}>Cadastrar</Link>
+              <Link to={RoutesEnum.SIGNUP_ROUTE}>Cadastrar</Link>
             </Button>
-            <Link to={'/logar'}>
+            <Link to={RoutesEnum.LOGIN_ROUTE}>
               <Button variant="purple">Logar</Button>
             </Link>
           </ResponsiveHidden>
@@ -102,21 +111,21 @@ const Header = ({ screen, active }: HeaderProps) => {
           <ResponsiveHidden>
             <Items>
               <Item $active={active === '/'}>
-                <Link to={'/'}>Home</Link>
+                <Link to={RoutesEnum.MAIN_ROUTE}>Home</Link>
               </Item>
               <Item $active={active === '/carreiras'}>Carreiras</Item>
               <Item $active={active === '/sobre'}>Sobre</Item>
               <Item $active={active === '/segurança'}>Segurança</Item>
             </Items>
           </ResponsiveHidden>
-          <ResponsiveHidden>
-            <Button variant="none">
-              <Link to={'/'}>Sair</Link>
-            </Button>
-          </ResponsiveHidden>
           <Responsive>
             <ResponsiveBar onClick={toggleDrawer(true)} />
           </Responsive>
+          <Button variant="none" onClick={handleLogout}>
+            <Link to={RoutesEnum.MAIN_ROUTE}>
+              <LogoutText>Sair</LogoutText>
+            </Link>
+          </Button>
           <Drawer open={open} onClose={toggleDrawer(false)}>
             {DrawerList}
           </Drawer>

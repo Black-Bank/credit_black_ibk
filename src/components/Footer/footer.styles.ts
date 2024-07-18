@@ -79,7 +79,7 @@ export const FooterCard = styled.div`
   background: ${themes.colors.gray1a1a1a};
   width: 100%;
   margin-top: 3rem;
-  color: ${themes.colors.grayb3b3b3};
+  color: ${themes.colors.gray};
   padding: 1rem;
 
   @media (max-width: 600px) {
