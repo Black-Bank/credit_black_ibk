@@ -10,6 +10,7 @@ import Home from '../screens/Home/home.screen';
 import { Dashboard } from 'screens/Dashboard/dashboard.screen';
 import DefaultLayout from 'layouts/default.layout';
 import { RoutesEnum } from './routes.enum';
+import { PixDashboard } from 'screens/PixDashboard/pix-dashboard.screen';
 
 export const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ export const AppRoutes = () => {
           <Route path={RoutesEnum.LOGIN_ROUTE} element={<Login />} />
           <Route path={RoutesEnum.SIGNUP_ROUTE} element={<Signup />} />
           <Route path={RoutesEnum.DASHBOARD_ROUTE} element={<Dashboard />} />
+          <Route path={RoutesEnum.PIX_ROUTE} element={<PixDashboard />} />
           <Route
             path="*"
             element={<Navigate to={RoutesEnum.MAIN_ROUTE} replace />}
