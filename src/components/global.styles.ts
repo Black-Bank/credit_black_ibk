@@ -83,3 +83,28 @@ export const Divider = styled.div`
 export const Spacer = styled.div<SpacerProps>`
   height: ${(props) => (props.size ? `${props.size}rem` : '50px')};
 `;
+
+export const CircleButton = styled.button`
+  display: flex;
+  border-radius: 10px;
+  padding: 0.5rem;
+  background: transparent;
+  border: 1px solid ${themes.colors.primary};
+  color: ${themes.colors.white};
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: 0.3s;
+
+  svg {
+    color: ${themes.colors.primary};
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    background-color: ${themes.colors.primary};
+
+    svg {
+      color: ${themes.colors.gray};
+    }
+  }
+`;
