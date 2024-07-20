@@ -115,7 +115,7 @@ export const TransferContainer = styled.div`
   justify-content: center;
 
   svg {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: ${themes.colors.primary};
   }
 `;
@@ -124,6 +124,9 @@ export const Transfer = styled.div`
   font-size: 0.9rem;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Divider = styled.div`
@@ -214,4 +217,24 @@ export const LimitBarFill = styled.div<LimitBarFillProps>`
   border: 1px solid ${themes.colors.primary};
   background: ${themes.colors.primary};
   border-radius: 50px;
+`;
+
+export const CircleButton = styled.button`
+  display: flex;
+  border-radius: 10px;
+  padding: 0.5rem;
+  background: transparent;
+  border: 1px solid ${themes.colors.primary};
+  color: ${themes.colors.white};
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: ${themes.colors.primary};
+
+    svg {
+      color: ${themes.colors.gray};
+    }
+  }
 `;

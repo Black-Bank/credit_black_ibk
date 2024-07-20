@@ -3,6 +3,7 @@ import {
   Activity,
   Balance,
   BalanceContainer,
+  CircleButton,
   Container,
   Divider,
   Investments,
@@ -149,8 +150,10 @@ export const Dashboard = () => {
             <Divider />
             <TransferContainer>
               <Transfer>
-                <FaPix />
-                <p>Pix</p>
+                <CircleButton>
+                  <FaPix />
+                </CircleButton>
+                <p>Área Pix</p>
               </Transfer>
             </TransferContainer>
           </BalanceContainer>
