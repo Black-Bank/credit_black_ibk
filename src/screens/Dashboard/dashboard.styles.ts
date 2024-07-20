@@ -126,7 +126,13 @@ export const Transfer = styled.div`
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  height: 100%;
+
+  button {
+    margin: 0.5rem auto;
+  }
 `;
 
 export const Divider = styled.div`

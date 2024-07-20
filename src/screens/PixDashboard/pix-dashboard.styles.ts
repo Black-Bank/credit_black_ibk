@@ -17,10 +17,24 @@ export const CardsContainer = styled.div`
   p {
     font-size: 0.9rem;
   }
+
+  @media (max-width: 800px) {
+    width: 71%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media (min-width: 801px) and (max-width: 1000px) {
+    gap: 2rem;
+  }
 `;
 
 export const DepositButton = styled.div`
-  width: 30%;
+  width: 6%;
+
+  button {
+    margin: 0.5rem auto;
+  }
 `;
 export const SendButton = styled.div`
   width: 30%;
@@ -33,7 +47,16 @@ export const SendButton = styled.div`
 export const SendContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+
+  @media (max-width: 800px) {
+    width: 71%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media (min-width: 801px) and (max-width: 1000px) {
+    gap: 2rem;
+  }
 `;
 
 export const Activity = styled.div`
