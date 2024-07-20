@@ -218,23 +218,3 @@ export const LimitBarFill = styled.div<LimitBarFillProps>`
   background: ${themes.colors.primary};
   border-radius: 50px;
 `;
-
-export const CircleButton = styled.button`
-  display: flex;
-  border-radius: 10px;
-  padding: 0.5rem;
-  background: transparent;
-  border: 1px solid ${themes.colors.primary};
-  color: ${themes.colors.white};
-  cursor: pointer;
-  margin-bottom: 0.5rem;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: ${themes.colors.primary};
-
-    svg {
-      color: ${themes.colors.gray};
-    }
-  }
-`;
