@@ -3,7 +3,6 @@ import {
   Activity,
   Balance,
   BalanceContainer,
-  CircleButton,
   Container,
   Divider,
   Investments,
@@ -33,6 +32,9 @@ import { GoEye, GoEyeClosed } from 'react-icons/go';
 import { FaMoneyBillTransfer } from 'react-icons/fa6';
 import { formatMoney } from 'utils/utils';
 import Button from 'components/Button/button.component';
+import { CircleButton } from 'components/global.styles';
+import { Link } from 'react-router-dom';
+import { RoutesEnum } from 'routes/routes.enum';
 
 export const Dashboard = () => {
   const userService = UserService.getInstance();
@@ -150,10 +152,12 @@ export const Dashboard = () => {
             <Divider />
             <TransferContainer>
               <Transfer>
-                <CircleButton>
-                  <FaPix />
-                </CircleButton>
-                <p>Área Pix</p>
+                <Link to={RoutesEnum.PIX_ROUTE}>
+                  <CircleButton>
+                    <FaPix />
+                  </CircleButton>
+                  <p>Área Pix</p>
+                </Link>
               </Transfer>
             </TransferContainer>
           </BalanceContainer>
