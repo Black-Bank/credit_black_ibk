@@ -115,7 +115,7 @@ export const TransferContainer = styled.div`
   justify-content: center;
 
   svg {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: ${themes.colors.primary};
   }
 `;
@@ -124,6 +124,15 @@ export const Transfer = styled.div`
   font-size: 0.9rem;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  button {
+    margin: 0.5rem auto;
+  }
 `;
 
 export const Divider = styled.div`

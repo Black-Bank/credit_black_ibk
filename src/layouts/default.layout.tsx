@@ -23,7 +23,7 @@ const DefaultLayout = () => {
         navigate(RoutesEnum.DASHBOARD_ROUTE);
       }
     } else if (!sessionStorage.getItem('accessToken')) {
-      if (pathname === RoutesEnum.DASHBOARD_ROUTE) {
+      if (pathname.includes(RoutesEnum.DASHBOARD_ROUTE)) {
         navigate(RoutesEnum.MAIN_ROUTE);
       }
     }
