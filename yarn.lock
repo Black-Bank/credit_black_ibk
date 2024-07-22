@@ -5391,6 +5391,7 @@ __metadata:
     eslint-plugin-react: latest
     prettier: ^3.3.2
     react: ^18.3.1
+    react-currency-mask: ^1.3.2
     react-dom: ^18.3.1
     react-hook-form: ^7.52.1
     react-icons: ^5.2.1
@@ -11740,6 +11741,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-currency-mask@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "react-currency-mask@npm:1.3.2"
+  dependencies:
+    react: ^18.0.0
+  checksum: 8744d8c377e355075d9c43a7d9188871eef75c341192aec1ceb54114ec1a1ee04897be7e465157f40831e05b512fb8db8b612c8ff5f156234f1f220de5c52625
+  languageName: node
+  linkType: hard
+
 "react-dev-utils@npm:^12.0.1":
   version: 12.0.1
   resolution: "react-dev-utils@npm:12.0.1"
@@ -11968,7 +11978,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.3.1":
+"react@npm:^18.0.0, react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:
