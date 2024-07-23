@@ -10,12 +10,17 @@ import {
   KeyContainer,
 } from './pix-deposit.styles';
 import { CurrencyInput } from 'react-currency-mask';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { getPix } from 'api/pix';
 
 import Button from 'components/Button/button.component';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { ExtractContext } from 'context/extract.context';
+import { UserService } from 'services/user.service';
+import { IUser } from 'screens/Dashboard/dashboard.interface';
+import { log } from 'console';
+import { getCurrentDateFormatted } from 'utils/date.util';
 
 export const PixDeposit = () => {
   const [value, setValue] = useState<number | string>(0);
@@ -24,17 +29,30 @@ export const PixDeposit = () => {
 
   const [base64, setBase64] = useState('');
   const [pixKey, setPixKey] = useState('');
+  const [me, setMe] = useState<IUser>();
 
   const [imageUrl, setImageUrl] = useState('');
+
+  const context = useContext(ExtractContext);
+
+  const userService = UserService.getInstance();
+
+  if (!context) {
+    throw new Error('ChildComponent must be used within an AppProvider');
+  }
+
+  const { addItem } = context;
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetch = async () => {
       const { code, base64QRCode } = await getPix();
+      const userData = await userService.getMe();
 
       setBase64(base64QRCode);
       setPixKey(code);
+      setMe(userData);
     };
 
     const createImageUrl = () => {
@@ -63,6 +81,16 @@ export const PixDeposit = () => {
       if ((value as number) > 0) {
         setStep(newStep);
         setValue(0);
+
+        const date = getCurrentDateFormatted();
+
+        addItem({
+          id: Math.random() * 5000,
+          type: 'pix',
+          name: me?.name as string,
+          value: value as number,
+          date,
+        });
       } else {
         setNumberError(true);
       }
