@@ -21,35 +21,19 @@ import { formatMoney } from 'utils/utils';
 import { IoArrowBackCircleSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { RoutesEnum } from 'routes/routes.enum';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { PixDeposit } from 'screens/PixDeposit/pix-deposit.screen';
+import { ExtractContext } from 'context/extract.context';
 
 export const PixDashboard = () => {
   const [deposit, setDeposit] = useState(false);
+  const context = useContext(ExtractContext);
 
-  const activities = [
-    {
-      id: 1,
-      name: 'Gabriel Santos de Oliveira',
-      transferType: 'Pix',
-      value: 50,
-      date: '30/jul',
-    },
-    {
-      id: 2,
-      name: 'Gabriel Santos de Oliveira',
-      transferType: 'Pix',
-      value: 23,
-      date: '23/mar',
-    },
-    {
-      id: 3,
-      name: 'Gabriel Santos de Oliveira',
-      transferType: 'Pix',
-      value: 97,
-      date: '30/jul',
-    },
-  ];
+  if (!context) {
+    throw new Error('ChildComponent must be used within an AppProvider');
+  }
+
+  const { extract } = context;
 
   switch (deposit) {
     case false:
@@ -97,23 +81,27 @@ export const PixDashboard = () => {
           </CardsContainer>
           <CardsContainer>
             <h3>Extrato</h3>
-            {activities.map((activity) => (
-              <Activity key={activity.id}>
-                <div>
-                  <FaMoneyBillTransfer />
+            {extract.items.length > 0 ? (
+              extract.items.map((item) => (
+                <Activity key={item.id}>
                   <div>
-                    <p className="activity-name">{activity.name}</p>
-                    <p className="activity-footer">
-                      Transferência feita com {activity.transferType}
-                    </p>
+                    <FaMoneyBillTransfer />
+                    <div>
+                      <p className="activity-name">{item.name}</p>
+                      <p className="activity-footer">
+                        Transferência feita com {item.type}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <p>- {formatMoney(activity.value)}</p>
-                  <p className="activity-footer">{activity.date}</p>
-                </div>
-              </Activity>
-            ))}
+                  <div>
+                    <p>- {formatMoney(item.value)}</p>
+                    <p className="activity-footer">{item.date}</p>
+                  </div>
+                </Activity>
+              ))
+            ) : (
+              <p>Ainda não existe nenhum extrato para ser exibido.</p>
+            )}
           </CardsContainer>
           <BackButtonContainer>
             <Link to={RoutesEnum.DASHBOARD_ROUTE}>
