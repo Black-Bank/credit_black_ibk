@@ -86,6 +86,10 @@ export const PixDeposit = () => {
       value: value,
       date,
     });
+
+    setTimeout(() => {
+      navigate('/dashboard');
+    }, 5000);
   };
 
   type Inputs = {
@@ -192,7 +196,7 @@ export const PixDeposit = () => {
             Obrigado por confiar na <SpecialTitle>CreditBlack</SpecialTitle>!
           </p>
           <Actions $buttontype="back">
-            <CircleButton onClick={() => navigate('/')}>
+            <CircleButton onClick={() => navigate('/dashboard')}>
               <IoArrowBackCircleSharp />
             </CircleButton>
           </Actions>
