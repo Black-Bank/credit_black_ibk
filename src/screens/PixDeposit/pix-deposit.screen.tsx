@@ -10,7 +10,7 @@ import {
   KeyContainer,
 } from './pix-deposit.styles';
 import { CurrencyInput } from 'react-currency-mask';
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getPix } from 'api/pix';
 
 import Button from 'components/Button/button.component';
@@ -19,17 +19,18 @@ import { useNavigate } from 'react-router-dom';
 import { ExtractContext } from 'context/extract.context';
 import { UserService } from 'services/user.service';
 import { IUser } from 'screens/Dashboard/dashboard.interface';
-import { log } from 'console';
 import { getCurrentDateFormatted } from 'utils/date.util';
+import { z } from 'zod';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const PixDeposit = () => {
-  const [value, setValue] = useState<number | string>(0);
-  const [step, setStep] = useState(0);
-  const [numberError, setNumberError] = useState(false);
+  const [step, setStep] = useState(1);
 
   const [base64, setBase64] = useState('');
   const [pixKey, setPixKey] = useState('');
   const [me, setMe] = useState<IUser>();
+  const [value, setValue] = useState(0);
 
   const [imageUrl, setImageUrl] = useState('');
 
@@ -72,29 +73,41 @@ export const PixDeposit = () => {
     createImageUrl();
   });
 
-  const handleChangeStep = (newStep: number) => {
-    window.scrollTo(0, 0);
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
 
-    if (step === 1) {
-      setStep(newStep);
-    } else {
-      if ((value as number) > 0) {
-        setStep(newStep);
-        setValue(0);
+  const handleAddExtract = () => {
+    const date = getCurrentDateFormatted();
 
-        const date = getCurrentDateFormatted();
+    addItem({
+      id: Math.random() * 5000,
+      type: 'pix',
+      name: me?.name as string,
+      value: value,
+      date,
+    });
+  };
 
-        addItem({
-          id: Math.random() * 5000,
-          type: 'pix',
-          name: me?.name as string,
-          value: value as number,
-          date,
-        });
-      } else {
-        setNumberError(true);
-      }
-    }
+  type Inputs = {
+    value: number;
+  };
+
+  const schema = z.object({
+    value: z.number().min(0.01),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    resolver: zodResolver(schema),
+    mode: 'onSubmit',
+  });
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    nextStep();
+    setValue(data.value);
   };
 
   const handleCopyKey = () => {
@@ -103,34 +116,41 @@ export const PixDeposit = () => {
   };
 
   switch (step) {
-    case 0:
+    case 1:
       return (
         <Container>
           <h2>Qual o valor gostaria de depositar usando o Pix?</h2>
-          <CurrencyInput
-            onChangeValue={function (
-              _: ChangeEvent<HTMLInputElement>,
-              originalValue: number | string,
-            ): void {
-              setValue(originalValue);
-              if ((originalValue as number) > 0) setNumberError(false);
-            }}
-            max={1000000000}
-            InputElement={
-              <input
-                placeholder="R$ 0,00"
-                className={numberError ? 'error' : ''}
-              />
-            }
-          />
-          <Actions $buttontype="next">
-            <CircleButton onClick={() => handleChangeStep(1)}>
-              <IoArrowForwardCircleSharp />
-            </CircleButton>
-          </Actions>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <CurrencyInput
+              onChangeValue={function (): void {}}
+              {...register('value', {
+                setValueAs(value: string): number {
+                  if (!value) return 0;
+                  const cleanedValue = value.replace(/R\$\s?/g, '');
+                  const dotValue = cleanedValue
+                    .replace(/\./g, '')
+                    .replace(',', '.');
+                  const numberValue = parseFloat(dotValue);
+                  return isNaN(numberValue) ? 0 : numberValue;
+                },
+              })}
+              max={1000000000}
+              InputElement={
+                <input
+                  placeholder="R$ 0,00"
+                  className={errors.value?.message ? 'error' : ''}
+                />
+              }
+            />
+            <Actions $buttontype="next">
+              <CircleButton>
+                <IoArrowForwardCircleSharp />
+              </CircleButton>
+            </Actions>
+          </form>
         </Container>
       );
-    case 1:
+    case 2:
       return (
         <Container>
           <h2>Tudo certo até aqui!</h2>
@@ -148,16 +168,22 @@ export const PixDeposit = () => {
             </Button>
           </KeyContainer>
           <Actions $buttontype="back">
-            <CircleButton onClick={() => handleChangeStep(0)}>
+            <CircleButton onClick={prevStep}>
               <IoArrowBackCircleSharp />
             </CircleButton>
-            <CircleButton onClick={() => handleChangeStep(2)}>
+            <CircleButton
+              onClick={() => {
+                window.scrollTo(0, 0);
+                nextStep();
+                handleAddExtract();
+              }}
+            >
               <IoArrowForwardCircleSharp />
             </CircleButton>
           </Actions>
         </Container>
       );
-    case 2:
+    case 3:
       return (
         <Container>
           <h2>Tudo certo!</h2>

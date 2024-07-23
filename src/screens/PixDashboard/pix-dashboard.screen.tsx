@@ -22,8 +22,8 @@ import { IoArrowBackCircleSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { RoutesEnum } from 'routes/routes.enum';
 import { useContext, useState } from 'react';
-import { PixDeposit } from 'screens/PixDeposit/pix-deposit.screen';
 import { ExtractContext } from 'context/extract.context';
+import { PixDeposit } from 'screens/PixDeposit/pix-deposit.screen';
 
 export const PixDashboard = () => {
   const [deposit, setDeposit] = useState(false);
@@ -94,7 +94,7 @@ export const PixDashboard = () => {
                     </div>
                   </div>
                   <div>
-                    <p>- {formatMoney(item.value)}</p>
+                    <p>+ {formatMoney(item.value)}</p>
                     <p className="activity-footer">{item.date}</p>
                   </div>
                 </Activity>
