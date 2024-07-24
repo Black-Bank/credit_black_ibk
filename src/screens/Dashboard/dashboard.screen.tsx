@@ -1,20 +1,16 @@
 import {
-  ActivitiesContainer,
-  Activity,
-  Balance,
+  BalanceAvailable,
   BalanceContainer,
+  BalanceContent,
+  BalanceMiddle,
+  BalanceTop,
+  Booming,
+  BoomingContainer,
+  BoomingContent,
   Container,
   Divider,
-  Investments,
-  InvestmentsCard,
-  InvestmentsContainer,
-  LimitBar,
-  LimitBarFill,
-  Limits,
-  LoanContainer,
-  MainContainer,
-  Transfer,
-  TransferContainer,
+  InUse,
+  TopDashboard,
 } from './dashboard.styles';
 import { UserService } from '../../services/user.service';
 import { useContext, useEffect, useState } from 'react';
@@ -22,26 +18,47 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IUser } from './dashboard.interface';
 import { Loading } from 'components/Loader/loading.component';
-
-import bitcoin from '../../assets/coins/bitcoin-logo.svg';
-
-import { FaPix } from 'react-icons/fa6';
-
-import { GoEye, GoEyeClosed } from 'react-icons/go';
-
-import { FaMoneyBillTransfer } from 'react-icons/fa6';
-import { formatMoney } from 'utils/utils';
-import Button from 'components/Button/button.component';
-import { CircleButton } from 'components/global.styles';
-import { Link } from 'react-router-dom';
-import { RoutesEnum } from 'routes/routes.enum';
 import { ExtractContext } from 'context/extract.context';
 
+import bitcoin from '../../assets/coins/bitcoin-logo.svg';
+import Button from 'components/Button/button.component';
+
 export const Dashboard = () => {
+  const coins = [
+    {
+      id: 1,
+      image: bitcoin,
+      name: 'Convex Finance',
+      dots: 'Convex Fin...',
+      money: 'R$ 17,02',
+      percentage: '+13,47%',
+    },
+    {
+      id: 2,
+      image: bitcoin,
+      name: 'Ethereum Service',
+      money: 'R$ 160,67',
+      percentage: '+5,30%',
+    },
+    {
+      id: 3,
+      image: bitcoin,
+      name: 'USDC',
+      money: 'R$ 5,6600',
+      percentage: '+2,42%',
+    },
+    {
+      id: 4,
+      image: bitcoin,
+      name: 'Tron',
+      money: 'R$ 0,7597',
+      percentage: '+2,15%',
+    },
+  ];
+
   const userService = UserService.getInstance();
   const accessToken = userService.getAccessToken();
   const [me, setMe] = useState<IUser>();
-  const [moneyVisible, setMoneyVisible] = useState(false);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -52,39 +69,6 @@ export const Dashboard = () => {
   if (!context) {
     throw new Error('ChildComponent must be used within an AppProvider');
   }
-
-  const { extract } = context;
-
-  const investments = [
-    {
-      id: 1,
-      type: 'bitcoin',
-      name: 'Meu investimento 1',
-      coinValue: '0.0000034661',
-      investmentValue: 'BRL 56,00',
-    },
-    {
-      id: 2,
-      type: 'bitcoin',
-      name: 'Meu investimento 2',
-      coinValue: '0.0000039361',
-      investmentValue: 'BRL 100,00',
-    },
-    {
-      id: 3,
-      type: 'bitcoin',
-      name: 'Meu investimento 3',
-      coinValue: '0.00000312221',
-      investmentValue: 'BRL 150,00',
-    },
-    {
-      id: 4,
-      type: 'bitcoin',
-      name: 'Meu investimento 3',
-      coinValue: '0.00000312221',
-      investmentValue: 'BRL 150,00',
-    },
-  ];
 
   useEffect(() => {
     const currentTimestamp = Date.now();
@@ -118,92 +102,42 @@ export const Dashboard = () => {
     <>
       {isLoading && <Loading />}
       <Container>
-        <MainContainer>
+        <TopDashboard>
           <BalanceContainer>
-            <span>Saldo total</span>
-            <Balance $visible={moneyVisible}>
-              <h2>{formatMoney(Number(me?.amount)).replace('R$', '')}</h2>
-              <span>BRL</span>
-              {!moneyVisible ? (
-                <GoEyeClosed onClick={() => setMoneyVisible(true)} />
-              ) : (
-                <GoEye onClick={() => setMoneyVisible(false)} />
-              )}
-            </Balance>
-            <Investments>
-              <span>≈ 2.000,00</span>
-              <span>Este mês: +7.65%</span>
-            </Investments>
-            <Divider />
-            <TransferContainer>
-              <Transfer>
-                <Link to={RoutesEnum.PIX_ROUTE}>
-                  <CircleButton>
-                    <FaPix />
-                  </CircleButton>
-                  <p>Área Pix</p>
-                </Link>
-              </Transfer>
-            </TransferContainer>
+            <BalanceTop>
+              <h2>Saldo</h2>
+              <Button variant="purple">Depositar</Button>
+            </BalanceTop>
+            <BalanceContent>
+              <BalanceAvailable>
+                <span>Disponível</span>
+                <p>R$ 0,00</p>
+              </BalanceAvailable>
+              <BalanceMiddle>
+                <Divider />
+                <a href="#">Depositar</a>
+                <a href="#">Sacar</a>
+              </BalanceMiddle>
+              <InUse>
+                <span>Em uso</span>
+                <p>R$ 0,00</p>
+              </InUse>
+            </BalanceContent>
           </BalanceContainer>
-          <ActivitiesContainer>
-            <h3>Sua atividade</h3>
-            {extract.items.length > 0 ? (
-              extract.items.map((item) => (
-                <Activity key={item.id}>
-                  <div>
-                    <FaMoneyBillTransfer />
-                    <div>
-                      <p className="activity-name">{item.name}</p>
-                      <p className="activity-footer">
-                        Transferência feita com {item.type}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="activity-value">
-                    <p>+ {formatMoney(item.value)}</p>
-                    <p className="activity-footer">{item.date}</p>
-                  </div>
-                </Activity>
-              ))
-            ) : (
-              <p>Ainda não existe nenhum extrato para ser exibido.</p>
-            )}
-          </ActivitiesContainer>
-        </MainContainer>
-        <InvestmentsContainer>
-          <h3>Investimentos atuais</h3>
-          <section>
-            {investments.map((investment) => (
-              <InvestmentsCard key={investment.id}>
-                <img src={bitcoin} alt="bitcoin" />
-                <div>
-                  <h4>{investment.name}</h4>
-                  <p>{investment.coinValue}</p>
-                  <p>{investment.investmentValue}</p>
-                </div>
-              </InvestmentsCard>
-            ))}
-          </section>
-          <Button variant="purple">Gerenciar investimentos</Button>
-        </InvestmentsContainer>
-        <LoanContainer>
-          <h3>Empréstimos</h3>
-          <Limits>
-            <p>Limite utilizado</p>
-            <p>Limite disponível</p>
-          </Limits>
-          <LimitBar>
-            <LimitBarFill $limitused={1200} $availablelimit={5000} />
-          </LimitBar>
-          <Limits>
-            <p>R$ 1.200,00</p>
-            <p>R$ 5.000,00</p>
-          </Limits>
-          <p className="balance">
-            Saldo devedor: <span>R$ 1.200,00</span>
-          </p>
-        </LoanContainer>
+          <BoomingContainer>
+            <h2>Em alta</h2>
+            <BoomingContent>
+              {coins.map((coin) => (
+                <Booming key={coin.id}>
+                  <img src={coin.image} alt={coin.name} />
+                  <p>{coin.name}</p>
+                  <span>{coin.money}</span>
+                  <span id="booming-value">{coin.percentage}</span>
+                </Booming>
+              ))}
+            </BoomingContent>
+          </BoomingContainer>
+        </TopDashboard>
       </Container>
     </>
   );

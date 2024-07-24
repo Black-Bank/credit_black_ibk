@@ -47,7 +47,7 @@ const DefaultLayout = () => {
       <MainContainer>
         <Outlet />
       </MainContainer>
-      <Footer />
+      {pathname !== RoutesEnum.DASHBOARD_ROUTE && <Footer />}
     </>
   );
 };

@@ -1,246 +1,156 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import themes from 'styles/themes.styles';
 
-export const Container = styled.main``;
+export const Container = styled.main`
+  width: 80%;
+  margin: 0 auto;
 
-export const MainContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
+  h2 {
+    font-weight: normal;
+  }
+
+  span {
+    color: ${themes.colors.gray};
+    font-size: 0.8rem;
+    display: block;
+  }
 
   @media (max-width: 800px) {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+    width: 85%;
+  }
+`;
+
+export const TopDashboard = styled.div`
+  display: flex;
+  gap: 1rem;
+
+  @media (max-width: 1000px) {
+    flex-direction: column-reverse;
   }
 `;
 
 export const BalanceContainer = styled.div`
-  width: 25%;
-  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.25);
-  padding: 1rem;
-  color: ${themes.colors.gray};
-  border-radius: 5px;
-
-  span:first-child {
-    font-size: 0.8rem;
-  }
-
-  @media (max-width: 800px) {
-    width: 75%;
-  }
-`;
-
-export const Investments = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
-`;
-
-type BalanceProps = {
-  $visible: boolean;
-};
-
-export const Balance = styled.div<BalanceProps>`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  h2 {
-    font-size: 2rem;
-    color: ${themes.colors.primary};
-    ${(props) =>
-      !props.$visible &&
-      css`
-        filter: blur(10px);
-      `}
-  }
-
-  span {
-    position: relative;
-    bottom: 1rem;
-    right: 0.8rem;
-    color: ${themes.colors.primary};
-  }
-
-  svg {
-    color: ${themes.colors.gray};
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-`;
-
-export const ActivitiesContainer = styled.div`
-  width: 75%;
-  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.25);
-  margin: 0 3rem;
-  padding: 1rem;
-  border-radius: 5px;
-
-  h3 {
-    border-bottom: 1px solid ${themes.colors.gray};
-    padding-bottom: 0.5rem;
-  }
-`;
-
-export const Activity = styled.div`
-  padding-top: 1rem;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  div:first-child {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  svg {
-    font-size: 2rem;
-  }
-
-  .activity-footer {
-    font-size: 0.8rem;
-    color: ${themes.colors.gray};
-  }
-
-  .activity-name {
-    font-weight: bold;
-  }
-
-  .activity-value {
-    width: 25%;
-  }
-
-  @media (max-width: 600px) {
-    display: block;
-
-    .activity-value {
-      margin-top: 1rem;
-      width: 100%;
-    }
-  }
-
-  @media (min-width: 601px) and (max-width: 1000px) {
-    .activity-value {
-      margin-top: 1rem;
-      width: 40%;
-    }
-  }
-`;
-
-export const TransferContainer = styled.div`
-  display: flex;
-  justify-content: center;
-
-  svg {
-    font-size: 1.3rem;
-    color: ${themes.colors.primary};
-  }
-`;
-
-export const Transfer = styled.div`
-  font-size: 0.9rem;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 50%;
   height: 100%;
 
-  button {
-    margin: 0.5rem auto;
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
   }
 `;
 
 export const Divider = styled.div`
-  width: 75%;
+  width: 100%;
   border: 1px solid ${themes.colors.gray262626};
-  margin: 1rem auto;
+  margin: 0.5rem 0;
 `;
 
-export const InvestmentsContainer = styled.div`
-  margin-top: 2rem;
+export const BalanceAvailable = styled.div``;
 
-  section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-
-    @media (max-width: 800px) {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-
-  button {
-    display: block;
-    margin: 1rem auto;
-    width: 75%;
-    color: ${themes.colors.white};
-  }
+export const BalanceContent = styled.div`
+  background-color: ${themes.colors.gray202022};
+  padding: 0.8rem;
+  border-radius: 10px;
 `;
 
-export const InvestmentsCard = styled.div`
-  display: flex;
-  gap: 2rem;
-  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.25);
-  padding: 1.5rem;
-  border-radius: 5px;
-  margin-top: 1rem;
-  cursor: pointer;
-  width: 25%;
-
-  img {
-    width: 3rem;
-  }
-
-  @media (max-width: 800px) {
-    width: 90%;
-  }
-`;
-
-export const LoanContainer = styled.div`
-  margin-top: 5rem;
-
-  .balance {
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  .balance span {
-    color: ${themes.colors.error};
-  }
-`;
-
-export const Limits = styled.div`
+export const BalanceMiddle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15rem;
+  gap: 1rem;
+
+  a {
+    color: ${themes.colors.primary};
+
+    @media (max-width: 1000px) {
+      display: none;
+    }
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 `;
 
-export const LimitBar = styled.div`
-  width: 42%;
-  height: 0.3rem;
-  border: 1px solid ${themes.colors.gray};
-  margin: 1rem auto;
-  border-radius: 50px;
+export const BalanceTop = styled.div`
+  button {
+    display: none;
+  }
+
+  @media (max-width: 1000px) {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    button {
+      display: block;
+    }
+  }
 `;
 
-type LimitBarFillProps = {
-  $limitused: number;
-  $availablelimit: number;
-};
+export const InUse = styled.div``;
 
-export const LimitBarFill = styled.div<LimitBarFillProps>`
-  width: ${(props) => {
-    return (props.$limitused / props.$availablelimit) * 100 + '%';
-  }};
-  height: 0.2rem;
-  border: 1px solid ${themes.colors.primary};
-  background: ${themes.colors.primary};
-  border-radius: 50px;
+export const BoomingContainer = styled.div`
+  height: 100%;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+`;
+
+export const BoomingContent = styled.div`
+  display: flex;
+  gap: 1rem;
+
+  @media (max-width: 800px) {
+    gap: 0.5rem;
+  }
+`;
+
+export const Booming = styled.div`
+  background: ${themes.colors.gray202022};
+  border-radius: 10px;
+  padding: 1.2rem 2rem;
+  padding-left: 1rem;
+  width: 5rem;
+
+  img {
+    width: 2rem;
+
+    @media (max-width: 600px) {
+      width: 1.3rem;
+    }
+    @media (min-width: 601px) and (max-width: 800px) {
+      width: 1.5rem;
+    }
+  }
+
+  p {
+    font-size: 0.8rem;
+    width: 200%;
+  }
+
+  span#booming-value {
+    color: ${themes.colors.positiveValue};
+    font-size: 1.3rem;
+
+    @media (max-width: 600px) {
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 601px) and (max-width: 800px) {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 0.5rem;
+  }
 `;
