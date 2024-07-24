@@ -17,7 +17,7 @@ import {
   TransferContainer,
 } from './dashboard.styles';
 import { UserService } from '../../services/user.service';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IUser } from './dashboard.interface';
@@ -35,6 +35,7 @@ import Button from 'components/Button/button.component';
 import { CircleButton } from 'components/global.styles';
 import { Link } from 'react-router-dom';
 import { RoutesEnum } from 'routes/routes.enum';
+import { ExtractContext } from 'context/extract.context';
 
 export const Dashboard = () => {
   const userService = UserService.getInstance();
@@ -46,29 +47,13 @@ export const Dashboard = () => {
 
   const navigate = useNavigate();
 
-  const activities = [
-    {
-      id: 1,
-      name: 'Gabriel Santos de Oliveira',
-      transferType: 'Pix',
-      value: 50,
-      date: '30/jul',
-    },
-    {
-      id: 2,
-      name: 'Gabriel Santos de Oliveira',
-      transferType: 'Pix',
-      value: 23,
-      date: '23/mar',
-    },
-    {
-      id: 3,
-      name: 'Gabriel Santos de Oliveira',
-      transferType: 'Pix',
-      value: 97,
-      date: '30/jul',
-    },
-  ];
+  const context = useContext(ExtractContext);
+
+  if (!context) {
+    throw new Error('ChildComponent must be used within an AppProvider');
+  }
+
+  const { extract } = context;
 
   const investments = [
     {
@@ -163,23 +148,27 @@ export const Dashboard = () => {
           </BalanceContainer>
           <ActivitiesContainer>
             <h3>Sua atividade</h3>
-            {activities.map((activity) => (
-              <Activity key={activity.id}>
-                <div>
-                  <FaMoneyBillTransfer />
+            {extract.items.length > 0 ? (
+              extract.items.map((item) => (
+                <Activity key={item.id}>
                   <div>
-                    <p className="activity-name">{activity.name}</p>
-                    <p className="activity-footer">
-                      Transferência feita com {activity.transferType}
-                    </p>
+                    <FaMoneyBillTransfer />
+                    <div>
+                      <p className="activity-name">{item.name}</p>
+                      <p className="activity-footer">
+                        Transferência feita com {item.type}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <p>- {formatMoney(activity.value)}</p>
-                  <p className="activity-footer">{activity.date}</p>
-                </div>
-              </Activity>
-            ))}
+                  <div className="activity-value">
+                    <p>+ {formatMoney(item.value)}</p>
+                    <p className="activity-footer">{item.date}</p>
+                  </div>
+                </Activity>
+              ))
+            ) : (
+              <p>Ainda não existe nenhum extrato para ser exibido.</p>
+            )}
           </ActivitiesContainer>
         </MainContainer>
         <InvestmentsContainer>
