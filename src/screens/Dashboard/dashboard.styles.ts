@@ -108,6 +108,26 @@ export const Activity = styled.div`
   .activity-name {
     font-weight: bold;
   }
+
+  .activity-value {
+    width: 25%;
+  }
+
+  @media (max-width: 600px) {
+    display: block;
+
+    .activity-value {
+      margin-top: 1rem;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1000px) {
+    .activity-value {
+      margin-top: 1rem;
+      width: 40%;
+    }
+  }
 `;
 
 export const TransferContainer = styled.div`

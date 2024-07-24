@@ -93,7 +93,7 @@ export const PixDashboard = () => {
                       </p>
                     </div>
                   </div>
-                  <div>
+                  <div className="activity-value">
                     <p>+ {formatMoney(item.value)}</p>
                     <p className="activity-footer">{item.date}</p>
                   </div>
