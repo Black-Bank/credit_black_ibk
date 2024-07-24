@@ -108,6 +108,26 @@ export const Activity = styled.div`
   .activity-name {
     font-weight: bold;
   }
+
+  .activity-value {
+    width: 25%;
+  }
+
+  @media (max-width: 600px) {
+    display: block;
+
+    .activity-value {
+      margin-top: 1rem;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1000px) {
+    .activity-value {
+      margin-top: 1rem;
+      width: 40%;
+    }
+  }
 `;
 
 export const TransferContainer = styled.div`
@@ -115,7 +135,7 @@ export const TransferContainer = styled.div`
   justify-content: center;
 
   svg {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: ${themes.colors.primary};
   }
 `;
@@ -124,6 +144,15 @@ export const Transfer = styled.div`
   font-size: 0.9rem;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  button {
+    margin: 0.5rem auto;
+  }
 `;
 
 export const Divider = styled.div`
