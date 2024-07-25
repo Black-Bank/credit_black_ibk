@@ -12,6 +12,7 @@ const themes = {
     black: '#000000',
     error: '#D61A1F',
     positiveValue: '#41A32D',
+    negativeValue: '#e63e39',
   },
 };
 

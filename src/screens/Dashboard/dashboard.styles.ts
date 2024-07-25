@@ -20,16 +20,17 @@ export const Container = styled.main`
   }
 `;
 
-export const TopDashboard = styled.div`
+export const DashboardFlex = styled.div`
   display: flex;
   gap: 1rem;
+  margin-bottom: 1rem;
 
   @media (max-width: 1000px) {
     flex-direction: column-reverse;
   }
 `;
 
-export const BalanceContainer = styled.div`
+export const LeftContainer = styled.div`
   width: 50%;
   height: 100%;
 
@@ -52,15 +53,13 @@ export const Divider = styled.div`
   margin: 0.5rem 0;
 `;
 
-export const BalanceAvailable = styled.div``;
-
-export const BalanceContent = styled.div`
+export const LeftContent = styled.div`
   background-color: ${themes.colors.gray202022};
   padding: 0.8rem;
   border-radius: 10px;
 `;
 
-export const BalanceMiddle = styled.div`
+export const LeftMiddle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,7 +78,7 @@ export const BalanceMiddle = styled.div`
   }
 `;
 
-export const BalanceTop = styled.div`
+export const LeftTop = styled.div`
   button {
     display: none;
   }
@@ -95,9 +94,7 @@ export const BalanceTop = styled.div`
   }
 `;
 
-export const InUse = styled.div``;
-
-export const BoomingContainer = styled.div`
+export const RightContainer = styled.div`
   height: 100%;
 
   h2 {
@@ -105,7 +102,7 @@ export const BoomingContainer = styled.div`
   }
 `;
 
-export const BoomingContent = styled.div`
+export const RightContent = styled.div`
   display: flex;
   gap: 1rem;
 
@@ -145,12 +142,12 @@ export const Booming = styled.div<BoomingProps>`
     font-size: 0.8rem;
     width: 100%;
     max-width: ${(props) => props.$maxWidth || '300px'};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     @media (max-width: 800px) {
       max-width: ${(props) => props.$mobileMaxWidth || '150px'};
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   }
 
@@ -170,4 +167,48 @@ export const Booming = styled.div<BoomingProps>`
   @media (max-width: 600px) {
     padding: 0.5rem;
   }
+`;
+
+export const Portfolio = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid ${themes.colors.gray262626};
+  padding: 1rem 0;
+
+  img {
+    width: 2rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+  }
+
+  div.left-side {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  p.negative-percentage {
+    color: ${themes.colors.negativeValue};
+    text-align: right;
+  }
+  p.positive-percentage {
+    color: ${themes.colors.positiveValue};
+    text-align: right;
+  }
+`;
+
+export const PortfolioTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  p.percentage {
+    color: ${themes.colors.negativeValue};
+  }
+`;
+
+export const PortfolioBar = styled.div`
+  border: 1px solid ${themes.colors.primary};
+  width: 100%;
+  margin: 1rem 0;
 `;

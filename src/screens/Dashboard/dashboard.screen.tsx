@@ -1,16 +1,17 @@
 import {
-  BalanceAvailable,
-  BalanceContainer,
-  BalanceContent,
-  BalanceMiddle,
-  BalanceTop,
+  LeftContainer,
+  LeftContent,
+  LeftMiddle,
+  LeftTop,
   Booming,
-  BoomingContainer,
-  BoomingContent,
+  RightContainer,
+  RightContent,
   Container,
   Divider,
-  InUse,
-  TopDashboard,
+  DashboardFlex,
+  PortfolioTop,
+  PortfolioBar,
+  Portfolio,
 } from './dashboard.styles';
 import { UserService } from '../../services/user.service';
 import { useContext, useEffect, useState } from 'react';
@@ -53,6 +54,27 @@ export const Dashboard = () => {
       name: 'Tron',
       money: 'R$ 0,7597',
       percentage: '+2,15%',
+    },
+  ];
+
+  const portfolio = [
+    {
+      id: 1,
+      image: bitcoin,
+      name: 'Ethereum',
+      coin: '0.00000008972 ETH',
+      unitMoney: 'R$ 5,96',
+      money: 'R$ 19.280,83',
+      percentage: '-1,36%',
+    },
+    {
+      id: 2,
+      image: bitcoin,
+      name: 'Tether',
+      coin: '0.2093928 USDT',
+      unitMoney: 'R$ 1,12',
+      money: 'R$ 5,555',
+      percentage: '+0,29%',
     },
   ];
 
@@ -102,46 +124,100 @@ export const Dashboard = () => {
     <>
       {isLoading && <Loading />}
       <Container>
-        <TopDashboard>
-          <BalanceContainer>
-            <BalanceTop>
+        <DashboardFlex>
+          <LeftContainer>
+            <LeftTop>
               <h2>Saldo</h2>
               <Button variant="purple">Depositar</Button>
-            </BalanceTop>
-            <BalanceContent>
-              <BalanceAvailable>
+            </LeftTop>
+            <LeftContent>
+              <div>
                 <span>Disponível</span>
                 <p>R$ 0,00</p>
-              </BalanceAvailable>
-              <BalanceMiddle>
+              </div>
+              <LeftMiddle>
                 <Divider />
                 <a href="#">Depositar</a>
                 <a href="#">Sacar</a>
-              </BalanceMiddle>
-              <InUse>
+              </LeftMiddle>
+              <div>
                 <span>Em uso</span>
                 <p>R$ 0,00</p>
-              </InUse>
-            </BalanceContent>
-          </BalanceContainer>
-          <BoomingContainer>
+              </div>
+            </LeftContent>
+          </LeftContainer>
+          <RightContainer>
             <h2>Em alta</h2>
-            <BoomingContent>
+            <RightContent>
               {coins.map((coin) => (
-                <Booming
-                  key={coin.id}
-                  $maxWidth="280px"
-                  $mobileMaxWidth="150px"
-                >
+                <Booming key={coin.id} $maxWidth="280px" $mobileMaxWidth="50px">
                   <img src={coin.image} alt={coin.name} />
-                  <p>{coin.name}</p>
+                  <p>
+                    <abbr title={coin.name}>{coin.name}</abbr>
+                  </p>
                   <span>{coin.money}</span>
                   <span id="booming-value">{coin.percentage}</span>
                 </Booming>
               ))}
-            </BoomingContent>
-          </BoomingContainer>
-        </TopDashboard>
+            </RightContent>
+          </RightContainer>
+        </DashboardFlex>
+        <DashboardFlex>
+          <LeftContainer>
+            <h2>Portfólio</h2>
+            <LeftContent>
+              <PortfolioTop>
+                <div>
+                  <span>Total</span>
+                  <p>R$ 8,00</p>
+                </div>
+                <p className="percentage">-1,10%</p>
+              </PortfolioTop>
+              <LeftMiddle>
+                <PortfolioBar />
+              </LeftMiddle>
+              {portfolio.map((port) => (
+                <Portfolio key={port.id}>
+                  <div className="left-side">
+                    <img src={bitcoin} alt="bitcoin" />
+                    <div>
+                      <p>{port.name}</p>
+                      <p>{port.coin}</p>
+                      <span>{port.unitMoney}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p>{port.money}</p>
+                    <p
+                      className={
+                        port.percentage.includes('-')
+                          ? 'negative-percentage'
+                          : 'positive-percentage'
+                      }
+                    >
+                      {port.percentage}
+                    </p>
+                  </div>
+                </Portfolio>
+              ))}
+            </LeftContent>
+          </LeftContainer>
+          <RightContainer>
+            <h2>Extrato</h2>
+            <RightContent>
+              {coins.map((coin) => (
+                <Booming key={coin.id} $maxWidth="280px" $mobileMaxWidth="50px">
+                  <img src={coin.image} alt={coin.name} />
+                  <p>
+                    <abbr title={coin.name}>{coin.name}</abbr>
+                  </p>
+                  <span>{coin.money}</span>
+                  <span id="booming-value">{coin.percentage}</span>
+                </Booming>
+              ))}
+            </RightContent>
+          </RightContainer>
+        </DashboardFlex>
       </Container>
     </>
   );
