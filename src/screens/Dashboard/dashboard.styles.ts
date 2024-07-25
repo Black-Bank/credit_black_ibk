@@ -114,7 +114,12 @@ export const BoomingContent = styled.div`
   }
 `;
 
-export const Booming = styled.div`
+type BoomingProps = {
+  $maxWidth: string;
+  $mobileMaxWidth: string;
+};
+
+export const Booming = styled.div<BoomingProps>`
   background: ${themes.colors.gray202022};
   border-radius: 10px;
   padding: 1.2rem 2rem;
@@ -132,9 +137,21 @@ export const Booming = styled.div`
     }
   }
 
+  span {
+    width: 200%;
+  }
+
   p {
     font-size: 0.8rem;
-    width: 200%;
+    width: 100%;
+    max-width: ${(props) => props.$maxWidth || '300px'};
+
+    @media (max-width: 800px) {
+      max-width: ${(props) => props.$mobileMaxWidth || '150px'};
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   span#booming-value {

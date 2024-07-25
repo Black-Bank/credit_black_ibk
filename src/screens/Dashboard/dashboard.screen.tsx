@@ -128,7 +128,11 @@ export const Dashboard = () => {
             <h2>Em alta</h2>
             <BoomingContent>
               {coins.map((coin) => (
-                <Booming key={coin.id}>
+                <Booming
+                  key={coin.id}
+                  $maxWidth="280px"
+                  $mobileMaxWidth="150px"
+                >
                   <img src={coin.image} alt={coin.name} />
                   <p>{coin.name}</p>
                   <span>{coin.money}</span>
