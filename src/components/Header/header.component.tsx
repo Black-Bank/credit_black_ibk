@@ -3,6 +3,7 @@ import { ScreenTypes } from './header.enum';
 import {
   Container,
   ContainerLogged,
+  ContainerResponsiveLogged,
   CriptoButton,
   Item,
   Items,
@@ -65,14 +66,6 @@ const Header = ({ screen, active }: HeaderProps) => {
     setOpen(newOpen);
   };
 
-  const handleLogout = () => {
-    toast.success('Até mais! Redirecionando...');
-    setTimeout(() => {
-      navigate(RoutesEnum.MAIN_ROUTE);
-      sessionStorage.clear();
-    }, 3000);
-  };
-
   const DrawerList = (
     <Box sx={{ width: 400 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
@@ -80,6 +73,53 @@ const Header = ({ screen, active }: HeaderProps) => {
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => navigate('/')}>
               <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+  const navItens = [
+    {
+      id: 1,
+      name: 'Início',
+      path: '/',
+    },
+    {
+      id: 2,
+      name: 'Negociar',
+      path: '/',
+    },
+    {
+      id: 3,
+      name: 'Depositar',
+      path: '/',
+    },
+    {
+      id: 4,
+      name: 'Sacar',
+      path: '/',
+    },
+    {
+      id: 5,
+      name: 'Pagar',
+      path: '/',
+    },
+    {
+      id: 6,
+      name: 'Extrato',
+      path: '/',
+    },
+  ];
+
+  const DrawerListResponsive = (
+    <Box sx={{ width: 400 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        {navItens.map((item) => (
+          <ListItem key={item.id} disablePadding>
+            <ListItemButton onClick={() => navigate(item.path)}>
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -129,29 +169,31 @@ const Header = ({ screen, active }: HeaderProps) => {
       );
     case ScreenTypes.SCREEN_LOGGED:
       return (
-        <ContainerLogged>
-          <div className="left-side">
-            <Logo>
-              <div>
-                <img src={logo} alt="logo-creditblack" />
-              </div>
-              <h1>Credit Black</h1>
-            </Logo>
-            <Items>
-              <Item $active={active === '/'}>
-                <Link to={RoutesEnum.MAIN_ROUTE}>Início</Link>
-              </Item>
-              <Item $active={active === '/'}>
-                <div className="btn-negotiate">
-                  Negociar
-                  <IoIosArrowDown />
+        <>
+          <ContainerLogged>
+            <div className="left-side">
+              <Logo>
+                <div>
+                  <img src={logo} alt="logo-creditblack" />
                 </div>
-              </Item>
-              <Item $active={active === '/'}>Depositar</Item>
-              <Item $active={active === '/'}>Sacar</Item>
-              <Item $active={active === '/'}>Pagar</Item>
-              <Item $active={active === '/'}>Extrato</Item>
-            </Items>
+                <h1>Credit Black</h1>
+              </Logo>
+              <Items>
+                <Item $active={active === '/'}>
+                  <Link to={RoutesEnum.MAIN_ROUTE}>Início</Link>
+                </Item>
+                <Item $active={active === '/'}>
+                  <div className="btn-negotiate">
+                    Negociar
+                    <IoIosArrowDown />
+                  </div>
+                </Item>
+                <Item $active={active === '/'}>Depositar</Item>
+                <Item $active={active === '/'}>Sacar</Item>
+                <Item $active={active === '/'}>Pagar</Item>
+                <Item $active={active === '/'}>Extrato</Item>
+              </Items>
+            </div>
             <div className="right-side">
               <CriptoButton>
                 <GiPresent />
@@ -162,14 +204,28 @@ const Header = ({ screen, active }: HeaderProps) => {
               <IoIosNotifications />
               <HiOutlineMenuAlt3 />
             </div>
-          </div>
-          <Responsive>
-            <ResponsiveBar onClick={toggleDrawer(true)} />
-          </Responsive>
-          <Drawer open={open} onClose={toggleDrawer(false)}>
-            {DrawerList}
-          </Drawer>
-        </ContainerLogged>
+          </ContainerLogged>
+          <ContainerResponsiveLogged>
+            <div className="left-side">
+              <Logo>
+                <div>
+                  <img src={logo} alt="logo-creditblack" />
+                </div>
+                <h1>Credit Black</h1>
+              </Logo>
+            </div>
+            <div className="right-side">
+              <CriptoButton>
+                <GiPresent />
+                Cripto grátis
+              </CriptoButton>
+              <HiOutlineMenuAlt3 onClick={toggleDrawer(true)} />
+              <Drawer open={open} onClose={toggleDrawer(false)}>
+                {DrawerListResponsive}
+              </Drawer>
+            </div>
+          </ContainerResponsiveLogged>
+        </>
       );
 
     default:
