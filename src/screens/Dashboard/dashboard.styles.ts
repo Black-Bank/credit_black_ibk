@@ -45,6 +45,10 @@ export const LeftContainer = styled.div`
   @media (max-width: 1000px) {
     width: 100%;
   }
+
+  @media (min-width: 1001px) {
+    width: 70%;
+  }
 `;
 
 export const Divider = styled.div`
