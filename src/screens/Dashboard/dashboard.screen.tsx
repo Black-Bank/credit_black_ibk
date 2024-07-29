@@ -12,6 +12,8 @@ import {
   PortfolioTop,
   PortfolioBar,
   Portfolio,
+  ExtractContainer,
+  Extract,
 } from './dashboard.styles';
 import { UserService } from '../../services/user.service';
 import { useContext, useEffect, useState } from 'react';
@@ -23,6 +25,11 @@ import { ExtractContext } from 'context/extract.context';
 
 import bitcoin from '../../assets/coins/bitcoin-logo.svg';
 import Button from 'components/Button/button.component';
+import { FaMoneyBillTransfer } from 'react-icons/fa6';
+import { formatMoney } from 'utils/utils';
+import { getDataFormatted } from 'utils/date.util';
+
+import { RiCoinsLine } from 'react-icons/ri';
 
 export const Dashboard = () => {
   const coins = [
@@ -75,6 +82,33 @@ export const Dashboard = () => {
       unitMoney: 'R$ 1,12',
       money: 'R$ 5,555',
       percentage: '+0,29%',
+    },
+  ];
+
+  const extracts = [
+    {
+      id: 1,
+      transferType: 'transfer',
+      coin: 'Ethereum',
+      type: 'send',
+      value: 0.00455121,
+      date: '02/07/2023',
+    },
+    {
+      id: 2,
+      transferType: 'transfer',
+      coin: 'Ethereum',
+      type: 'send',
+      value: 0.00455121,
+      date: '02/08/2023',
+    },
+    {
+      id: 3,
+      transferType: 'deposit',
+      coin: 'Real',
+      type: 'brazil',
+      value: 100,
+      date: '02/12/2023',
     },
   ];
 
@@ -200,21 +234,45 @@ export const Dashboard = () => {
                   </div>
                 </Portfolio>
               ))}
+              <Button variant="none">Ver tudo</Button>
             </LeftContent>
           </LeftContainer>
           <RightContainer>
             <h2>Extrato</h2>
             <RightContent>
-              {coins.map((coin) => (
-                <Booming key={coin.id} $maxWidth="280px" $mobileMaxWidth="50px">
-                  <img src={coin.image} alt={coin.name} />
-                  <p>
-                    <abbr title={coin.name}>{coin.name}</abbr>
-                  </p>
-                  <span>{coin.money}</span>
-                  <span id="booming-value">{coin.percentage}</span>
-                </Booming>
-              ))}
+              <ExtractContainer>
+                {extracts.map((extract) => (
+                  <Extract key={extract.id}>
+                    <div className="extract-right">
+                      {extract.transferType === 'transfer' ? (
+                        <FaMoneyBillTransfer />
+                      ) : (
+                        <RiCoinsLine />
+                      )}
+
+                      <div>
+                        <p>
+                          {extract.transferType === 'transfer'
+                            ? `Transferência de ${extract.coin}`
+                            : `Depósito em ${extract.coin}`}
+                        </p>
+                        <span>
+                          {extract.type === 'send' ? 'Envio' : 'Brasil Plural'}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="extract-informations">
+                      <p>
+                        {extract.transferType === 'transfer'
+                          ? `- ${extract.value}`
+                          : `+ ${formatMoney(extract.value)}`}
+                      </p>
+                      <span>{getDataFormatted(extract.date)}</span>
+                    </div>
+                  </Extract>
+                ))}
+                <Button variant="none">Ver tudo</Button>
+              </ExtractContainer>
             </RightContent>
           </RightContainer>
         </DashboardFlex>

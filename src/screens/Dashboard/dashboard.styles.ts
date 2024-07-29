@@ -31,7 +31,7 @@ export const DashboardFlex = styled.div`
 `;
 
 export const LeftContainer = styled.div`
-  width: 50%;
+  width: 35%;
   height: 100%;
 
   h2 {
@@ -57,6 +57,12 @@ export const LeftContent = styled.div`
   background-color: ${themes.colors.gray202022};
   padding: 0.8rem;
   border-radius: 10px;
+
+  button {
+    display: block;
+    margin: 0.5rem auto;
+    color: ${themes.colors.primary};
+  }
 `;
 
 export const LeftMiddle = styled.div`
@@ -96,15 +102,27 @@ export const LeftTop = styled.div`
 
 export const RightContainer = styled.div`
   height: 100%;
+  width: 60%;
 
   h2 {
     margin-bottom: 1rem;
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
+    order: -1;
   }
 `;
 
 export const RightContent = styled.div`
   display: flex;
   gap: 1rem;
+
+  button {
+    display: block;
+    margin: 0.5rem auto;
+    color: ${themes.colors.primary};
+  }
 
   @media (max-width: 800px) {
     gap: 0.5rem;
@@ -172,7 +190,7 @@ export const Booming = styled.div<BoomingProps>`
 export const Portfolio = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: 3px solid ${themes.colors.gray262626};
+  border-bottom: 2px solid ${themes.colors.gray262626};
   padding: 1rem 0;
 
   img {
@@ -211,4 +229,39 @@ export const PortfolioBar = styled.div`
   border: 1px solid ${themes.colors.primary};
   width: 100%;
   margin: 1rem 0;
+`;
+
+export const ExtractContainer = styled.div`
+  background-color: ${themes.colors.gray202022};
+  width: 100%;
+  border-radius: 10px;
+  padding: 0.8rem;
+`;
+
+export const Extract = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid ${themes.colors.gray262626};
+  padding: 1rem 0;
+
+  svg {
+    font-size: 1.5rem;
+  }
+
+  .extract-right {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .extract-informations {
+    width: 9.375rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 600px) {
+      width: 10.375rem;
+    }
+  }
 `;
