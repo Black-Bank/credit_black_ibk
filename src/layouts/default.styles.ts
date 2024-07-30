@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: 85%;
+type ContainerProps = {
+  $islogged: boolean;
+};
+
+export const Container = styled.div<ContainerProps>`
+  width: ${(props) => (props.$islogged ? '100%' : '85%')};
   margin: 0 auto;
 `;
 
