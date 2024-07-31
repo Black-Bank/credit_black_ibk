@@ -31,7 +31,7 @@ const DefaultLayout = () => {
 
   return (
     <>
-      <Container $islogged={pathname === RoutesEnum.DASHBOARD_ROUTE}>
+      <Container $islogged={pathname.includes(RoutesEnum.DASHBOARD_ROUTE)}>
         <Header
           active={pathname}
           screen={
