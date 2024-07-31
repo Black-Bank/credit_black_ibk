@@ -94,7 +94,7 @@ const Header = ({ screen, active }: HeaderProps) => {
     {
       id: 3,
       name: 'Depositar',
-      path: '/',
+      path: '/dashboard/deposit',
     },
     {
       id: 4,
