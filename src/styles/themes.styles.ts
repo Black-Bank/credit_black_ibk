@@ -11,6 +11,7 @@ const themes = {
     white: '#FFFFFF',
     black: '#000000',
     error: '#D61A1F',
+    information: '#005d85',
     positiveValue: '#41A32D',
     negativeValue: '#e63e39',
   },
