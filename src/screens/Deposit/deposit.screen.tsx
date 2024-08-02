@@ -19,12 +19,24 @@ import Dollar from '../../assets/icons/money-symbols/dollar.png';
 import { useEffect, useState } from 'react';
 import { getPix } from 'api/pix';
 import { CircleButton } from 'components/global.styles';
+import { toast } from 'react-toastify';
+import { CurrencyInput } from 'react-currency-mask';
+import { formatDollarMoney } from 'utils/utils';
 
 const Deposit = () => {
   const [isOptionsVisible, setIsOptionsVisible] = useState(false);
   const [base64, setBase64] = useState('');
   const [pixKey, setPixKey] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+
+  const [dollarInput, setDollarInput] = useState(0);
+
+  const dollar = 5.73;
+
+  const handleCopyKey = (key: string) => {
+    navigator.clipboard.writeText(key);
+    toast.success('Chave copiada com sucesso');
+  };
 
   useEffect(() => {
     const fetch = async () => {
@@ -71,7 +83,11 @@ const Deposit = () => {
             </Select>
             {isOptionsVisible && (
               <Options>
-                <span>Nenhuma opção encontrada.</span>
+                <CurrentOption>
+                  <img src={Dollar} alt="dólar" />
+                  <p>Dólar</p>
+                  <span>USD</span>
+                </CurrentOption>
               </Options>
             )}
           </SelectCoin>
@@ -121,12 +137,19 @@ const Deposit = () => {
         <Address>
           <AddressContent>
             <div>
-              <span>Saldo disponível</span>
-              <p className="value">R$ 0,00</p>
+              <span>Saldo para transferir</span>
+              <CurrencyInput
+                onChangeValue={(event, originalValue, maskedValue) => {
+                  setDollarInput((originalValue as number) / dollar);
+                }}
+                max={1000000000}
+              />
             </div>
             <div>
               <span>Valor convertido</span>
-              <p className="converted-value">R$ 0,00</p>
+              <p className="converted-value">
+                {formatDollarMoney(dollarInput)}
+              </p>
             </div>
             <Orientation className="address-orientation">
               <FaInfo className="info" />
@@ -141,7 +164,9 @@ const Deposit = () => {
               </AddressSelect>
               <img src={imageUrl} alt="pix-qr-code" />
               <p>{pixKey}</p>
-              <CircleButton>Copiar</CircleButton>
+              <CircleButton onClick={() => handleCopyKey(pixKey)}>
+                Copiar
+              </CircleButton>
               <CircleButton>Upload de comprovante</CircleButton>
             </Payment>
           </AddressContent>
