@@ -102,14 +102,31 @@ export const Options = styled.div`
   padding: 2rem;
   font-style: italic;
   background-color: ${themes.colors.gray202022};
-  width: 84.5%;
+  width: 85.2%;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 3rem;
+  }
+
+  @media (min-width: 1500px) {
+    width: 89.3%;
+  }
 `;
 
 export const OrientationsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   grid-area: left;
   background-color: ${themes.colors.gray202022};
   margin: 1rem 0;
   border-radius: 10px;
+
+  @media (min-width: 1500px) {
+    height: 37.7rem;
+  }
 `;
 
 export const Orientations = styled.div`
@@ -146,6 +163,16 @@ export const AddressContent = styled.div`
   }
 
   svg.info {
+    font-size: 1.2rem;
+  }
+
+  input {
+    display: block;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid ${themes.colors.primary};
+    margin: 1rem 0;
+    color: ${themes.colors.white};
     font-size: 1.2rem;
   }
 
