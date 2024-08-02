@@ -6,10 +6,14 @@ import {
   AddressSelect,
   Container,
   CurrentOption,
+  ExtractContainer,
+  ExtractContent,
+  Extracts,
   Options,
   Orientation,
   Orientations,
   OrientationsContainer,
+  Pagination,
   Payment,
   Select,
   SelectCoin,
@@ -139,10 +143,10 @@ const Deposit = () => {
             <div>
               <span>Saldo para transferir</span>
               <CurrencyInput
-                onChangeValue={(event, originalValue, maskedValue) => {
+                onChangeValue={(event, originalValue) => {
                   setDollarInput((originalValue as number) / dollar);
                 }}
-                max={1000000000}
+                max={100000000000}
               />
             </div>
             <div>
@@ -172,6 +176,45 @@ const Deposit = () => {
           </AddressContent>
         </Address>
       </AddressContainer>
+      <ExtractContainer>
+        <h6>Histórico de depósitos em Reais</h6>
+        <Extracts>
+          <ExtractContent>
+            <tr>
+              <th>ID</th>
+              <th>Tipo</th>
+              <th>Destino</th>
+              <th>Moeda</th>
+              <th>Valor</th>
+              <th>Data</th>
+              <th>Status</th>
+            </tr>
+            <tr>
+              <td>#D838168</td>
+              <td>Depósito</td>
+              <td>Credit Black</td>
+              <td>BRL</td>
+              <td>R$ 100,00</td>
+              <td>02/08/2024</td>
+              <td>Confirmado</td>
+            </tr>
+            <tr>
+              <td>#D838168</td>
+              <td>Depósito</td>
+              <td>Credit Black</td>
+              <td>BRL</td>
+              <td>R$ 100,00</td>
+              <td>02/08/2024</td>
+              <td>Confirmado</td>
+            </tr>
+          </ExtractContent>
+          <Pagination>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </Pagination>
+        </Extracts>
+      </ExtractContainer>
     </Container>
   );
 };

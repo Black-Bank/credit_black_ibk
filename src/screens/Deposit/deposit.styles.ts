@@ -102,12 +102,16 @@ export const Options = styled.div`
   padding: 2rem;
   font-style: italic;
   background-color: ${themes.colors.gray202022};
-  width: 85.2%;
+  width: 88.6%;
   display: flex;
   justify-content: center;
 
   img {
     width: 3rem;
+  }
+
+  @media (max-width: 600px) {
+    width: 83%;
   }
 
   @media (min-width: 1500px) {
@@ -123,6 +127,11 @@ export const OrientationsContainer = styled.div`
   background-color: ${themes.colors.gray202022};
   margin: 1rem 0;
   border-radius: 10px;
+  height: 34.5rem;
+
+  @media (max-width: 600px) {
+    height: 39.5rem;
+  }
 
   @media (min-width: 1500px) {
     height: 37.7rem;
@@ -150,7 +159,7 @@ export const Address = styled.div`
   background-color: ${themes.colors.gray202022};
   margin: 1rem 0;
   border-radius: 10px;
-  height: 92%;
+  height: 90%;
 `;
 
 export const AddressContent = styled.div`
@@ -209,5 +218,59 @@ export const Payment = styled.div`
   p {
     font-size: 0.6rem;
     margin-top: 1rem;
+  }
+`;
+
+export const ExtractContainer = styled.div`
+  width: 200%;
+`;
+
+export const Extracts = styled.div`
+  background-color: ${themes.colors.gray202022};
+  border-radius: 10px;
+  margin-top: 1rem;
+  width: 85%;
+  overflow-x: auto;
+
+  @media (max-width: 1000px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1500px) {
+    width: 101%;
+  }
+`;
+
+export const ExtractContent = styled.table`
+  border-collapse: collapse;
+  width: 98%;
+  margin: 0 auto;
+
+  th {
+    font-weight: normal;
+    padding: 0.5rem;
+  }
+
+  td {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    border-bottom: 2px solid ${themes.colors.gray262626};
+  }
+`;
+
+export const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 0;
+  gap: 1rem;
+
+  span {
+    color: ${themes.colors.primary};
+    cursor: pointer;
+  }
+
+  span:hover {
+    text-decoration: underline;
   }
 `;
