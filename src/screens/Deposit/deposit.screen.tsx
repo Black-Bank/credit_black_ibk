@@ -20,18 +20,24 @@ import {
 } from './deposit.styles';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import Dollar from '../../assets/icons/money-symbols/dollar.png';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 import { getPix } from 'api/pix';
 import { CircleButton } from 'components/global.styles';
 import { toast } from 'react-toastify';
 import { CurrencyInput } from 'react-currency-mask';
 import { formatDollarMoney } from 'utils/utils';
+import { v4 } from 'uuid';
+import { CreateDepositService } from 'services/deposit.service';
 
 const Deposit = () => {
+  const createDepositService = new CreateDepositService();
+
   const [isOptionsVisible, setIsOptionsVisible] = useState(false);
   const [base64, setBase64] = useState('');
   const [pixKey, setPixKey] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [dollarInput, setDollarInput] = useState(0);
 
@@ -40,6 +46,61 @@ const Deposit = () => {
   const handleCopyKey = (key: string) => {
     navigator.clipboard.writeText(key);
     toast.success('Chave copiada com sucesso');
+  };
+
+  const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      if (file.type.startsWith('image/')) {
+        if (dollarInput > 0) {
+          toast.success('Comprovante enviado com sucesso!');
+
+          const identifier = sessionStorage.getItem('identifier') as string;
+          const payID = v4();
+
+          const tzoffset = new Date().getTimezoneOffset() * 60000;
+          const createdAt = new Date(Date.now() - tzoffset)
+            .toISOString()
+            .slice(0, -1);
+
+          const value = Number(dollarInput.toFixed(2));
+
+          const reader = new FileReader();
+          reader.onloadend = async () => {
+            const result = reader.result as string;
+
+            const depositData = {
+              identifier,
+              payID,
+              createdAt,
+              value,
+              status: 'pending',
+              base64: result,
+            };
+
+            try {
+              const response =
+                await createDepositService.createUser(depositData);
+              console.log(response);
+            } catch (err) {
+              console.log(err);
+            }
+          };
+          reader.readAsDataURL(file);
+
+          e.target.value = '';
+        } else {
+          toast.error('O valor precisa ser maior do que 0');
+        }
+      } else {
+        toast.error('Apenas é aceitado imagens.');
+
+        if (e?.target) {
+          e.target.value = '';
+        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -171,7 +232,21 @@ const Deposit = () => {
               <CircleButton onClick={() => handleCopyKey(pixKey)}>
                 Copiar
               </CircleButton>
-              <CircleButton>Upload de comprovante</CircleButton>
+              <input
+                type="file"
+                style={{ display: 'none' }}
+                ref={fileInputRef}
+                accept="image/*"
+                onChange={handleUpload}
+              />
+              <CircleButton
+                onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                  e.preventDefault();
+                  fileInputRef.current && fileInputRef.current?.click();
+                }}
+              >
+                Upload de comprovante
+              </CircleButton>
             </Payment>
           </AddressContent>
         </Address>
@@ -180,33 +255,37 @@ const Deposit = () => {
         <h6>Histórico de depósitos em Reais</h6>
         <Extracts>
           <ExtractContent>
-            <tr>
-              <th>ID</th>
-              <th>Tipo</th>
-              <th>Destino</th>
-              <th>Moeda</th>
-              <th>Valor</th>
-              <th>Data</th>
-              <th>Status</th>
-            </tr>
-            <tr>
-              <td>#D838168</td>
-              <td>Depósito</td>
-              <td>Credit Black</td>
-              <td>BRL</td>
-              <td>R$ 100,00</td>
-              <td>02/08/2024</td>
-              <td>Confirmado</td>
-            </tr>
-            <tr>
-              <td>#D838168</td>
-              <td>Depósito</td>
-              <td>Credit Black</td>
-              <td>BRL</td>
-              <td>R$ 100,00</td>
-              <td>02/08/2024</td>
-              <td>Confirmado</td>
-            </tr>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Destino</th>
+                <th>Moeda</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#D838168</td>
+                <td>Depósito</td>
+                <td>Credit Black</td>
+                <td>BRL</td>
+                <td>R$ 100,00</td>
+                <td>02/08/2024</td>
+                <td>Confirmado</td>
+              </tr>
+              <tr>
+                <td>#D838168</td>
+                <td>Depósito</td>
+                <td>Credit Black</td>
+                <td>BRL</td>
+                <td>R$ 100,00</td>
+                <td>02/08/2024</td>
+                <td>Confirmado</td>
+              </tr>
+            </tbody>
           </ExtractContent>
           <Pagination>
             <span>1</span>
