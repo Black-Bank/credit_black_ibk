@@ -199,7 +199,7 @@ const Header = ({ screen, active }: HeaderProps) => {
                 <GiPresent />
                 Cripto grátis
               </CriptoButton>
-              <p>{me ? me.name : <ReactLoading type="spin" />}</p>
+              {me ? <p>{me.name}</p> : <ReactLoading type="spin" />}
               <LuCalculator />
               <IoIosNotifications />
               <HiOutlineMenuAlt3 />
