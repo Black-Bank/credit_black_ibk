@@ -242,7 +242,7 @@ const Deposit = () => {
               <CircleButton
                 onClick={(e: MouseEvent<HTMLButtonElement>) => {
                   e.preventDefault();
-                  fileInputRef.current && fileInputRef.current?.click();
+                  fileInputRef.current?.click();
                 }}
               >
                 Upload de comprovante
