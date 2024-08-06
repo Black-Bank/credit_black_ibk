@@ -86,14 +86,16 @@ export const Spacer = styled.div<SpacerProps>`
 
 export const CircleButton = styled.button`
   display: flex;
+  justify-content: center;
   border-radius: 10px;
-  padding: 0.5rem;
-  background: transparent;
-  border: 1px solid ${themes.colors.primary};
+  padding: 0.8rem;
   color: ${themes.colors.white};
   cursor: pointer;
-  margin-bottom: 0.5rem;
+  margin: 1rem 0;
   transition: 0.3s;
+  background-color: ${themes.colors.primary};
+  border: 0;
+  width: 100%;
 
   svg {
     color: ${themes.colors.primary};
@@ -101,7 +103,7 @@ export const CircleButton = styled.button`
   }
 
   &:hover {
-    background-color: ${themes.colors.primary};
+    opacity: 0.8;
 
     svg {
       color: ${themes.colors.gray};

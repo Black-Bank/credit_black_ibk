@@ -30,6 +30,7 @@ import { formatMoney } from 'utils/utils';
 import { getDataFormatted } from 'utils/date.util';
 
 import { RiCoinsLine } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 export const Dashboard = () => {
   const coins = [
@@ -171,7 +172,7 @@ export const Dashboard = () => {
               </div>
               <LeftMiddle>
                 <Divider />
-                <a href="#">Depositar</a>
+                <Link to={'/dashboard/deposit'}>Depositar</Link>
                 <a href="#">Sacar</a>
               </LeftMiddle>
               <div>

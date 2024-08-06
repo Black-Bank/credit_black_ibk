@@ -4,3 +4,10 @@ export const formatMoney = (value: number) => {
     currency: 'BRL',
   });
 };
+
+export const formatDollarMoney = (value: number) => {
+  return value.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+};
