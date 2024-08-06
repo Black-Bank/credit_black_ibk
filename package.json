@@ -26,7 +26,7 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "start": "yarn cache clean && react-scripts build && BROWSER=none react-scripts start",
+    "start": "yarn cache clean && husky install && BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
