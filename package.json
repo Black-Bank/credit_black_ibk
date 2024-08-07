@@ -30,7 +30,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "reset": "rm -rf node_modules && yarn && yarn cache clean",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "lint": "npx prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "eslintConfig": {
     "extends": [
