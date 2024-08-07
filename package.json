@@ -1,6 +1,4 @@
 {
-
-  
   "name": "credit_black_ibk",
   "version": "0.1.0",
   "private": true,
@@ -28,8 +26,8 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "start": "yarn cache clean && react-scripts",
-    "test":  "react-scripts test",
+    "start": "yarn cache clean && react-scripts start",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "reset": "rm -rf node_modules && yarn && yarn cache clean",
     "build": "react-scripts build"
