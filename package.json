@@ -1,4 +1,6 @@
 {
+
+  
   "name": "credit_black_ibk",
   "version": "0.1.0",
   "private": true,
@@ -26,12 +28,11 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "start": "yarn cache clean && react-scripts build && BROWSER=none react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "yarn cache clean && react-scripts",
+    "test":  "react-scripts test",
     "eject": "react-scripts eject",
     "reset": "rm -rf node_modules && yarn && yarn cache clean",
-    "prepare": "husky install"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
