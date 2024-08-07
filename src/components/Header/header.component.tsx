@@ -8,6 +8,7 @@ import {
   Item,
   Items,
   Logo,
+  LogoutButton,
   Responsive,
   ResponsiveHidden,
 } from './header.styles';
@@ -46,6 +47,15 @@ const Header = ({ screen, active }: HeaderProps) => {
 
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    toast.success(`Até mais, ${me?.name}!`);
+    setInterval(() => {
+      sessionStorage.clear();
+      navigate('/');
+      location.reload();
+    }, 3000);
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -60,7 +70,7 @@ const Header = ({ screen, active }: HeaderProps) => {
     if (!me) {
       fetchUserData();
     }
-  }, []);
+  }, [me]);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -203,6 +213,7 @@ const Header = ({ screen, active }: HeaderProps) => {
               <LuCalculator />
               <IoIosNotifications />
               <HiOutlineMenuAlt3 />
+              <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
             </div>
           </ContainerLogged>
           <ContainerResponsiveLogged>
@@ -223,6 +234,7 @@ const Header = ({ screen, active }: HeaderProps) => {
               <Drawer open={open} onClose={toggleDrawer(false)}>
                 {DrawerListResponsive}
               </Drawer>
+              <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
             </div>
           </ContainerResponsiveLogged>
         </>
