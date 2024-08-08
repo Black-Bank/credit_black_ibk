@@ -1,25 +1,3 @@
-export function getCurrentDateFormatted() {
-  const date = new Date();
-  const day = String(date.getDate()).padStart(2, '0');
-  const monthNames = [
-    'jan',
-    'fev',
-    'mar',
-    'abr',
-    'mai',
-    'jun',
-    'jul',
-    'ago',
-    'set',
-    'out',
-    'nov',
-    'dez',
-  ];
-  const month = monthNames[date.getMonth()];
-
-  return `${day}/${month}`;
-}
-
 export function getDataFormatted(date: string) {
   const day = date.split('/')[0];
   const month = date.split('/')[1];
@@ -49,4 +27,14 @@ export function getDataFormatted(date: string) {
   });
 
   return `${day} de ${monthComplete} de ${year}`;
+}
+
+export function getPaymentDate(ISODate: string) {
+  const date = new Date(ISODate);
+
+  const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  const month = date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
 }
