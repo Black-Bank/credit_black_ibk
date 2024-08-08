@@ -59,8 +59,7 @@ const Login = () => {
           navigate(RoutesEnum.DASHBOARD_ROUTE);
           location.reload();
         }, 3000);
-        const userTimestamp = JSON.parse(response.token as string);
-        console.log(userTimestamp.exp - timeStamp);
+        JSON.parse(response.token as string);
       } else if (response.status === 401) {
         toast.error('CPF ou senha estão incorretos.');
       } else {

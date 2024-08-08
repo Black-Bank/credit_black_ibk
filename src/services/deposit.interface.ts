@@ -6,3 +6,8 @@ export interface ICreateDeposit {
   status: string;
   base64?: string;
 }
+
+export interface IPayments {
+  payments: ICreateDeposit[];
+  total: number;
+}
