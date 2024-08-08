@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { AUTHORIZATION_HEADER, BASE_URL } from 'config/env';
 
-export const getPayments = async () => {
+export const getPayments = async (page: number) => {
   const identifier = sessionStorage.getItem('identifier') as string;
-  const apiUrl = `${BASE_URL}/pix/payments?identifier=${identifier}&page=0`;
+  const apiUrl = `${BASE_URL}/pix/payments?identifier=${identifier}&page=${page}`;
 
   const headers = {
     'Content-Type': 'application/json',
