@@ -26,12 +26,12 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "start": "yarn cache clean && husky install && BROWSER=none react-scripts start",
-    "build": "react-scripts build",
+    "start": "yarn cache clean && react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "reset": "rm -rf node_modules && yarn && yarn cache clean",
-    "prepare": "husky install"
+    "build": "react-scripts build",
+    "lint": "npx prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "eslintConfig": {
     "extends": [

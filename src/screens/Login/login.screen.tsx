@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import * as z from 'zod';
-
+import { Loading } from 'components/Loader/loading.component';
 import { SpecialTitle, Text, Title } from '../../components/global.styles';
 import Button from '../../components/Button/button.component';
 import SignupDesign from '../../components/Designs/SignupDesign/signup.design';
@@ -20,6 +21,7 @@ type Inputs = {
 };
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false); // Add do estados is loading by Leo
   const authService = new AuthService();
   const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ const Login = () => {
     password: z
       .string()
       .trim()
-      .min(8, { message: 'A senha é preciso ter, pelo menos, 8 caracteres' }),
+      .min(8, { message: 'A senha precisa ter pelo menos 8 caracteres' }),
   });
 
   const {
@@ -41,6 +43,7 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setIsLoading(true); // carregamento true by Leo
     const now = new Date();
     const timeStamp = now.getTime();
     const userData = {
@@ -68,13 +71,16 @@ const Login = () => {
     } catch (e) {
       const error = e as AxiosError;
       toast.error(error?.message as string);
+    } finally {
+      setIsLoading(false); // desativar carregamento by Leo
     }
   };
 
   return (
     <Container>
       <SignupDesign />
-
+      {isLoading && <Loading />}{' '}
+      {/* Exibir o carregamento do isLoading se true  by Leo*/}
       <Title>
         <SpecialTitle>Login</SpecialTitle>
         <Text>
