@@ -232,6 +232,13 @@ export const Extracts = styled.div`
   width: 85%;
   overflow-x: auto;
 
+  p {
+    text-align: center;
+    padding: 1rem;
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+
   @media (max-width: 1000px) {
     width: 50%;
   }
@@ -258,19 +265,22 @@ export const ExtractContent = styled.table`
   }
 `;
 
-export const Pagination = styled.div`
+export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
   padding: 1rem 0;
   gap: 1rem;
 
-  span {
+  button {
+    background: none;
+    border: 0;
+    margin-right: 0.5rem;
     color: ${themes.colors.primary};
     cursor: pointer;
-  }
 
-  span:hover {
-    text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
