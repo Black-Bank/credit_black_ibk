@@ -30,7 +30,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: Pagination) => {
       )}
 
       {pageNumbers.map((number) => (
-        <button key={number} onClick={() => onPageChange(number)}>
+        <button key={number} onClick={() => onPageChange(number + 1)}>
           {number + 1}
         </button>
       ))}

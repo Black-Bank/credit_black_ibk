@@ -41,7 +41,7 @@ const Deposit = () => {
   const [imageUrl, setImageUrl] = useState('');
 
   const [payments, setPayments] = useState<IPayments>();
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -87,7 +87,7 @@ const Deposit = () => {
 
             try {
               await createDepositService.createDeposit(depositData);
-              const data = await createDepositService.getPayments(1);
+              const data = await createDepositService.getPayments(currentPage);
 
               setPayments(data);
             } catch (err) {
@@ -110,14 +110,16 @@ const Deposit = () => {
     }
   };
 
-  const handlePageChange = (pageNumber: number) => {
+  const handlePageChange = async (pageNumber: number) => {
     setCurrentPage(pageNumber);
+    const data = await createDepositService.getPayments(pageNumber);
+    setPayments(data);
   };
 
   useEffect(() => {
     const fetch = async () => {
       const { code, base64QRCode } = await getPix();
-      const data = await createDepositService.getPayments(1);
+      const data = await createDepositService.getPayments(currentPage);
 
       setPayments(data);
 
