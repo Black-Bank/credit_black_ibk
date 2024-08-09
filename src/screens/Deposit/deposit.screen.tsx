@@ -13,7 +13,7 @@ import {
   Orientation,
   Orientations,
   OrientationsContainer,
-  Pagination,
+  PaginationContainer,
   Payment,
   Select,
   SelectCoin,
@@ -28,6 +28,9 @@ import { CurrencyInput } from 'react-currency-mask';
 import { formatDollarMoney } from 'utils/utils';
 import { v4 } from 'uuid';
 import { CreateDepositService } from 'services/deposit.service';
+import { IPayments } from 'services/deposit.interface';
+import { getPaymentDate } from 'utils/date.util';
+import Pagination from 'components/Pagination/pagination.component';
 
 const Deposit = () => {
   const createDepositService = new CreateDepositService();
@@ -36,6 +39,9 @@ const Deposit = () => {
   const [base64, setBase64] = useState('');
   const [pixKey, setPixKey] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+
+  const [payments, setPayments] = useState<IPayments>();
+  const [currentPage, setCurrentPage] = useState(0);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -80,9 +86,10 @@ const Deposit = () => {
             };
 
             try {
-              const response =
-                await createDepositService.createUser(depositData);
-              console.log(response);
+              await createDepositService.createDeposit(depositData);
+              const data = await createDepositService.getPayments(currentPage);
+
+              setPayments(data);
             } catch (err) {
               console.log(err);
             }
@@ -103,9 +110,18 @@ const Deposit = () => {
     }
   };
 
+  const handlePageChange = async (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    const data = await createDepositService.getPayments(pageNumber);
+    setPayments(data);
+  };
+
   useEffect(() => {
     const fetch = async () => {
       const { code, base64QRCode } = await getPix();
+      const data = await createDepositService.getPayments(currentPage);
+
+      setPayments(data);
 
       setBase64(base64QRCode);
       setPixKey(code);
@@ -126,7 +142,7 @@ const Deposit = () => {
 
     fetch();
     createImageUrl();
-  });
+  }, [base64]);
 
   return (
     <Container>
@@ -254,44 +270,54 @@ const Deposit = () => {
       <ExtractContainer>
         <h6>Histórico de depósitos em Reais</h6>
         <Extracts>
-          <ExtractContent>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Tipo</th>
-                <th>Destino</th>
-                <th>Moeda</th>
-                <th>Valor</th>
-                <th>Data</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>#D838168</td>
-                <td>Depósito</td>
-                <td>Credit Black</td>
-                <td>BRL</td>
-                <td>R$ 100,00</td>
-                <td>02/08/2024</td>
-                <td>Confirmado</td>
-              </tr>
-              <tr>
-                <td>#D838168</td>
-                <td>Depósito</td>
-                <td>Credit Black</td>
-                <td>BRL</td>
-                <td>R$ 100,00</td>
-                <td>02/08/2024</td>
-                <td>Confirmado</td>
-              </tr>
-            </tbody>
-          </ExtractContent>
-          <Pagination>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-          </Pagination>
+          {payments && payments.payments.length > 0 ? (
+            <>
+              <ExtractContent>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Destino</th>
+                    <th>Moeda</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {payments.payments
+                    .sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1))
+                    .map((payment) => (
+                      <tr key={payment.payID}>
+                        <td>#{payment.payID.split('-')[0]}</td>
+                        <td>Depósito</td>
+                        <td>Credit Black</td>
+                        <td>USD</td>
+                        <td>{formatDollarMoney(payment.value)}</td>
+                        <td>{getPaymentDate(payment.createdAt)}</td>
+                        <td>
+                          {payment.status === 'pending'
+                            ? 'Pendente'
+                            : 'Confirmado'}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </ExtractContent>
+              <PaginationContainer>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={Math.max(
+                    1,
+                    Math.ceil((payments?.total as number) / 10),
+                  )}
+                  onPageChange={handlePageChange}
+                />
+              </PaginationContainer>
+            </>
+          ) : (
+            <p>Sem extratos no momento.</p>
+          )}
         </Extracts>
       </ExtractContainer>
     </Container>

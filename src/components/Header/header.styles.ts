@@ -210,3 +210,11 @@ export const ContainerResponsiveLogged = styled.div`
     }
   }
 `;
+
+export const LogoutButton = styled.button`
+  margin: 0 1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: ${themes.colors.white};
+`;
